@@ -1,4 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Syncopate:wght@700&family=Cinzel:wght@700;800&display=swap');
+
+@font-face {
+  font-family: 'Floral';
+  src: url('../font/floral.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-BOLD.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-BOLD-ITALIC.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-SEMI-BLACK.otf') format('opentype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-SEMI-BLACK-ITALIC.otf') format('opentype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-BLACK.otf') format('opentype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Chorus';
+  src: url('../font/CHORUS/CHORUS-BLACK-ITALIC.otf') format('opentype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: italic;
+}
 
 :root {
   font-family: 'Inter', sans-serif;
@@ -8,6 +58,11 @@
 /* Custom font styles */
 .font-logo {
   font-family: 'Montserrat', sans-serif;
+}
+
+.font-iconic {
+  /* Modern High-End Automotive Luxury Font (like Bugatti/Porsche/Lamborghini) */
+  font-family: 'Chorus', 'Syncopate', sans-serif;
 }
 
 /* Theme transition */
