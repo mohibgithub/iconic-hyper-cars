@@ -13,6 +13,11 @@
       theme: {
         extend: {
 
+          fontFamily: {
+            sans: ['RedditSans', 'sans-serif'],
+            logo: ['BombergSans', 'Montserrat', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          },
           colors: {
             brand: '#bc1919',
           },
@@ -61,9 +66,9 @@
 
         <a href="#" class="flex flex-col items-center text-center select-none font-logo group">
           <span
-            class="text-[13px] md:text-1xl font-extrabold tracking-widest text-white transition-colors font-iconic">ICONIC</span>
+            class="text-[16.4px] md:text-1xl font-extrabold tracking-widest text-white transition-colors font-iconic">ICONIC</span>
           <span
-            class="text-[10px] md:text-[13px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0">HYPERCARS</span>
+            class="text-[10px] md:text-[13px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
         </a>
 
         <div class="flex items-center gap-4">
@@ -235,9 +240,9 @@
 
       <div class="relative z-10 flex flex-col justify-between items-center h-full w-full py-8 md:py-16 flex-grow">
         <div class="text-center w-full max-w-xs md:max-w-2xl px-4 mt-20 md:mt-24">
-          <h1 class="text-xl md:text-4xl lg:text-5xl font-semibold text-white uppercase leading-none mb-2">GLOBAL
+          <h1 class="text-xl md:text-4xl lg:text-5xl font-semibold text-white uppercase leading-none mb-2 font-iconic">GLOBAL
             MARKETPLACE</h1>
-          <h1 class="text-xl md:text-4xl lg:text-5xl font-semibold text-white uppercase leading-none mb-[45px]">
+          <h1 class="text-xl md:text-4xl lg:text-5xl font-semibold text-white uppercase leading-none mb-[45px] font-iconic">
             SUPERCARS • HYPERCARS</h1>
           <h2 class="text-[12px] md:text-sm lg:text-base font-semibold text-white mb-1.5 md:mb-3">By the world's fastest
             closers</h2>
@@ -280,7 +285,7 @@
                   <img src="assets/images/chiron.png" alt="2021 Bugatti Chiron Super Sport"
                     class="w-32 md:w-56 object-contain pointer-events-none hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div class="text-brand font-logo font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
+                <div class="text-brand font-sans font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
                   SOLD
                 </div>
               </div>
@@ -297,7 +302,7 @@
                   <img src="assets/images/jesko.png" alt="2023 Koenigsegg Jesko Attack"
                     class="w-32 md:w-56 object-contain pointer-events-none hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div class="text-brand font-logo font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
+                <div class="text-brand font-sans font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
                   SOLD
                 </div>
               </div>
@@ -314,7 +319,7 @@
                   <img src="assets/images/utopia.png" alt="2022 Pagani Utopia"
                     class="w-32 md:w-56 object-contain pointer-events-none hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div class="text-brand font-logo font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
+                <div class="text-brand font-sans font-extrabold text-base md:text-2xl tracking-widest pb-1 select-none">
                   SOLD
                 </div>
               </div>
@@ -352,7 +357,7 @@
               <img src="assets/images/thumbnail-1.jpg" alt="List Your Car"
                 class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
               <h3
-                class="mt-3 md:mt-5 absolute font-bold font-logo text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
+                class="mt-3 md:mt-5 absolute font-bold font-sans text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
                 LIST YOUR CAR</h3>
             </div>
           </div>
@@ -364,7 +369,7 @@
               <img src="assets/images/thumbnail-2.jpg" alt="Off-Market Hypercars"
                 class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
               <h3
-                class="mt-3 md:mt-5 absolute font-bold font-logo text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
+                class="mt-3 md:mt-5 absolute font-bold font-sans text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
                 OFF-MARKET</h3>
             </div>
           </div>
@@ -376,7 +381,7 @@
               <img src="assets/images/thumbnail-3.jpg" alt="Wanted Hypercars"
                 class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
               <h3
-                class="mt-3 md:mt-5 absolute font-bold font-logo text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
+                class="mt-3 md:mt-5 absolute font-bold font-sans text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
                 WANTED</h3>
             </div>
           </div>
@@ -388,8 +393,9 @@
               <img src="assets/images/thumbnail-4.jpg" alt="Recently Sold"
                 class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
               <h3
-                class="mt-3 md:mt-5 absolute font-bold font-logo text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
+                class="mt-3 md:mt-5 absolute font-bold font-sans text-zinc-800 dark:text-dark bottom-[8px] text-[14px] md:text-lg text-center uppercase transition-colors">
                  RECENTLY SOLD</h3>
+            </div>
           </div>
 
         </div>
