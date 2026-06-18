@@ -93,30 +93,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Touch Swipe Support
-    let soldTouchStartX = 0;
-    let soldTouchEndX = 0;
+    let soldStartX = 0;
+    let soldStartY = 0;
+    let soldHasSwiped = false;
 
     soldTrack.addEventListener('touchstart', (e) => {
-      soldTouchStartX = e.changedTouches[0].screenX;
+      soldStartX = e.touches[0].clientX;
+      soldStartY = e.touches[0].clientY;
+      soldHasSwiped = false;
     }, { passive: true });
 
-    soldTrack.addEventListener('touchend', (e) => {
-      soldTouchEndX = e.changedTouches[0].screenX;
-      handleSoldSwipe();
-    }, { passive: true });
+    soldTrack.addEventListener('touchmove', (e) => {
+      if (soldHasSwiped || !soldStartX) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = soldStartX - currentX;
+      const diffY = soldStartY - currentY;
 
-    function handleSoldSwipe() {
-      const swipeThreshold = 50;
-      if (soldTouchStartX - soldTouchEndX > swipeThreshold) {
-        soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
-      } else if (soldTouchEndX - soldTouchStartX > swipeThreshold) {
-        soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (e.cancelable) e.preventDefault();
+        const swipeThreshold = 50;
+        if (Math.abs(diffX) > swipeThreshold) {
+          soldHasSwiped = true;
+          if (diffX > 0) {
+            soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
+          } else {
+            soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
+          }
+          updateSoldSlider();
+          resetSoldAutoSlide();
+          soldStartX = 0;
+          soldStartY = 0;
+        }
       }
-    }
+    }, { passive: false });
 
     startSoldAutoSlide();
   }
@@ -162,32 +172,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (featTrack) {
     // Touch Swipe Support
-    let featTouchStartX = 0;
-    let featTouchEndX = 0;
+    let featStartX = 0;
+    let featStartY = 0;
+    let featHasSwiped = false;
 
     featTrack.addEventListener('touchstart', (e) => {
-      featTouchStartX = e.changedTouches[0].screenX;
+      featStartX = e.touches[0].clientX;
+      featStartY = e.touches[0].clientY;
+      featHasSwiped = false;
     }, { passive: true });
 
-    featTrack.addEventListener('touchend', (e) => {
-      featTouchEndX = e.changedTouches[0].screenX;
-      handleFeatSwipe();
-    }, { passive: true });
+    featTrack.addEventListener('touchmove', (e) => {
+      if (featHasSwiped || !featStartX) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = featStartX - currentX;
+      const diffY = featStartY - currentY;
 
-    function handleFeatSwipe() {
-      const swipeThreshold = 50;
-      if (featTouchStartX - featTouchEndX > swipeThreshold) {
-        const maxSlide = getFeatMaxSlide();
-        featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
-        updateFeatSlider();
-        resetFeatAutoSlide();
-      } else if (featTouchEndX - featTouchStartX > swipeThreshold) {
-        const maxSlide = getFeatMaxSlide();
-        featCurrentSlide = (featCurrentSlide - 1) < 0 ? maxSlide : featCurrentSlide - 1;
-        updateFeatSlider();
-        resetFeatAutoSlide();
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (e.cancelable) e.preventDefault();
+        const swipeThreshold = 50;
+        if (Math.abs(diffX) > swipeThreshold) {
+          featHasSwiped = true;
+          const maxSlide = getFeatMaxSlide();
+          if (diffX > 0) {
+            featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
+          } else {
+            featCurrentSlide = (featCurrentSlide - 1) < 0 ? maxSlide : featCurrentSlide - 1;
+          }
+          updateFeatSlider();
+          resetFeatAutoSlide();
+          featStartX = 0;
+          featStartY = 0;
+        }
       }
-    }
+    }, { passive: false });
 
     // Handle screen resize
     window.addEventListener('resize', () => {
@@ -247,32 +266,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (testimonialTrack) {
     // Touch Swipe Support
-    let testimonialTouchStartX = 0;
-    let testimonialTouchEndX = 0;
+    let testimonialStartX = 0;
+    let testimonialStartY = 0;
+    let testimonialHasSwiped = false;
 
     testimonialTrack.addEventListener('touchstart', (e) => {
-      testimonialTouchStartX = e.changedTouches[0].screenX;
+      testimonialStartX = e.touches[0].clientX;
+      testimonialStartY = e.touches[0].clientY;
+      testimonialHasSwiped = false;
     }, { passive: true });
 
-    testimonialTrack.addEventListener('touchend', (e) => {
-      testimonialTouchEndX = e.changedTouches[0].screenX;
-      handleTestimonialSwipe();
-    }, { passive: true });
-
-    function handleTestimonialSwipe() {
+    testimonialTrack.addEventListener('touchmove', (e) => {
       if (!isMobile()) return;
-      const swipeThreshold = 50;
-      const maxSlide = getTestimonialMaxSlide();
-      if (testimonialTouchStartX - testimonialTouchEndX > swipeThreshold) {
-        testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
-        updateTestimonialSlider();
-        resetTestimonialAutoSlide();
-      } else if (testimonialTouchEndX - testimonialTouchStartX > swipeThreshold) {
-        testimonialCurrentSlide = (testimonialCurrentSlide - 1) < 0 ? maxSlide : testimonialCurrentSlide - 1;
-        updateTestimonialSlider();
-        resetTestimonialAutoSlide();
+      if (testimonialHasSwiped || !testimonialStartX) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = testimonialStartX - currentX;
+      const diffY = testimonialStartY - currentY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (e.cancelable) e.preventDefault();
+        const swipeThreshold = 50;
+        if (Math.abs(diffX) > swipeThreshold) {
+          testimonialHasSwiped = true;
+          const maxSlide = getTestimonialMaxSlide();
+          if (diffX > 0) {
+            testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
+          } else {
+            testimonialCurrentSlide = (testimonialCurrentSlide - 1) < 0 ? maxSlide : testimonialCurrentSlide - 1;
+          }
+          updateTestimonialSlider();
+          resetTestimonialAutoSlide();
+          testimonialStartX = 0;
+          testimonialStartY = 0;
+        }
       }
-    }
+    }, { passive: false });
 
     // Handle screen resize
     window.addEventListener('resize', () => {
