@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Syncopate:wght@700&family=Cinzel:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@700&family=Cinzel:wght@700;800&display=swap');
 
 @font-face {
   font-family: 'Floral';
@@ -8,127 +8,109 @@
 }
 
 @font-face {
-  font-family: 'BombergSans';
-  src: url('../font/bomberg_sans/fonts/IFBombergSans-Regular-Text.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Light.ttf') format('truetype');
+  font-weight: 300;
   font-style: normal;
-}
-@font-face {
-  font-family: 'BombergSans';
-  src: url('../font/bomberg_sans/fonts/IFBombergSans-Regular-Display.ttf') format('truetype');
-  font-weight: 500;
   font-display: swap;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'BombergSans';
-  src: url('../font/bomberg_sans/fonts/IFBombergSans-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-display: swap;
-  font-style: normal;
 }
 
-/* Reddit Sans Font Definitions */
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-Light.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Light.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-LightItalic.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-LightItalic.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-LightItalic.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-Regular.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Regular.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Regular.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-Italic.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Italic.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Italic.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBold.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBold.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBold.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Semibold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBoldItalic.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBoldItalic.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-SemiBoldItalic.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-SemiboldItalic.ttf') format('truetype');
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-Bold.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Bold.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-Bold.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-BoldItalic.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-BoldItalic.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-BoldItalic.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-BoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBold.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBold.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBold.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-Extrabold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'RedditSans';
-  src: url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBoldItalic.woff2') format('woff2'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBoldItalic.woff') format('woff'),
-       url('../font/reddit_sans/Reddit Sans/RedditSans-ExtraBoldItalic.ttf') format('truetype');
+  font-family: 'ProximaNova';
+  src: url('../font/Proxima-Nova-Font-Family/ProximaNova-ExtraboldItalic.ttf') format('truetype');
   font-weight: 800;
   font-style: italic;
   font-display: swap;
 }
 
 :root {
-  font-family: 'RedditSans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Custom font styles */
 .font-logo {
-  font-family: 'BombergSans', 'Montserrat', sans-serif;
+  font-family: 'ProximaNova', 'Montserrat', sans-serif;
 }
 
 .font-montserrat {
@@ -137,7 +119,7 @@
 
 .font-iconic {
   /* Modern High-End Automotive Luxury Font (like Bugatti/Porsche/Lamborghini) */
-  font-family: 'BombergSans', 'Syncopate', sans-serif;
+  font-family: 'ProximaNova', 'Syncopate', sans-serif;
 }
 
 /* Theme transition */
@@ -168,7 +150,8 @@ body {
   width: 85%;
   max-width: 320px;
   height: 100%;
-  border-right: 1px solid #f4f4f5;
+  background-color: #eae6e4;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
   transform: translateX(-100%);
   transition-property: transform, display, overlay, background-color, border-color;
   transition-duration: 0.4s;
@@ -177,7 +160,45 @@ body {
 }
 
 .dark #mobile-menu {
-  border-right: 1px solid #18181b;
+  background-color: #6f6866 !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #d7d0cd !important;
+}
+
+.dark #mobile-menu .dark\:text-white,
+.dark #mobile-menu span,
+.dark #mobile-menu h3,
+.dark #mobile-menu a:not(.text-brand) {
+  color: #e2dcd9 !important;
+}
+
+.dark #mobile-menu .dark\:text-white\/80,
+.dark #mobile-menu p {
+  color: rgba(215, 208, 205, 0.8) !important;
+}
+
+.dark #mobile-menu .dark\:text-white\/60,
+.dark #mobile-menu button {
+  color: rgba(215, 208, 205, 0.6) !important;
+}
+
+.dark #mobile-menu button:hover,
+.dark #mobile-menu a:hover:not(.text-brand) {
+  color: #d7d0cd !important;
+}
+
+.dark #mobile-menu .dark\:border-white\/\[0\.37\] {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.dark #mobile-menu a.text-brand,
+.dark #mobile-menu a.text-brand * {
+  color: #bc1919 !important;
+}
+
+.dark #mobile-menu a.text-brand:hover,
+.dark #mobile-menu a.text-brand:hover * {
+  color: rgba(188, 25, 25, 0.8) !important;
 }
 
 #mobile-menu:popover-open {

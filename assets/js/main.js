@@ -357,4 +357,167 @@ document.addEventListener('DOMContentLoaded', () => {
       authLoginForm.classList.add('hidden');
     });
   }
+
+  // --- Global Slider Helper ---
+  function getVisibleSlides() {
+    if (window.innerWidth < 768) {
+      return 1;
+    } else if (window.innerWidth < 1024) {
+      return 2;
+    } else {
+      return 3;
+    }
+  }
+
+  // --- News Slider Logic ---
+  const newsTrack = document.getElementById('news-slider-track');
+  const newsPrevBtn = document.getElementById('news-prev-btn');
+  const newsNextBtn = document.getElementById('news-next-btn');
+  const newsSlides = document.querySelectorAll('.news-slider-slide');
+  const newsTotalSlides = newsSlides.length;
+  let newsCurrentSlide = 0;
+
+  function getNewsMaxSlide() {
+    return newsTotalSlides - getVisibleSlides();
+  }
+
+  function updateNewsSlider() {
+    if (!newsTrack) return;
+    const visible = getVisibleSlides();
+    const stepSize = 100 / visible;
+    const maxSlide = getNewsMaxSlide();
+    
+    if (newsCurrentSlide > maxSlide) {
+      newsCurrentSlide = 0;
+    } else if (newsCurrentSlide < 0) {
+      newsCurrentSlide = maxSlide;
+    }
+    
+    newsTrack.style.transform = `translateX(-${newsCurrentSlide * stepSize}%)`;
+  }
+
+  if (newsTrack) {
+    if (newsPrevBtn && newsNextBtn) {
+      newsPrevBtn.addEventListener('click', () => {
+        newsCurrentSlide = newsCurrentSlide - 1;
+        updateNewsSlider();
+      });
+
+      newsNextBtn.addEventListener('click', () => {
+        newsCurrentSlide = newsCurrentSlide + 1;
+        updateNewsSlider();
+      });
+    }
+
+    // Touch Swipe Support
+    let newsStartX = 0;
+    let newsStartY = 0;
+    let newsHasSwiped = false;
+
+    newsTrack.addEventListener('touchstart', (e) => {
+      newsStartX = e.touches[0].clientX;
+      newsStartY = e.touches[0].clientY;
+      newsHasSwiped = false;
+    }, { passive: true });
+
+    newsTrack.addEventListener('touchmove', (e) => {
+      if (newsHasSwiped || !newsStartX) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = newsStartX - currentX;
+      const diffY = newsStartY - currentY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (e.cancelable) e.preventDefault();
+        const swipeThreshold = 50;
+        if (Math.abs(diffX) > swipeThreshold) {
+          newsHasSwiped = true;
+          if (diffX > 0) {
+            newsCurrentSlide = newsCurrentSlide + 1;
+          } else {
+            newsCurrentSlide = newsCurrentSlide - 1;
+          }
+          updateNewsSlider();
+        }
+      }
+    }, { passive: false });
+
+    window.addEventListener('resize', updateNewsSlider);
+  }
+
+  // --- Reviews Slider Logic ---
+  const reviewsTrack = document.getElementById('reviews-slider-track');
+  const reviewsPrevBtn = document.getElementById('reviews-prev-btn');
+  const reviewsNextBtn = document.getElementById('reviews-next-btn');
+  const reviewsSlides = document.querySelectorAll('.reviews-slider-slide');
+  const reviewsTotalSlides = reviewsSlides.length;
+  let reviewsCurrentSlide = 0;
+
+  function getReviewsMaxSlide() {
+    return reviewsTotalSlides - getVisibleSlides();
+  }
+
+  function updateReviewsSlider() {
+    if (!reviewsTrack) return;
+    const visible = getVisibleSlides();
+    const stepSize = 100 / visible;
+    const maxSlide = getReviewsMaxSlide();
+    
+    if (reviewsCurrentSlide > maxSlide) {
+      reviewsCurrentSlide = 0;
+    } else if (reviewsCurrentSlide < 0) {
+      reviewsCurrentSlide = maxSlide;
+    }
+    
+    reviewsTrack.style.transform = `translateX(-${reviewsCurrentSlide * stepSize}%)`;
+  }
+
+  if (reviewsTrack) {
+    if (reviewsPrevBtn && reviewsNextBtn) {
+      reviewsPrevBtn.addEventListener('click', () => {
+        reviewsCurrentSlide = reviewsCurrentSlide - 1;
+        updateReviewsSlider();
+      });
+
+      reviewsNextBtn.addEventListener('click', () => {
+        reviewsCurrentSlide = reviewsCurrentSlide + 1;
+        updateReviewsSlider();
+      });
+    }
+
+    // Touch Swipe Support
+    let reviewsStartX = 0;
+    let reviewsStartY = 0;
+    let reviewsHasSwiped = false;
+
+    reviewsTrack.addEventListener('touchstart', (e) => {
+      reviewsStartX = e.touches[0].clientX;
+      reviewsStartY = e.touches[0].clientY;
+      reviewsHasSwiped = false;
+    }, { passive: true });
+
+    reviewsTrack.addEventListener('touchmove', (e) => {
+      if (reviewsHasSwiped || !reviewsStartX) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = reviewsStartX - currentX;
+      const diffY = reviewsStartY - currentY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (e.cancelable) e.preventDefault();
+        const swipeThreshold = 50;
+        if (Math.abs(diffX) > swipeThreshold) {
+          reviewsHasSwiped = true;
+          if (diffX > 0) {
+            reviewsCurrentSlide = reviewsCurrentSlide + 1;
+          } else {
+            reviewsCurrentSlide = reviewsCurrentSlide - 1;
+          }
+          updateReviewsSlider();
+        }
+      }
+    }, { passive: false });
+
+    window.addEventListener('resize', updateReviewsSlider);
+  }
 });

@@ -14,8 +14,8 @@
         extend: {
 
           fontFamily: {
-            sans: ['RedditSans', 'sans-serif'],
-            logo: ['BombergSans', 'Montserrat', 'sans-serif'],
+            sans: ['Montserrat', 'sans-serif'],
+            logo: ['ProximaNova', 'Montserrat', 'sans-serif'],
             montserrat: ['Montserrat', 'sans-serif'],
           },
           colors: {
@@ -102,15 +102,15 @@
 
 
     <div id="mobile-menu" popover
-      class="mobile-sidebar p-5 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white shadow-2xl h-full flex flex-col justify-between">
+      class="mobile-sidebar p-5 text-zinc-900 dark:text-white shadow-2xl h-full flex flex-col justify-between">
       <div>
-        <div class="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-900 pb-4 mb-6">
+        <div class="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.37] pb-4 mb-6">
           <div class="font-logo flex flex-col">
-            <span class="text-xs font-extrabold tracking-widest text-zinc-400">NAVIGATION</span>
+            <!-- <span class="text-xs font-extrabold tracking-widest text-zinc-400">NAVIGATION</span> -->
             <span class="text-base font-bold text-zinc-900 dark:text-white uppercase mt-0.5">MENU</span>
           </div>
           <button popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Close menu"
-            class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white transition-colors">
+            class="text-zinc-500 hover:text-zinc-900 dark:text-white/60 dark:hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -118,24 +118,40 @@
           </button>
         </div>
 
-        <nav class="flex flex-col gap-4 text-base font-medium">
-          <a href="#"
-            class="py-2.5 border-b border-zinc-50 dark:border-zinc-900/40 hover:text-brand transition-colors flex items-center justify-between">
-            <span>Home Overview</span>
-            <span class="text-xs text-brand font-bold tracking-widest">LIVE</span>
+        <nav class="flex flex-col text-base font-medium">
+          <a href="index.html"
+            class="py-3 hover:text-brand transition-colors flex items-center justify-between text-zinc-900 dark:text-white font-medium text-[16px]">
+            <span>Home</span>
+            <!-- <span class="text-xs text-brand font-bold tracking-widest">LIVE</span> -->
           </a>
+          <div class="border-t border-black/[0.08] dark:border-white/[0.37] py-4 flex flex-col gap-3">
+            <span class="text-[16px] font-medium text-zinc-900 dark:text-white">Browse Hypercars</span>
+
+            <div class="p-4 rounded-xl border border-black/[0.08] dark:border-white/[0.37] bg-transparent">
+              <h3 class="text-sm font-bold text-zinc-900 dark:text-white flex items-baseline gap-1">
+                Sell Your Hypercar
+              </h3>
+              <p class="mt-2 text-xs text-zinc-600 dark:text-white/80 leading-relaxed font-normal">
+                Get immediate offers & sell with confidence and discretion.
+              </p>
+              <a href="#"
+                class="inline-flex mt-3.5 items-center gap-1 text-xs font-bold text-brand hover:text-brand/80 transition-colors group">
+                <span
+                  class="underline underline-offset-4 decoration-1 decoration-brand/40 group-hover:decoration-brand">Let's
+                  get started</span>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
           <a href="#"
-            class="py-2.5 border-b border-zinc-50 dark:border-zinc-900/40 hover:text-brand transition-colors">Browse
-            Stock</a>
-          <a href="#"
-            class="py-2.5 border-b border-zinc-50 dark:border-zinc-900/40 hover:text-brand transition-colors">Sell
-            Hypercar</a>
-          <a href="#"
-            class="py-2.5 border-b border-zinc-50 dark:border-zinc-900/40 hover:text-brand transition-colors">Private
-            Treaty</a>
-          <a href="#"
-            class="py-2.5 border-b border-zinc-50 dark:border-zinc-900/40 hover:text-brand transition-colors">VIP
-            Private Lounge</a>
+            class="py-3 hover:text-brand transition-colors flex items-center justify-between border-t border-black/[0.08] dark:border-white/[0.37] text-zinc-900 dark:text-white font-medium text-[16px]">
+            <span>VIP Private consulting</span>
+            <!-- <span class="text-xs text-brand font-bold tracking-widest">LIVE</span> -->
+          </a>
         </nav>
       </div>
 
@@ -273,11 +289,11 @@
 
         <div class="flex flex-row gap-3 justify-center items-center w-full max-w-xs md:max-w-md mb-2 md:mb-6">
           <a href="#"
-            class="flex-1 border border-white rounded-[6px] px-[7px] py-[10px] md:py-2.7 font-bold text-[13px] md:text-xs text-white uppercase bg-transparent hover:bg-white hover:text-black active:scale-95 transition-all duration-300 text-center">
+            class="flex-1 border border-white rounded-[6px] px-[7px] py-[10px] md:py-2.7 font-bold text-[12px] md:text-xs text-white uppercase bg-transparent hover:bg-white hover:text-black active:scale-95 transition-all duration-300 text-center">
             SHOP HYPERCARS
           </a>
           <a href="#"
-            class="flex-1 bg-white border border-white rounded-[6px] px-[7px] py-[10px] md:py-2.7 font-bold text-[13px] md:text-xs text-zinc-950 uppercase hover:bg-zinc-100 active:scale-95 transition-all duration-300 flex items-center justify-center gap-1">
+            class="flex-1 bg-white border border-white rounded-[6px] px-[7px] py-[10px] md:py-2.7 font-bold text-[12px] md:text-xs text-zinc-950 uppercase hover:bg-zinc-100 active:scale-95 transition-all duration-300 flex items-center justify-center gap-1">
             <span>SELL PRIVATELY</span>
             <span class="text-xs md:text-sm">&rarr;</span>
           </a>
@@ -292,7 +308,7 @@
 
       <div class="flex items-center justify-between gap-3 md:gap-8 w-full max-w-[340px] md:max-w-3xl">
         <button id="slider-prev-btn" aria-label="Previous slide"
-          class="border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+          class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
           <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
             <polygon points="16,5 7,12 16,19" />
           </svg>
@@ -356,7 +372,7 @@
         </div>
 
         <button id="slider-next-btn" aria-label="Next slide"
-          class="border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+          class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
           <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
             <polygon points="8,5 17,12 8,19" />
           </svg>
@@ -451,34 +467,7 @@
                 </div>
 
                 <div class="flex flex-col gap-4 justify-between h-full">
-                  <!-- Social Links -->
-                  <div class="flex items-center gap-3.5 z-10">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="LinkedIn Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#0077b5] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-                      </svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Instagram Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#e1306c] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                      </svg>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Twitter X Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white transition-colors duration-200">
-                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                    </a>
-                  </div>
-
+                  <div class="h-6"></div>
                   <!-- Testimonial Text -->
                   <p class="text-zinc-600 dark:text-zinc-300 text-sm md:text-base leading-relaxed text-pretty flex-1">
                     This platform has completely transformed how we source off-market hypercars. The attention to detail
@@ -514,34 +503,7 @@
                 </div>
 
                 <div class="flex flex-col gap-4 justify-between h-full">
-                  <!-- Social Links -->
-                  <div class="flex items-center gap-3.5 z-10">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="LinkedIn Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#0077b5] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-                      </svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Instagram Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#e1306c] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                      </svg>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Twitter X Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white transition-colors duration-200">
-                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                    </a>
-                  </div>
-
+                  <div class="h-6"></div>
                   <!-- Testimonial Text -->
                   <p class="text-zinc-600 dark:text-zinc-300 text-sm md:text-base leading-relaxed text-pretty flex-1">
                     The sourcing process is extremely transparent and easy. The vehicle quality is top-notch and the
@@ -577,34 +539,7 @@
                 </div>
 
                 <div class="flex flex-col gap-4 justify-between h-full">
-                  <!-- Social Links -->
-                  <div class="flex items-center gap-3.5 z-10">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="LinkedIn Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#0077b5] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-                      </svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Instagram Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-[#e1306c] transition-colors duration-200">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                      </svg>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                      aria-label="Twitter X Profile"
-                      class="text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white transition-colors duration-200">
-                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path
-                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                    </a>
-                  </div>
-
+                  <div class="h-6"></div>
                   <!-- Testimonial Text -->
                   <p class="text-zinc-600 dark:text-zinc-300 text-sm md:text-base leading-relaxed text-pretty flex-1">
                     The importing compliance and logistical consistency are impressive. It's saved us countless hours in
@@ -807,282 +742,610 @@
     <!-- SERVICES SECTION -->
     <section
       class="services-section bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900/60 py-10 px-6 md:py-16 md:px-12 transition-colors duration-300">
-      <div class="max-w-7xl mx-auto flex flex-col">
+
+      <h2
+        class="w-full max-w-[340px] md:max-w-5xl mb-8 md:mb-12 font-logo font-extrabold text-base md:text-2xl tracking-widest text-zinc-900 dark:text-white uppercase text-left px-1.5 md:px-4">
+        Our Services
+      </h2>
+      <div class="flex flex-col border-zinc-150 dark:border-zinc-900/60">
 
 
-        <h2
-          class="w-full max-w-[340px] md:max-w-5xl mb-8 md:mb-12 font-logo font-extrabold text-base md:text-2xl tracking-widest text-zinc-900 dark:text-white uppercase text-left px-1.5 md:px-4">
-          Our Services
-        </h2>
+        <div class="border-b border-zinc-150 dark:border-zinc-900/60 pb-5 md:pb-6">
 
-
-        <div class="flex flex-col border-zinc-150 dark:border-zinc-900/60">
-
-
-          <div class="border-b border-zinc-150 dark:border-zinc-900/60 pb-5 md:pb-6">
-
-            <div class="flex md:hidden items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">SELL
-                    FAST</span>
-                  <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">GET A CASH OFFER</h3>
-                  <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Receive offers within 24 hours.</p>
-                </div>
-              </div>
-              <a href="#"
-                class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
-                <span>GET OFFER</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none"
-                  viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
+          <div class="flex md:hidden items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
-              </a>
-            </div>
-
-            <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">SELL
-                    FAST</span>
-                  <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">GET A CASH OFFER</h3>
-                </div>
+              </span>
+              <div class="flex flex-col">
+                <span class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">SELL
+                  FAST</span>
+                <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">GET A CASH OFFER</h3>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Receive offers within 24 hours.</p>
               </div>
-              <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
-                Receive offers within 24 hours.
-              </p>
-              <a href="#"
-                class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
-                <span>GET OFFER</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
             </div>
+            <a href="#"
+              class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+              <span>GET OFFER</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
 
-
-          <div class="border-b border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
-            <div class="flex md:hidden items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m15 6 2 2 4-4" />
-                    <path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10" />
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span
-                    class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">DISCRETION</span>
-                  <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">SELL OFF-MARKET</h3>
-                  <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">No listing. We handle everything.</p>
-                </div>
-              </div>
-              <a href="#"
-                class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
-                <span>SUBMIT</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none"
-                  viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
+          <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
-              </a>
-            </div>
-
-            <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span
-                    class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">DISCRETION</span>
-                  <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">SELL OFF-MARKET</h3>
-                </div>
+              </span>
+              <div class="flex flex-col">
+                <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">SELL
+                  FAST</span>
+                <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">GET A CASH OFFER</h3>
               </div>
-              <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
-                No listing. We handle everything.
-              </p>
-              <a href="#"
-                class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
-                <span>SUBMIT</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
             </div>
+            <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
+              Receive offers within 24 hours.
+            </p>
+            <a href="#"
+              class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
+              <span>GET OFFER</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="border-b border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
+          <div class="flex md:hidden items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m15 6 2 2 4-4" />
+                  <path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10" />
+                </svg>
+              </span>
+              <div class="flex flex-col">
+                <span
+                  class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">DISCRETION</span>
+                <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">SELL OFF-MARKET</h3>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">No listing. We handle everything.</p>
+              </div>
+            </div>
+            <a href="#"
+              class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+              <span>SUBMIT</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
 
-
-          <div class="border-b border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
-            <div class="flex md:hidden items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="10" cy="7" r="4" />
-                    <path d="M10.3 15H7a4 4 0 0 0-4 4v2" />
-                    <circle cx="17" cy="17" r="3" />
-                    <path d="m21 21-1.9-1.9" />
-                  </svg>
-
-                </span>
-                <div class="flex flex-col">
-                  <span
-                    class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">BUYING</span>
-                  <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">SUBMIT A WANTED</h3>
-                  <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Tell us exactly what you want.</p>
-                </div>
-              </div>
-              <a href="#"
-                class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
-                <span>SUBMIT</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none"
-                  viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
+          <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-              </a>
-            </div>
-
-            <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
-              <div class="flex items-center gap-3">
+              </span>
+              <div class="flex flex-col">
                 <span
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span
-                    class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">BUYING</span>
-                  <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">SUBMIT A WANTED</h3>
-                </div>
+                  class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">DISCRETION</span>
+                <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">SELL OFF-MARKET</h3>
               </div>
-              <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
-                Tell us exactly what you want.
-              </p>
-              <a href="#"
-                class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
-                <span>SUBMIT</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
             </div>
+            <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
+              No listing. We handle everything.
+            </p>
+            <a href="#"
+              class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
+              <span>SUBMIT</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="border-b border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
+          <div class="flex md:hidden items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="10" cy="7" r="4" />
+                  <path d="M10.3 15H7a4 4 0 0 0-4 4v2" />
+                  <circle cx="17" cy="17" r="3" />
+                  <path d="m21 21-1.9-1.9" />
+                </svg>
+
+              </span>
+              <div class="flex flex-col">
+                <span
+                  class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">BUYING</span>
+                <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">SUBMIT A WANTED</h3>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Tell us exactly what you want.</p>
+              </div>
+            </div>
+            <a href="#"
+              class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+              <span>SUBMIT</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
 
-
-          <div class="border-b border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
-            <div class="flex md:hidden items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
-                    <path d="M7 14h.01" />
-                    <path d="M17 14h.01" />
-                    <rect width="18" height="8" x="3" y="10" rx="2" />
-                    <path d="M5 18v2" />
-                    <path d="M19 18v2" />
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">LIST
-                    PUBLICLY</span>
-                  <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">LIST YOUR CAR</h3>
-                  <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Reach the world's most serious buyers.
-                  </p>
-                </div>
-              </div>
-              <a href="#"
-                class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
-                <span>LIST NOW</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none"
-                  viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
+          <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-              </a>
-            </div>
-
-            <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
-              <div class="flex items-center gap-3">
+              </span>
+              <div class="flex flex-col">
                 <span
-                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
-                    <path d="M7 14h.01" />
-                    <path d="M17 14h.01" />
-                    <rect width="18" height="8" x="3" y="10" rx="2" />
-                    <path d="M5 18v2" />
-                    <path d="M19 18v2" />
-                  </svg>
-                </span>
-                <div class="flex flex-col">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">LIST
-                    PUBLICLY</span>
-                  <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">LIST YOUR CAR</h3>
-                </div>
+                  class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">BUYING</span>
+                <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">SUBMIT A WANTED</h3>
               </div>
-              <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
-                Reach the world's most serious buyers.
-              </p>
-              <a href="#"
-                class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
-                <span>LIST NOW</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
             </div>
+            <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
+              Tell us exactly what you want.
+            </p>
+            <a href="#"
+              class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
+              <span>SUBMIT</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div class=" border-zinc-150 dark:border-zinc-900/60 py-5 md:py-6">
+          <div class="flex md:hidden items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
+                  <path d="M7 14h.01" />
+                  <path d="M17 14h.01" />
+                  <rect width="18" height="8" x="3" y="10" rx="2" />
+                  <path d="M5 18v2" />
+                  <path d="M19 18v2" />
+                </svg>
+              </span>
+              <div class="flex flex-col">
+                <span class="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">LIST
+                  PUBLICLY</span>
+                <h3 class="font-bold text-[13px] text-zinc-900 dark:text-white uppercase mt-0.5">LIST YOUR CAR</h3>
+                <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Reach the world's most serious buyers.
+                </p>
+              </div>
+            </div>
+            <a href="#"
+              class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+              <span>LIST NOW</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           </div>
 
+          <div class="hidden md:grid grid-cols-4 items-center gap-6 px-4">
+            <div class="flex items-center gap-3">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" />
+                  <path d="M7 14h.01" />
+                  <path d="M17 14h.01" />
+                  <rect width="18" height="8" x="3" y="10" rx="2" />
+                  <path d="M5 18v2" />
+                  <path d="M19 18v2" />
+                </svg>
+              </span>
+              <div class="flex flex-col">
+                <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">LIST
+                  PUBLICLY</span>
+                <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase mt-0.5">LIST YOUR CAR</h3>
+              </div>
+            </div>
+            <p class="col-span-2 text-lg font-semibold text-zinc-600 dark:text-zinc-300">
+              Reach the world's most serious buyers.
+            </p>
+            <a href="#"
+              class="ml-auto border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-5 py-2.5 font-bold text-xs uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1.5 shadow-sm">
+              <span>LIST NOW</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
         </div>
 
       </div>
     </section>
 
+    <!-- NEWS SECTION -->
+    <section
+      class="news-section border-t border-zinc-100 dark:border-zinc-900/60 py-10 px-6 md:py-16 md:px-12 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto flex flex-col items-center">
+        <!-- Section Header -->
+        <div class="w-full max-w-[340px] md:max-w-5xl mb-8 md:mb-12 flex items-center justify-between px-1.5 md:px-4">
+          <h2
+            class="font-logo font-extrabold text-base md:text-2xl tracking-widest text-zinc-900 dark:text-white uppercase text-left">
+            News
+          </h2>
+          <a href="#"
+            class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+            <span>SHOW ALL</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
 
+        <!-- News Slider Row with flanking navigation -->
+        <div class="flex items-center justify-between gap-3 md:gap-8 w-full max-w-[340px] md:max-w-5xl">
+          <!-- Left Navigation Button -->
+          <button id="news-prev-btn" aria-label="Previous slide"
+            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
+              <polygon points="16,5 7,12 16,19" />
+            </svg>
+          </button>
 
+          <!-- Slider Container -->
+          <div class="news-slider-container flex-1 overflow-hidden relative">
+            <div id="news-slider-track" class="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+              <!-- Slide 1 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/mercedes_one.png" alt="Bugatti Tourbillon"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">NEW ERA</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Tourbillon V16 Hybrid Revealed
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Bugatti &bull; June 18, 2026
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/ferrari_enzo.png" alt="Koenigsegg Jesko Absolut"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">SPEED RECORD</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Jesko Absolut Sets New Records
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Koenigsegg &bull; June 10, 2026
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-1.jpg" alt="Pagani Utopia Roadster"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ARTWORK</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Utopia Roadster Unveiled
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Pagani &bull; May 28, 2026
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 4 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-2.jpg" alt="Mercedes AMG One"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">RING RECORD</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    AMG One Smashes Ring Record
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Mercedes-AMG &bull; May 15, 2026
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 5 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-3.jpg" alt="Ferrari Enzo"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Enzo Restoration Program Launched
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Ferrari &bull; April 22, 2026
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 6 -->
+              <div
+                class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-4.jpg" alt="Bugatti Chiron L'Ultime"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LIMITED RUN</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Final Chiron L'Ultime Delivered
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    Bugatti &bull; March 30, 2026
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Navigation Button -->
+          <button id="news-next-btn" aria-label="Next slide"
+            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
+              <polygon points="8,5 17,12 8,19" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section
+      class="reviews-section bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900/60 py-10 px-6 md:py-16 md:px-12 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto flex flex-col items-center">
+        <!-- Section Header -->
+        <div class="w-full max-w-[340px] md:max-w-5xl mb-8 md:mb-12 flex items-center justify-between px-1.5 md:px-4">
+          <h2
+            class="font-logo font-extrabold text-base md:text-2xl tracking-widest text-zinc-900 dark:text-white uppercase text-left">
+            Reviews
+          </h2>
+          <a href="#"
+            class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-2 font-bold text-[10px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+            <span>SHOW ALL</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Reviews Slider Row with flanking navigation -->
+        <div class="flex items-center justify-between gap-3 md:gap-8 w-full max-w-[340px] md:max-w-5xl">
+          <!-- Left Navigation Button -->
+          <button id="reviews-prev-btn" aria-label="Previous slide"
+            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
+              <polygon points="16,5 7,12 16,19" />
+            </svg>
+          </button>
+
+          <!-- Slider Container -->
+          <div class="reviews-slider-container flex-1 overflow-hidden relative">
+            <div id="reviews-slider-track"
+              class="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+              <!-- Slide 1 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-4.jpg" alt="Bugatti Chiron Super Sport Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">GT CLASS</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Chiron SS: Continental Conqueror
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    ROAD & TRACK &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-3.jpg" alt="Koenigsegg Jesko Attack Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">TRACK TEST</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Jesko Attack: Redefining Aerodynamics
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    TOP GEAR &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-2.jpg" alt="Pagani Utopia Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ANALOG ART</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Pagani Utopia: Pure V12 Romance
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    CAR MAGAZINE &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.8 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 4 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/thumbnail-1.jpg" alt="Mercedes AMG One Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">F1 TECH</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    AMG One: True F1 Engine on the Road
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    EVO &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 5 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/ferrari_enzo.png" alt="Ferrari Enzo Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Ferrari Enzo: The Analog Masterpiece
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    MOTOR TREND &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Slide 6 -->
+              <div
+                class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
+                <div class="w-full flex flex-col items-center group cursor-pointer">
+                  <div
+                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    <img src="assets/images/mercedes_one.png" alt="Pagani Utopia Review"
+                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <span
+                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">V12 SOUND</span>
+                  </div>
+                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
+                    Utopia: A Symphonic AMG Experience
+                  </h3>
+                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
+                    CAR & DRIVER &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Navigation Button -->
+          <button id="reviews-next-btn" aria-label="Next slide"
+            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
+              <polygon points="8,5 17,12 8,19" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    </div>
+    </section>
   </main>
 
 
