@@ -150,7 +150,7 @@ body {
   width: 85%;
   max-width: 320px;
   height: 100%;
-  background-color: #eae6e4;
+  background-color: #e6e9e8;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   transform: translateX(-100%);
   transition-property: transform, display, overlay, background-color, border-color;
@@ -160,31 +160,31 @@ body {
 }
 
 .dark #mobile-menu {
-  background-color: #6f6866 !important;
+  background-color: #353535 !important;
   border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: #d7d0cd !important;
+  color: #e8e8e8 !important;
 }
 
 .dark #mobile-menu .dark\:text-white,
 .dark #mobile-menu span,
 .dark #mobile-menu h3,
 .dark #mobile-menu a:not(.text-brand) {
-  color: #e2dcd9 !important;
+  color: #e8e8e8 !important;
 }
 
 .dark #mobile-menu .dark\:text-white\/80,
 .dark #mobile-menu p {
-  color: rgba(215, 208, 205, 0.8) !important;
+  color: rgba(232, 232, 232, 0.8) !important;
 }
 
 .dark #mobile-menu .dark\:text-white\/60,
 .dark #mobile-menu button {
-  color: rgba(215, 208, 205, 0.6) !important;
+  color: rgba(232, 232, 232, 0.6) !important;
 }
 
 .dark #mobile-menu button:hover,
 .dark #mobile-menu a:hover:not(.text-brand) {
-  color: #d7d0cd !important;
+  color: #e8e8e8 !important;
 }
 
 .dark #mobile-menu .dark\:border-white\/\[0\.37\] {
@@ -342,3 +342,251 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(156, 163, 175, 0.8);
 }
+
+/* Footer Styles matching Mobile Menu colors and layout spacing */
+footer {
+  background-color: #e6e9e8 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #27272a !important;
+}
+
+.dark footer {
+  background-color: #353535 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #e8e8e8 !important;
+}
+
+/* Footer Dividers */
+footer .footer-divider {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark footer .footer-divider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+footer .footer-divider-t {
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark footer .footer-divider-t {
+  border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Headings */
+footer h3 {
+  color: #18181b !important;
+}
+
+.dark footer h3 {
+  color: #e8e8e8 !important;
+}
+
+/* Text and Links */
+footer p {
+  color: #52525b !important;
+}
+
+.dark footer p {
+  color: #e8e8e8 !important;
+}
+
+footer a:not(.text-brand),
+footer svg {
+  color: #52525b !important;
+}
+
+.dark footer a:not(.text-brand),
+.dark footer svg {
+  color: #e8e8e8 !important;
+}
+
+footer a:hover:not(.text-brand),
+footer a:hover:not(.text-brand) svg {
+  color: #bc1919 !important;
+}
+
+.dark footer a:hover:not(.text-brand),
+.dark footer a:hover:not(.text-brand) svg {
+  color: #bc1919 !important;
+}
+
+footer a.text-brand,
+footer a.text-brand * {
+  color: #bc1919 !important;
+}
+
+footer input[type="email"] {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: #18181b !important;
+}
+
+.dark footer input[type="email"] {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #e8e8e8 !important;
+}
+
+footer input[type="email"]::placeholder {
+  color: #71717a !important;
+}
+
+.dark footer input[type="email"]::placeholder {
+  color: rgba(232, 232, 232, 0.7) !important;
+}
+
+footer button[type="submit"] {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+
+footer button[type="submit"]:hover {
+  background-color: #27272a !important;
+}
+
+.dark footer button[type="submit"] {
+  background-color: #e8e8e8 !important;
+  color: #18181b !important;
+}
+
+.dark footer button[type="submit"]:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* Enforce Casing Rules on Footer Elements */
+footer h3 {
+  text-transform: uppercase !important;
+}
+
+footer a,
+footer button {
+  text-transform: capitalize !important;
+}
+
+/* Popovers Background & Text Styling matching Footer theme colors */
+#search-popover,
+#profile-popover {
+  background-color: #e0e0e0 !important;
+  color: #27272a !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.dark #search-popover,
+.dark #profile-popover {
+  background-color: #353535 !important;
+  color: #e8e8e8 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Close button inside Search Popover */
+#search-popover button {
+  color: #52525b !important;
+}
+#search-popover button:hover {
+  color: #18181b !important;
+}
+.dark #search-popover button {
+  color: rgba(232, 232, 232, 0.8) !important;
+}
+.dark #search-popover button:hover {
+  color: #e8e8e8 !important;
+}
+
+/* Auth Popover Tab Buttons */
+#profile-popover button:not(.text-brand):not([type="submit"]):not([type="button"]) {
+  color: #71717a !important;
+}
+#profile-popover button:not(.text-brand):not([type="submit"]):not([type="button"]):hover {
+  color: #18181b !important;
+}
+.dark #profile-popover button:not(.text-brand):not([type="submit"]):not([type="button"]) {
+  color: rgba(232, 232, 232, 0.6) !important;
+}
+.dark #profile-popover button:not(.text-brand):not([type="submit"]):not([type="button"]):hover {
+  color: #e8e8e8 !important;
+}
+
+/* Popover Form Labels */
+#profile-popover label {
+  color: #52525b !important;
+}
+.dark #profile-popover label {
+  color: rgba(232, 232, 232, 0.8) !important;
+}
+
+/* Popover Inputs */
+#search-popover input {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #18181b !important;
+}
+.dark #search-popover input {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+#profile-popover input {
+  background-color: #f4f4f5 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #18181b !important;
+}
+.dark #profile-popover input {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #e8e8e8 !important;
+}
+
+/* Popover Divider & Middle Text overlay */
+#profile-popover .absolute.inset-x-0.h-px {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+.dark #profile-popover .absolute.inset-x-0.h-px {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+#profile-popover .relative.px-3 {
+  background-color: #e0e0e0 !important;
+  color: #52525b !important;
+}
+.dark #profile-popover .relative.px-3 {
+  background-color: #353535 !important;
+  color: #e8e8e8 !important;
+}
+
+/* Popover Submit Buttons */
+#profile-popover button[type="submit"] {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+#profile-popover button[type="submit"]:hover {
+  background-color: #27272a !important;
+}
+.dark #profile-popover button[type="submit"] {
+  background-color: #e8e8e8 !important;
+  color: #18181b !important;
+}
+.dark #profile-popover button[type="submit"]:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* Popover Google Auth Button */
+#profile-popover button[type="button"] {
+  background-color: #f4f4f5 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #27272a !important;
+}
+#profile-popover button[type="button"]:hover {
+  background-color: #e4e4e7 !important;
+}
+.dark #profile-popover button[type="button"] {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #e8e8e8 !important;
+}
+.dark #profile-popover button[type="button"]:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+

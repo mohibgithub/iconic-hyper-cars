@@ -158,17 +158,17 @@
     </div>
 
     <div id="search-popover" popover
-      class="header-search-bar w-full bg-white dark:bg-zinc-950 p-4 border-b border-zinc-100 dark:border-zinc-900 shadow-xl transition-colors duration-300">
-      <div class="flex items-center gap-3 w-full max-w-md mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24"
+      class="header-search-bar w-full px-6 md:px-12 py-4 border-b shadow-xl transition-colors duration-300">
+      <div class="flex items-center gap-3 w-full max-w-md mx-auto bg-white/30 dark:bg-black/15 border border-black/5 dark:border-white/10 rounded-full px-4 py-1.5 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-600 dark:text-zinc-200" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input type="text" id="search-input" placeholder="Search Bugatti, Koenigsegg, Pagani..."
-          class="flex-1 bg-transparent text-sm border-none outline-none text-zinc-900 dark:text-white placeholder-zinc-400 py-1" />
+          class="flex-1 bg-transparent text-sm border-none outline-none py-1 placeholder-zinc-500 dark:placeholder-zinc-300/80" />
         <button popovertarget="search-popover" popovertargetaction="hide"
-          class="text-xs font-semibold tracking-wider text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+          class="text-xs font-bold tracking-wider text-zinc-600 dark:text-zinc-200 hover:text-brand dark:hover:text-brand transition-colors duration-200 uppercase">
           CLOSE
         </button>
       </div>
@@ -1031,36 +1031,39 @@
           </a>
         </div>
 
-        <!-- News Slider Row with flanking navigation -->
-        <div class="flex items-center justify-between gap-3 md:gap-8 w-full max-w-[340px] md:max-w-5xl">
+        <!-- News Slider Wrapper with absolute navigation -->
+        <div class="relative w-full max-w-[340px] md:max-w-5xl">
           <!-- Left Navigation Button -->
           <button id="news-prev-btn" aria-label="Previous slide"
-            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 border border-zinc-300/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shadow-lg shrink-0">
             <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
               <polygon points="16,5 7,12 16,19" />
             </svg>
           </button>
 
           <!-- Slider Container -->
-          <div class="news-slider-container flex-1 overflow-hidden relative">
+          <div class="news-slider-container w-full overflow-hidden relative">
             <div id="news-slider-track" class="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
               <!-- Slide 1 -->
               <div
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/mercedes_one.png" alt="Bugatti Tourbillon"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">NEW ERA</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">NEW ERA</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Tourbillon V16 Hybrid Revealed
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Bugatti &bull; June 18, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Tourbillon V16 Hybrid Revealed
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Bugatti &bull; June 18, 2026
-                  </p>
                 </div>
               </div>
 
@@ -1069,18 +1072,21 @@
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/ferrari_enzo.png" alt="Koenigsegg Jesko Absolut"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">SPEED RECORD</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">SPEED RECORD</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Jesko Absolut Sets New Records
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Koenigsegg &bull; June 10, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Jesko Absolut Sets New Records
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Koenigsegg &bull; June 10, 2026
-                  </p>
                 </div>
               </div>
 
@@ -1089,18 +1095,21 @@
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-1.jpg" alt="Pagani Utopia Roadster"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ARTWORK</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ARTWORK</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Utopia Roadster Unveiled
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Pagani &bull; May 28, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Utopia Roadster Unveiled
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Pagani &bull; May 28, 2026
-                  </p>
                 </div>
               </div>
 
@@ -1109,18 +1118,21 @@
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-2.jpg" alt="Mercedes AMG One"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">RING RECORD</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">RING RECORD</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        AMG One Smashes Ring Record
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Mercedes-AMG &bull; May 15, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    AMG One Smashes Ring Record
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Mercedes-AMG &bull; May 15, 2026
-                  </p>
                 </div>
               </div>
 
@@ -1129,18 +1141,21 @@
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-3.jpg" alt="Ferrari Enzo"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Enzo Restoration Program Launched
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Ferrari &bull; April 22, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Enzo Restoration Program Launched
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Ferrari &bull; April 22, 2026
-                  </p>
                 </div>
               </div>
 
@@ -1149,18 +1164,21 @@
                 class="news-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-4.jpg" alt="Bugatti Chiron L'Ultime"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LIMITED RUN</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LIMITED RUN</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Final Chiron L'Ultime Delivered
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        Bugatti &bull; March 30, 2026
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Final Chiron L'Ultime Delivered
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    Bugatti &bull; March 30, 2026
-                  </p>
                 </div>
               </div>
             </div>
@@ -1168,7 +1186,7 @@
 
           <!-- Right Navigation Button -->
           <button id="news-next-btn" aria-label="Next slide"
-            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 border border-zinc-300/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shadow-lg shrink-0">
             <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
               <polygon points="8,5 17,12 8,19" />
             </svg>
@@ -1198,18 +1216,18 @@
           </a>
         </div>
 
-        <!-- Reviews Slider Row with flanking navigation -->
-        <div class="flex items-center justify-between gap-3 md:gap-8 w-full max-w-[340px] md:max-w-5xl">
+        <!-- Reviews Slider Wrapper with absolute navigation -->
+        <div class="relative w-full max-w-[340px] md:max-w-5xl">
           <!-- Left Navigation Button -->
           <button id="reviews-prev-btn" aria-label="Previous slide"
-            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 border border-zinc-300/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shadow-lg shrink-0">
             <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
               <polygon points="16,5 7,12 16,19" />
             </svg>
           </button>
 
           <!-- Slider Container -->
-          <div class="reviews-slider-container flex-1 overflow-hidden relative">
+          <div class="reviews-slider-container w-full overflow-hidden relative">
             <div id="reviews-slider-track"
               class="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
               <!-- Slide 1 -->
@@ -1217,18 +1235,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-4.jpg" alt="Bugatti Chiron Super Sport Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">GT CLASS</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">GT CLASS</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Chiron SS: Continental Conqueror
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        ROAD & TRACK &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Chiron SS: Continental Conqueror
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    ROAD & TRACK &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
-                  </p>
                 </div>
               </div>
 
@@ -1237,18 +1258,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-3.jpg" alt="Koenigsegg Jesko Attack Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">TRACK TEST</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">TRACK TEST</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Jesko Attack: Redefining Aerodynamics
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        TOP GEAR &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Jesko Attack: Redefining Aerodynamics
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    TOP GEAR &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
-                  </p>
                 </div>
               </div>
 
@@ -1257,18 +1281,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-2.jpg" alt="Pagani Utopia Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ANALOG ART</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">ANALOG ART</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Pagani Utopia: Pure V12 Romance
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        CAR MAGAZINE &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.8 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Pagani Utopia: Pure V12 Romance
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    CAR MAGAZINE &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.8 ★ RATING</span>
-                  </p>
                 </div>
               </div>
 
@@ -1277,18 +1304,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/thumbnail-1.jpg" alt="Mercedes AMG One Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">F1 TECH</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">F1 TECH</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        AMG One: True F1 Engine on the Road
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        EVO &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    AMG One: True F1 Engine on the Road
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    EVO &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
-                  </p>
                 </div>
               </div>
 
@@ -1297,18 +1327,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/ferrari_enzo.png" alt="Ferrari Enzo Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">LEGEND</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Ferrari Enzo: The Analog Masterpiece
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        MOTOR TREND &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Ferrari Enzo: The Analog Masterpiece
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    MOTOR TREND &bull; <span style="color: rgb(238 150 11)" class="font-semibold">5.0 ★ RATING</span>
-                  </p>
                 </div>
               </div>
 
@@ -1317,18 +1350,21 @@
                 class="reviews-slider-slide flex-shrink-0 px-1.5 md:px-4 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center select-none">
                 <div class="w-full flex flex-col items-center group cursor-pointer">
                   <div
-                    class="relative overflow-hidden w-full aspect-[3/2] bg-zinc-50 dark:bg-zinc-900/50 border border-black/60 dark:border-white/60 rounded-[12px] flex items-center justify-center transition-all duration-300">
+                    class="relative overflow-hidden w-full aspect-[3/2] border border-black/60 dark:border-white/60 rounded-[12px] p-4 md:p-6 flex flex-col justify-end transition-all duration-300">
                     <img src="assets/images/mercedes_one.png" alt="Pagani Utopia Review"
-                      class="w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                      class="absolute inset-0 w-full h-full object-cover pointer-events-none group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent z-10"></div>
                     <span
-                      class="absolute top-2 left-2 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">V12 SOUND</span>
+                      class="absolute top-2 left-2 z-20 bg-blue-600 text-white text-[8px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md">V12 SOUND</span>
+                    <div class="relative z-20 w-full text-center flex flex-col items-center">
+                      <h3 class="font-bold text-white text-[12px] md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                        Utopia: A Symphonic AMG Experience
+                      </h3>
+                      <p class="text-zinc-300 text-[10px] md:text-sm text-center mt-1">
+                        CAR & DRIVER &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
+                      </p>
+                    </div>
                   </div>
-                  <h3 class="mt-3 md:mt-4 font-bold text-zinc-800 dark:text-white text-[12px] md:text-lg text-center tracking-wide leading-tight transition-colors line-clamp-1">
-                    Utopia: A Symphonic AMG Experience
-                  </h3>
-                  <p class="text-zinc-500 dark:text-white/50 text-[10px] md:text-sm text-center mt-1">
-                    CAR & DRIVER &bull; <span style="color: rgb(238 150 11)" class="font-semibold">4.9 ★ RATING</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -1336,7 +1372,7 @@
 
           <!-- Right Navigation Button -->
           <button id="reviews-next-btn" aria-label="Next slide"
-            class="-translate-y-[26px] md:-translate-y-[34px] border border-zinc-300 dark:border-zinc-800 w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shrink-0">
+            class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 border border-zinc-300/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md w-10 h-10 md:w-16 md:h-16 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-900 active:scale-95 transition-all duration-200 rounded-lg md:rounded-xl shadow-lg shrink-0">
             <svg class="w-3.5 h-3.5 md:w-6 md:h-6 fill-current text-zinc-800 dark:text-zinc-200" viewBox="0 0 24 24">
               <polygon points="8,5 17,12 8,19" />
             </svg>
@@ -1344,8 +1380,114 @@
         </div>
       </div>
     </section>
-    </div>
-    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="w-full mt-auto transition-colors duration-300">
+      <div class="max-w-7xl mx-auto flex flex-col items-center">
+        <!-- Top Row: Logo & Socials -->
+        <div class="w-full pt-8 pb-4 flex flex-col items-center justify-center">
+          <a href="#" class="flex flex-col items-center text-center select-none font-logo group mb-6">
+            <span class="text-[18px] md:text-[22px] font-extrabold tracking-widest text-zinc-900 dark:text-white transition-colors font-iconic">ICONIC</span>
+            <span class="text-[11px] md:text-[14px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
+          </a>
+          <!-- Social Icons -->
+          <div class="flex items-center gap-6 text-zinc-600 dark:text-zinc-400">
+            <a href="#" aria-label="Facebook" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="X" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" aria-label="Pinterest" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.162 0 7.396 2.967 7.396 6.93 0 4.135-2.607 7.462-6.227 7.462-1.216 0-2.359-.631-2.75-1.378l-.752 2.863c-.272 1.05-1.014 2.368-1.51 3.183 1.123.345 2.306.531 3.533.531 6.628 0 12-5.373 12-12 0-6.628-5.372-12-12-12z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="YouTube" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.163c-.272-1.022-1.074-1.826-2.099-2.099C19.517 3.5 12 3.5 12 3.5s-7.517 0-9.399.564c-1.025.273-1.827 1.077-2.1 2.099C0 8.07 0 12 0 12s0 3.93.501 5.837c.273 1.022 1.075 1.826 2.1 2.099C4.483 20.5 12 20.5 12 20.5s7.517 0 9.399-.564c1.025-.273-1.827-1.077 2.1-2.099C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok" class="hover:text-brand dark:hover:text-brand transition-colors duration-200">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.11.13.24.26.37.38v3.87c-1.3-.39-2.45-1.18-3.3-2.23-.05-.06-.1-.13-.15-.2v8.19c-.04 3.79-2.52 7.02-6.13 7.7-3.91.73-7.7-1.74-8.43-5.65-.73-3.91 1.74-7.7 5.65-8.43 1.09-.2 2.22-.1 3.25.28v3.91c-.7-.34-1.48-.48-2.25-.4-1.95.19-3.4 1.93-3.21 3.88.19 1.95 1.93 3.4 3.88 3.21 1.82-.18 3.19-1.64 3.23-3.48.01-2.91 0-5.82.01-8.73-.01-2.28-.01-4.56-.01-6.84z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Middle Row: 4-Column Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 w-full max-w-5xl px-6 md:px-12 py-6 md:py-8">
+          <!-- Column 1: Global Marketplace -->
+          <div class="flex flex-col items-center md:items-start w-full">
+            <h3 class="font-logo font-extrabold text-xs tracking-widest text-zinc-900 dark:text-white text-center md:text-left">Global Marketplace</h3>
+            <div class="w-full footer-divider my-3"></div>
+            <div class="flex flex-col items-center md:items-start gap-2.5">
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">About us</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Contact us</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Advertise</a>
+            </div>
+          </div>
+
+          <!-- Column 2: ICONIC Group -->
+          <div class="flex flex-col items-center md:items-start w-full">
+            <h3 class="font-logo font-extrabold text-xs tracking-widest text-zinc-900 dark:text-white text-center md:text-left">Iconic Group</h3>
+            <div class="w-full footer-divider my-3"></div>
+            <div class="flex flex-col items-center md:items-start gap-2.5">
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Iconic Hypercars Global</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Iconic Supercars Dubai</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Iconic Auctions</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Hypercars Majlis</a>
+            </div>
+          </div>
+
+          <!-- Column 3: LEGAL -->
+          <div class="flex flex-col items-center md:items-start w-full">
+            <h3 class="font-logo font-extrabold text-xs tracking-widest text-zinc-900 dark:text-white text-center md:text-left">Legal</h3>
+            <div class="w-full footer-divider my-3"></div>
+            <div class="flex flex-col items-center md:items-start gap-2.5">
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Privacy policy</a>
+              <a href="#" class="text-xs md:text-sm font-medium hover:text-brand dark:hover:text-brand transition-colors duration-200 text-center md:text-left">Terms & conditions</a>
+            </div>
+          </div>
+
+          <!-- Column 4: Subscribe -->
+          <div class="flex flex-col items-center md:items-start w-full">
+            <h3 class="font-logo font-extrabold text-xs tracking-widest text-zinc-900 dark:text-white text-center md:text-left">Subscribe</h3>
+            <div class="w-full footer-divider my-3"></div>
+            <p class="text-zinc-500 dark:text-zinc-400 text-xs md:text-sm mb-4 text-center md:text-left font-medium leading-relaxed max-w-[260px] md:max-w-none">
+              Be the first to know about new listings.
+            </p>
+            <form class="w-full flex flex-col items-center md:items-start gap-2 max-w-[280px] md:max-w-none" onsubmit="event.preventDefault(); alert('Subscribed!');">
+              <input type="email" placeholder="Enter email" required
+                class="bg-transparent border rounded-[6px] px-3 py-2.5 w-full text-left md:text-left text-xs focus:outline-none focus:border-brand transition-colors duration-200" />
+              <button type="submit"
+                class="w-full text-xs font-bold rounded-[6px] py-2.5 px-4 transition-all duration-300 active:scale-95 text-center shadow-sm">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Copyright -->
+        <div class="w-full footer-divider-t py-4 text-center">
+          <p class="text-[10px] md:text-xs tracking-wider">
+            &copy; 2026 Iconic Group. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   </main>
 
 
