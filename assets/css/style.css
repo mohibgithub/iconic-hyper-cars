@@ -433,7 +433,6 @@ footer input[type="email"]::placeholder {
 .dark footer input[type="email"]::placeholder {
   color: rgba(232, 232, 232, 0.7) !important;
 }
-
 footer button[type="submit"] {
   background-color: #18181b !important;
   color: #ffffff !important;
