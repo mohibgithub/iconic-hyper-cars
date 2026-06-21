@@ -313,6 +313,14 @@ body {
 .slider-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  touch-action: pan-y;
+}
+
+.featured-slider-track,
+#testimonials-slider-track,
+#news-slider-track,
+#reviews-slider-track {
+  touch-action: pan-y;
 }
 
 .slider-slide {

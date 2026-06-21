@@ -1,4 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Reusable Swipe Gesture Helper ---
+  function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
+    if (!trackElement) return;
+    let startX = 0, startY = 0, diffX = 0, diffY = 0, isHorizontalSwipe = false;
+
+    trackElement.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      diffX = 0;
+      diffY = 0;
+      isHorizontalSwipe = false;
+    }, { passive: true });
+
+    trackElement.addEventListener('touchmove', (e) => {
+      if (!startX || !startY) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      diffX = startX - currentX;
+      diffY = startY - currentY;
+
+      if (!isHorizontalSwipe && Math.abs(diffX) > 5 && Math.abs(diffX) > Math.abs(diffY)) {
+        isHorizontalSwipe = true;
+      }
+
+      if (isHorizontalSwipe) {
+        if (e.cancelable) e.preventDefault();
+      }
+    }, { passive: false });
+
+    trackElement.addEventListener('touchend', () => {
+      if (isHorizontalSwipe && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          onSwipeLeft();
+        } else {
+          onSwipeRight();
+        }
+      }
+      startX = 0;
+      startY = 0;
+      diffX = 0;
+      diffY = 0;
+      isHorizontalSwipe = false;
+    });
+  }
+
   // --- Theme Toggle Logic ---
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const sunIcon = document.getElementById('sun-icon');
@@ -69,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     soldInterval = setInterval(() => {
       soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
       updateSoldSlider();
-    }, 3000);
+    }, 5000);
   }
 
   function resetSoldAutoSlide() {
@@ -93,40 +138,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Touch Swipe Support
-    let soldStartX = 0;
-    let soldStartY = 0;
-    let soldHasSwiped = false;
-
-    soldTrack.addEventListener('touchstart', (e) => {
-      soldStartX = e.touches[0].clientX;
-      soldStartY = e.touches[0].clientY;
-      soldHasSwiped = false;
-    }, { passive: true });
-
-    soldTrack.addEventListener('touchmove', (e) => {
-      if (soldHasSwiped || !soldStartX) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = soldStartX - currentX;
-      const diffY = soldStartY - currentY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (e.cancelable) e.preventDefault();
-        const swipeThreshold = 50;
-        if (Math.abs(diffX) > swipeThreshold) {
-          soldHasSwiped = true;
-          if (diffX > 0) {
-            soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
-          } else {
-            soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
-          }
-          updateSoldSlider();
-          resetSoldAutoSlide();
-          soldStartX = 0;
-          soldStartY = 0;
-        }
+    enableTouchSwipe(
+      soldTrack,
+      () => {
+        soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
+        updateSoldSlider();
+        resetSoldAutoSlide();
+      },
+      () => {
+        soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
+        updateSoldSlider();
+        resetSoldAutoSlide();
       }
-    }, { passive: false });
+    );
 
     startSoldAutoSlide();
   }
@@ -162,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const maxSlide = getFeatMaxSlide();
       featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
       updateFeatSlider();
-    }, 3000);
+    }, 5000);
   }
 
   function resetFeatAutoSlide() {
@@ -172,41 +196,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (featTrack) {
     // Touch Swipe Support
-    let featStartX = 0;
-    let featStartY = 0;
-    let featHasSwiped = false;
-
-    featTrack.addEventListener('touchstart', (e) => {
-      featStartX = e.touches[0].clientX;
-      featStartY = e.touches[0].clientY;
-      featHasSwiped = false;
-    }, { passive: true });
-
-    featTrack.addEventListener('touchmove', (e) => {
-      if (featHasSwiped || !featStartX) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = featStartX - currentX;
-      const diffY = featStartY - currentY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (e.cancelable) e.preventDefault();
-        const swipeThreshold = 50;
-        if (Math.abs(diffX) > swipeThreshold) {
-          featHasSwiped = true;
-          const maxSlide = getFeatMaxSlide();
-          if (diffX > 0) {
-            featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
-          } else {
-            featCurrentSlide = (featCurrentSlide - 1) < 0 ? maxSlide : featCurrentSlide - 1;
-          }
-          updateFeatSlider();
-          resetFeatAutoSlide();
-          featStartX = 0;
-          featStartY = 0;
-        }
+    enableTouchSwipe(
+      featTrack,
+      () => {
+        const maxSlide = getFeatMaxSlide();
+        featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
+        updateFeatSlider();
+        resetFeatAutoSlide();
+      },
+      () => {
+        const maxSlide = getFeatMaxSlide();
+        featCurrentSlide = (featCurrentSlide - 1) < 0 ? maxSlide : featCurrentSlide - 1;
+        updateFeatSlider();
+        resetFeatAutoSlide();
       }
-    }, { passive: false });
+    );
 
     // Handle screen resize
     window.addEventListener('resize', () => {
@@ -256,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const maxSlide = getTestimonialMaxSlide();
       testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
       updateTestimonialSlider();
-    }, 3050);
+    }, 5000);
   }
 
   function resetTestimonialAutoSlide() {
@@ -266,42 +270,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (testimonialTrack) {
     // Touch Swipe Support
-    let testimonialStartX = 0;
-    let testimonialStartY = 0;
-    let testimonialHasSwiped = false;
-
-    testimonialTrack.addEventListener('touchstart', (e) => {
-      testimonialStartX = e.touches[0].clientX;
-      testimonialStartY = e.touches[0].clientY;
-      testimonialHasSwiped = false;
-    }, { passive: true });
-
-    testimonialTrack.addEventListener('touchmove', (e) => {
-      if (!isMobile()) return;
-      if (testimonialHasSwiped || !testimonialStartX) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = testimonialStartX - currentX;
-      const diffY = testimonialStartY - currentY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (e.cancelable) e.preventDefault();
-        const swipeThreshold = 50;
-        if (Math.abs(diffX) > swipeThreshold) {
-          testimonialHasSwiped = true;
-          const maxSlide = getTestimonialMaxSlide();
-          if (diffX > 0) {
-            testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
-          } else {
-            testimonialCurrentSlide = (testimonialCurrentSlide - 1) < 0 ? maxSlide : testimonialCurrentSlide - 1;
-          }
-          updateTestimonialSlider();
-          resetTestimonialAutoSlide();
-          testimonialStartX = 0;
-          testimonialStartY = 0;
-        }
+    enableTouchSwipe(
+      testimonialTrack,
+      () => {
+        if (!isMobile()) return;
+        const maxSlide = getTestimonialMaxSlide();
+        testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
+        updateTestimonialSlider();
+        resetTestimonialAutoSlide();
+      },
+      () => {
+        if (!isMobile()) return;
+        const maxSlide = getTestimonialMaxSlide();
+        testimonialCurrentSlide = (testimonialCurrentSlide - 1) < 0 ? maxSlide : testimonialCurrentSlide - 1;
+        updateTestimonialSlider();
+        resetTestimonialAutoSlide();
       }
-    }, { passive: false });
+    );
 
     // Handle screen resize
     window.addEventListener('resize', () => {
@@ -410,37 +395,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Touch Swipe Support
-    let newsStartX = 0;
-    let newsStartY = 0;
-    let newsHasSwiped = false;
-
-    newsTrack.addEventListener('touchstart', (e) => {
-      newsStartX = e.touches[0].clientX;
-      newsStartY = e.touches[0].clientY;
-      newsHasSwiped = false;
-    }, { passive: true });
-
-    newsTrack.addEventListener('touchmove', (e) => {
-      if (newsHasSwiped || !newsStartX) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = newsStartX - currentX;
-      const diffY = newsStartY - currentY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (e.cancelable) e.preventDefault();
-        const swipeThreshold = 50;
-        if (Math.abs(diffX) > swipeThreshold) {
-          newsHasSwiped = true;
-          if (diffX > 0) {
-            newsCurrentSlide = newsCurrentSlide + 1;
-          } else {
-            newsCurrentSlide = newsCurrentSlide - 1;
-          }
-          updateNewsSlider();
-        }
+    enableTouchSwipe(
+      newsTrack,
+      () => {
+        newsCurrentSlide = newsCurrentSlide + 1;
+        updateNewsSlider();
+      },
+      () => {
+        newsCurrentSlide = newsCurrentSlide - 1;
+        updateNewsSlider();
       }
-    }, { passive: false });
+    );
 
     window.addEventListener('resize', updateNewsSlider);
   }
@@ -486,37 +451,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Touch Swipe Support
-    let reviewsStartX = 0;
-    let reviewsStartY = 0;
-    let reviewsHasSwiped = false;
-
-    reviewsTrack.addEventListener('touchstart', (e) => {
-      reviewsStartX = e.touches[0].clientX;
-      reviewsStartY = e.touches[0].clientY;
-      reviewsHasSwiped = false;
-    }, { passive: true });
-
-    reviewsTrack.addEventListener('touchmove', (e) => {
-      if (reviewsHasSwiped || !reviewsStartX) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = reviewsStartX - currentX;
-      const diffY = reviewsStartY - currentY;
-
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (e.cancelable) e.preventDefault();
-        const swipeThreshold = 50;
-        if (Math.abs(diffX) > swipeThreshold) {
-          reviewsHasSwiped = true;
-          if (diffX > 0) {
-            reviewsCurrentSlide = reviewsCurrentSlide + 1;
-          } else {
-            reviewsCurrentSlide = reviewsCurrentSlide - 1;
-          }
-          updateReviewsSlider();
-        }
+    enableTouchSwipe(
+      reviewsTrack,
+      () => {
+        reviewsCurrentSlide = reviewsCurrentSlide + 1;
+        updateReviewsSlider();
+      },
+      () => {
+        reviewsCurrentSlide = reviewsCurrentSlide - 1;
+        updateReviewsSlider();
       }
-    }, { passive: false });
+    );
 
     window.addEventListener('resize', updateReviewsSlider);
   }
