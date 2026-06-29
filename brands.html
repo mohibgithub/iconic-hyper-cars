@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Brand | Iconic Hypercars</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: '#bc1919',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            logo: ['ProximaNova', 'Montserrat', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 4px 20px -2px rgba(0,0,0,0.08), 0 2px 8px -1px rgba(0,0,0,0.04)',
+            'card-hover': '0 20px 25px -5px rgba(0,0,0,0.12), 0 10px 10px -5px rgba(0,0,0,0.04)',
+          },
+          letterSpacing: {
+            widest: '0.25em',
+            wider: '0.15em',
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+    // System Theme Preference Manager
+    (function () {
+      const savedTheme = localStorage.getItem('color-theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Prevent sticky bottom navigation overlapping content */
+    @media (max-width: 767px) {
+      .brands-content-container {
+        padding-bottom: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen font-sans antialiased overflow-x-hidden transition-colors duration-300 flex flex-col">
+
+  <!-- Main Responsive Container -->
+  <main class="w-full flex-grow flex flex-col relative transition-all duration-300">
+
+    <!-- MAIN HEADER SECTION -->
+    <header
+      class="main-header absolute top-0 left-0 right-0 z-40 bg-white dark:bg-zinc-950 px-2 py-4 md:py-5 border-b border-black/[0.06] dark:border-white/5 transition-colors duration-300 shrink-0">
+      <div class="max-w-[100rem] mx-auto w-full flex items-center justify-center relative">
+        <a href="index.html" class="flex flex-col items-center text-center select-none font-logo group">
+          <span
+            class="text-[16.4px] md:text-1xl font-extrabold tracking-widest text-zinc-950 dark:text-white transition-colors font-iconic">ICONIC</span>
+          <span
+            class="text-[10px] md:text-[13px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
+        </a>
+        <!-- Hidden Compatibility Container for main.js element selector checks -->
+        <div class="hidden">
+          <button id="theme-toggle-btn">
+            <span id="sun-icon"></span>
+            <span id="moon-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- NATIVE INTERACTIVE OVERLAYS -->
+    <div id="mobile-menu" popover
+      class="mobile-sidebar p-5 text-zinc-900 dark:text-white shadow-2xl h-full flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.37] pb-4 mb-6">
+          <div class="font-logo flex flex-col">
+            <span class="text-base font-bold text-zinc-900 dark:text-white uppercase mt-0.5">MENU</span>
+          </div>
+          <button popovertarget="mobile-menu" aria-label="Close menu"
+            class="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 active:scale-90 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <nav class="flex flex-col gap-4">
+          <a href="index.html" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+            <span>Home</span>
+          </a>
+          <a href="brands.html" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+            <span>Browse Hypercars</span>
+          </a>
+          <a href="#" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+            <span>Services</span>
+          </a>
+          <a href="#" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+            <span>About Us</span>
+          </a>
+        </nav>
+      </div>
+      <div class="border-t border-black/[0.08] dark:border-white/[0.37] pt-4 flex flex-col gap-3">
+        <button popovertarget="profile-popover" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black font-bold py-2.5 rounded-[6px] text-xs uppercase tracking-wider hover:bg-brand dark:hover:bg-brand dark:hover:text-white transition-all active:scale-95">
+          Sign In
+        </button>
+      </div>
+    </div>
+
+    <!-- PROFILE POPOVER -->
+    <div id="profile-popover" popover
+      class="user-profile-dropdown bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white p-6 rounded-[12px] shadow-2xl border border-zinc-100 dark:border-zinc-800/80 transition-colors duration-300 w-[320px] sm:w-[350px]">
+      <div class="flex border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
+        <button id="auth-login-tab" class="flex-1 text-center font-bold text-xs uppercase tracking-wider text-brand border-b-2 border-brand pb-1 transition-all">Login</button>
+        <button id="auth-signup-tab" class="flex-1 text-center font-semibold text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white pb-1 transition-all">Sign Up</button>
+      </div>
+      <form id="auth-login-form" class="flex flex-col gap-3.5">
+        <div class="flex flex-col gap-1 text-left">
+          <label for="login-email" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email Address</label>
+          <input type="email" id="login-email" required placeholder="name@example.com" class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
+        </div>
+        <div class="flex flex-col gap-1 text-left">
+          <div class="flex justify-between items-center">
+            <label for="login-password" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Password</label>
+            <a href="#" class="text-[9px] font-semibold text-brand hover:underline">Forgot?</a>
+          </div>
+          <input type="password" id="login-password" required placeholder="••••••••" class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
+        </div>
+        <button type="submit" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-[6px] active:scale-[0.98] transition-all shadow-md">Sign In</button>
+      </form>
+    </div>
+
+    <!-- MAIN BODY SECTION -->
+    <section class="flex-grow bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-16 md:pt-20 pb-10 px-2 md:px-6 flex flex-col justify-start">
+      <div class="max-w-[70rem] mx-auto w-full flex flex-col mt-4 brands-content-container">
+        
+        <!-- Back Navigation -->
+        <div class="mb-6">
+          <a href="index.html" class="inline-flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-white text-xs font-bold uppercase tracking-wider transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Back to Home</span>
+          </a>
+        </div>
+
+        <!-- Headline Area -->
+        <div class="text-center mb-10">
+          <h1 class="text-xl md:text-2xl font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white font-logo mb-2">
+            Select Brand
+          </h1>
+          <p class="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-medium">
+            Choose a manufacturer to view their active hypercar listings
+          </p>
+        </div>
+
+        <!-- Brands Selection Grid (Same width / height items with 12px border radius) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5 w-full select-none">
+          
+          <!-- BRAND 1: BUGATTI (Active -> Links to listings.html?brand=bugatti) -->
+          <a href="listings.html?brand=bugatti" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/bugatti-logo.png" class="w-full h-full object-contain" alt="Bugatti Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BUGATTI</span>
+          </a>
+
+          <!-- BRAND 2: FERRARI -->
+          <a href="listings.html?brand=ferrari" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/ferrari-logo.png" class="w-full h-full object-contain" alt="Ferrari Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">FERRARI</span>
+          </a>
+
+          <!-- BRAND 3: LAMBORGHINI -->
+          <a href="listings.html?brand=lamborghini" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/lamborghini-logo.png" class="w-full h-full object-contain" alt="Lamborghini Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">LAMBORGHINI</span>
+          </a>
+
+          <!-- BRAND 4: KOENIGSEGG -->
+          <a href="listings.html?brand=koenigsegg" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/koenigsegg-logo.png" class="w-full h-full object-contain" alt="Koenigsegg Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">KOENIGSEGG</span>
+          </a>
+
+          <!-- BRAND 5: PAGANI -->
+          <a href="listings.html?brand=pagani" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/pagani-logo.png" class="w-full h-full object-contain" alt="Pagani Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">PAGANI</span>
+          </a>
+
+          <!-- BRAND 6: PORSCHE -->
+          <a href="listings.html?brand=porsche" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/porsche-logo.png" class="w-full h-full object-contain" alt="Porsche Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">PORSCHE</span>
+          </a>
+
+          <!-- BRAND 7: MCLAREN -->
+          <a href="listings.html?brand=mclaren" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/mclaren-logo.png" class="w-full h-full object-contain" alt="McLaren Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">McLAREN</span>
+          </a>
+
+          <!-- BRAND 8: ASTON MARTIN -->
+          <a href="listings.html?brand=astonmartin" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/aston-martin-logo.png" class="w-full h-full object-contain" alt="Aston Martin Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">ASTON MARTIN</span>
+          </a>
+
+          <!-- BRAND 9: MASERATI -->
+          <a href="listings.html?brand=maserati" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/maserati-logo.png" class="w-full h-full object-contain" alt="Maserati Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">MASERATI</span>
+          </a>
+
+          <!-- BRAND 10: BENTLEY -->
+          <a href="listings.html?brand=bentley" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/bentley-logo.png" class="w-full h-full object-contain" alt="Bentley Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BENTLEY</span>
+          </a>
+
+          <!-- BRAND 11: ROLLS-ROYCE -->
+          <a href="listings.html?brand=rollsroyce" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/rolls-royce-logo.png" class="w-full h-full object-contain" alt="Rolls-Royce Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">ROLLS-ROYCE</span>
+          </a>
+
+          <!-- BRAND 12: MERCEDES-BENZ -->
+          <a href="listings.html?brand=mercedesbenz" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/mercedes-benz-logo.png" class="w-full h-full object-contain" alt="Mercedes-Benz Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">MERCEDES-BENZ</span>
+          </a>
+
+          <!-- BRAND 13: BMW -->
+          <a href="listings.html?brand=bmw" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/bmw-logo.png" class="w-full h-full object-contain" alt="BMW Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BMW</span>
+          </a>
+
+          <!-- BRAND 14: AUDI -->
+          <a href="listings.html?brand=audi" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/audi-logo.png" class="w-full h-full object-contain" alt="Audi Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">AUDI</span>
+          </a>
+
+          <!-- BRAND 15: LOTUS -->
+          <a href="listings.html?brand=lotus" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/lotus-logo.png" class="w-full h-full object-contain" alt="Lotus Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">LOTUS</span>
+          </a>
+
+          <!-- BRAND 16: RIMAC -->
+          <a href="listings.html?brand=rimac" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
+            <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
+              <img src="https://www.carlogos.org/car-logos/rimac-logo.png" class="w-full h-full object-contain" alt="Rimac Logo" />
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">RIMAC</span>
+          </a>
+
+        </div>
+      </div>
+    </section><!-- NATIVE STICKY BOTTOM NAVIGATION (For Mobile Screen Viewports) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-t border-black/[0.08] dark:border-white/10 md:hidden grid grid-cols-5 items-center h-16 px-1 shadow-lg select-none">
+      <a href="index.html" class="flex flex-col items-center justify-center text-zinc-450 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Home</span>
+      </a>
+      <a href="brands.html" class="flex flex-col items-center justify-center text-zinc-800 dark:text-white transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px] stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Brands</span>
+      </a>
+      <a href="brands.html" class="flex flex-col items-center justify-center -translate-y-4 shrink-0 relative select-none w-full" aria-label="Place an ad">
+        <div class="h-14 w-14 bg-brand text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-4 border-zinc-50 dark:border-zinc-950">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="3">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+      </a>
+      <a href="#" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Chats</span>
+      </a>
+      <button popovertarget="mobile-menu" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Menu</span>
+      </button>
+    </nav>
+
+    <!-- FOOTER SECTION -->
+    <footer class="w-full mt-auto transition-colors duration-300">
+      <div class="max-w-[100rem] mx-auto flex flex-col items-center w-full">
+        <!-- Top Row: Logo & Socials -->
+        <div class="w-full pt-8 pb-4 md:py-8 flex flex-col md:flex-row items-center justify-center md:justify-between px-2 md:px-6 border-b border-black/[0.08] dark:border-white/[0.1]">
+          <a href="index.html" class="flex flex-col items-center md:items-start text-center md:text-left select-none font-logo group mb-6 md:mb-0">
+            <span class="text-[18px] md:text-[22px] font-extrabold tracking-widest text-zinc-900 dark:text-white transition-colors font-iconic">ICONIC</span>
+            <span class="text-[11px] md:text-[14px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
+          </a>
+          <div class="flex items-center gap-6 text-zinc-600 dark:text-zinc-400">
+            <a href="#" aria-label="Facebook" class="hover:text-brand transition-colors"><svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+            <a href="#" aria-label="Instagram" class="hover:text-brand transition-colors"><svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+          </div>
+        </div>
+        <div class="w-full footer-divider-t py-4 text-center">
+          <p class="text-[10px] md:text-xs tracking-wider">&copy; 2026 Iconic Group. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
