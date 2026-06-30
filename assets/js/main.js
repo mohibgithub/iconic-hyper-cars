@@ -309,38 +309,337 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Auth Tabs Toggle Logic ---
+  // --- Auth Tabs Toggle Logic & Authentication ---
   const authLoginTab = document.getElementById('auth-login-tab');
   const authSignupTab = document.getElementById('auth-signup-tab');
   const authLoginForm = document.getElementById('auth-login-form');
   const authSignupForm = document.getElementById('auth-signup-form');
+  const profilePopover = document.getElementById('profile-popover');
 
-  if (authLoginTab && authSignupTab && authLoginForm && authSignupForm) {
+  if (authLoginTab && authSignupTab && authLoginForm && authSignupForm && profilePopover) {
+    // 1. Setup DOM structure for logged in / logged out states
+    const loggedOutContainer = document.createElement('div');
+    loggedOutContainer.id = 'auth-logged-out-view';
+    loggedOutContainer.className = 'flex flex-col h-full w-full';
+    
+    // Move existing popover content into loggedOutContainer
+    while (profilePopover.firstChild) {
+      loggedOutContainer.appendChild(profilePopover.firstChild);
+    }
+    profilePopover.appendChild(loggedOutContainer);
+
+    const loggedInContainer = document.createElement('div');
+    loggedInContainer.id = 'auth-logged-in-view';
+    loggedInContainer.className = 'flex flex-col gap-4 hidden';
+    profilePopover.appendChild(loggedInContainer);
+
+    // 2. Tab Navigation logic (toggled via loggedOutContainer)
     authLoginTab.addEventListener('click', () => {
-      // Toggle tabs styling
       authLoginTab.classList.add('text-brand', 'border-b-2', 'border-brand');
       authLoginTab.classList.remove('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
-      
       authSignupTab.classList.remove('text-brand', 'border-b-2', 'border-brand');
       authSignupTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
-      
-      // Toggle form visibility
       authLoginForm.classList.remove('hidden');
       authSignupForm.classList.add('hidden');
     });
 
     authSignupTab.addEventListener('click', () => {
-      // Toggle tabs styling
       authSignupTab.classList.add('text-brand', 'border-b-2', 'border-brand');
       authSignupTab.classList.remove('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
-      
       authLoginTab.classList.remove('text-brand', 'border-b-2', 'border-brand');
       authLoginTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
-      
-      // Toggle form visibility
       authSignupForm.classList.remove('hidden');
       authLoginForm.classList.add('hidden');
     });
+
+    // Helper functions to show success/error feedback inside forms
+    function showFormMessage(form, type, message) {
+      let msgContainer = form.querySelector('.auth-msg-container');
+      if (!msgContainer) {
+        msgContainer = document.createElement('div');
+        form.insertBefore(msgContainer, form.firstChild);
+      }
+      msgContainer.textContent = message;
+      msgContainer.classList.remove('hidden');
+      
+      if (type === 'error') {
+        msgContainer.className = 'auth-msg-container text-xs font-semibold p-2.5 rounded-lg text-center mb-2.5 bg-brand/10 border border-brand/20 text-brand';
+      } else {
+        msgContainer.className = 'auth-msg-container text-xs font-semibold p-2.5 rounded-lg text-center mb-2.5 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/30 text-emerald-600 dark:text-emerald-400';
+      }
+    }
+
+    function clearFormMessages(form) {
+      const msgContainer = form.querySelector('.auth-msg-container');
+      if (msgContainer) {
+        msgContainer.classList.add('hidden');
+        msgContainer.textContent = '';
+      }
+    }
+
+    // Dynamic UI states rendering
+    function renderLoggedInView(user) {
+      const initials = user.name
+        ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2)
+        : 'U';
+
+      const isAdmin = user.role === 'admin';
+
+      loggedInContainer.innerHTML = `
+        <div class="flex items-center gap-3.5 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+          <div class="h-11 w-11 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand font-bold text-sm tracking-wider shrink-0">
+            ${initials}
+          </div>
+          <div class="flex flex-col min-w-0">
+            <div class="flex items-center gap-1.5">
+              <h3 class="font-bold text-sm text-zinc-900 dark:text-white truncate leading-tight">${user.name}</h3>
+              ${isAdmin ? `<span class="text-[8px] font-extrabold tracking-wider bg-brand text-white px-1.5 py-0.5 rounded-[4px] uppercase shrink-0">ADMIN</span>` : ''}
+            </div>
+            <p class="text-[10px] text-zinc-400 dark:text-zinc-500 truncate mt-0.5">${user.email}</p>
+          </div>
+        </div>
+        
+        <div class="flex flex-col gap-1 py-1">
+          ${isAdmin ? `
+            <!-- Admin Panel Options -->
+            <a href="#" class="flex items-center justify-between text-xs font-bold py-2.5 px-3 rounded-lg bg-red-50/50 dark:bg-brand/10 border border-brand/20 text-brand transition-colors">
+              <span>Admin Dashboard</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </a>
+            <a href="#" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+              <span>Manage Hypercars</span>
+              <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500">Edit Inventory</span>
+            </a>
+            <a href="#" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+              <span>Sourcing Enquiries</span>
+              <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500">View Requests</span>
+            </a>
+          ` : `
+            <!-- Standard User Options -->
+            <a href="#" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+              <span>VIP Dashboard</span>
+              <span class="text-[9px] font-bold tracking-widest text-brand uppercase bg-brand/10 px-2 py-0.5 rounded-full">ACTIVE</span>
+            </a>
+            <a href="listings.html" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+              <span>My Enquiries & Sourcing</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current opacity-60" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="#" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+              <span>Saved Hypercars</span>
+              <span class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500">0 Cars</span>
+            </a>
+          `}
+          <a href="#" class="flex items-center justify-between text-xs font-semibold py-2.5 px-3 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors">
+            <span>Account Settings</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current opacity-60" fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="border-t border-zinc-100 dark:border-zinc-800 pt-3">
+          <button id="auth-logout-btn" class="w-full flex items-center justify-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md">
+            <span>Log Out</span>
+          </button>
+        </div>
+      `;
+
+      loggedOutContainer.classList.add('hidden');
+      loggedInContainer.classList.remove('hidden');
+
+      // Update trigger buttons on the page to indicate authenticated state
+      const profileButtons = document.querySelectorAll('[popovertarget="profile-popover"]');
+      profileButtons.forEach(btn => {
+        btn.classList.add('text-brand');
+        btn.classList.remove('text-white', 'text-zinc-900');
+        if (!btn.querySelector('.active-dot')) {
+          const dot = document.createElement('span');
+          dot.className = 'active-dot absolute top-0 md:top-0.5 right-0 md:right-0.5 h-2 w-2 rounded-full bg-emerald-500 border border-white dark:border-zinc-950';
+          btn.classList.add('relative');
+          btn.appendChild(dot);
+        }
+      });
+
+      // Attach logout event
+      const logoutBtn = document.getElementById('auth-logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+      }
+    }
+
+    function renderLoggedOutView() {
+      loggedInContainer.innerHTML = '';
+      loggedOutContainer.classList.remove('hidden');
+      loggedInContainer.classList.add('hidden');
+
+      // Restore profile trigger buttons styling
+      const profileButtons = document.querySelectorAll('[popovertarget="profile-popover"]');
+      profileButtons.forEach(btn => {
+        btn.classList.remove('text-brand');
+        // Restore standard styling (header is transparent with white text, menu is dark)
+        const isHeaderButton = btn.closest('.main-header') !== null;
+        if (isHeaderButton) {
+          btn.classList.add('text-white');
+        } else {
+          btn.classList.add('text-zinc-900');
+        }
+        
+        const dot = btn.querySelector('.active-dot');
+        if (dot) dot.remove();
+      });
+    }
+
+    // Submit Logins
+    authLoginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearFormMessages(authLoginForm);
+
+      const emailInput = document.getElementById('login-email');
+      const passwordInput = document.getElementById('login-password');
+      const submitBtn = authLoginForm.querySelector('button[type="submit"]');
+
+      if (!emailInput || !passwordInput || !submitBtn) return;
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SIGNING IN...';
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFormMessage(authLoginForm, 'success', 'Login successful! Welcome back.');
+          renderLoggedInView(data.user);
+
+          emailInput.value = '';
+          passwordInput.value = '';
+
+          setTimeout(() => {
+            if (typeof profilePopover.hidePopover === 'function') {
+              profilePopover.hidePopover();
+            }
+            clearFormMessages(authLoginForm);
+          }, 1200);
+        } else {
+          showFormMessage(authLoginForm, 'error', data.error || 'Invalid credentials.');
+        }
+      } catch (err) {
+        showFormMessage(authLoginForm, 'error', 'Network error. Please try again.');
+        console.error('Login error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Submit Signup
+    authSignupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearFormMessages(authSignupForm);
+
+      const nameInput = document.getElementById('signup-name');
+      const emailInput = document.getElementById('signup-email');
+      const passwordInput = document.getElementById('signup-password');
+      const submitBtn = authSignupForm.querySelector('button[type="submit"]');
+
+      if (!nameInput || !emailInput || !passwordInput || !submitBtn) return;
+
+      const name = nameInput.value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'CREATING ACCOUNT...';
+
+      try {
+        const response = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFormMessage(authSignupForm, 'success', 'Account created! Welcome to Iconic.');
+          renderLoggedInView(data.user);
+
+          nameInput.value = '';
+          emailInput.value = '';
+          passwordInput.value = '';
+
+          setTimeout(() => {
+            if (typeof profilePopover.hidePopover === 'function') {
+              profilePopover.hidePopover();
+            }
+            clearFormMessages(authSignupForm);
+          }, 1200);
+        } else {
+          showFormMessage(authSignupForm, 'error', data.error || 'Failed to create account.');
+        }
+      } catch (err) {
+        showFormMessage(authSignupForm, 'error', 'Network error. Please try again.');
+        console.error('Signup error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Handle logout
+    async function handleLogout() {
+      const logoutBtn = document.getElementById('auth-logout-btn');
+      if (logoutBtn) {
+        logoutBtn.disabled = true;
+        logoutBtn.innerHTML = '<span>Logging out...</span>';
+      }
+
+      try {
+        const response = await fetch('/api/auth/logout', { method: 'POST' });
+        if (response.ok) {
+          renderLoggedOutView();
+          setTimeout(() => {
+            if (typeof profilePopover.hidePopover === 'function') {
+              profilePopover.hidePopover();
+            }
+          }, 500);
+        }
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+    }
+
+    // Initial auth status check
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch('/api/auth/me');
+        const data = await response.json();
+        if (response.ok && data.success) {
+          renderLoggedInView(data.user);
+        } else {
+          renderLoggedOutView();
+        }
+      } catch (err) {
+        renderLoggedOutView();
+      }
+    }
+
+    // Check status immediately
+    checkAuthStatus();
   }
 
   // --- Global Slider Helper ---
