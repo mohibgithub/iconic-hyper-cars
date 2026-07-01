@@ -473,6 +473,27 @@
       </div>
     </footer>
 
+    <!-- SUCCESS CONFIRMATION OVERLAY -->
+    <div id="success-overlay" class="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 flex items-center justify-center p-6 text-center select-none opacity-0 pointer-events-none transition-all duration-300">
+      <div class="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center scale-95 transition-all duration-300" id="success-card">
+        <!-- Bouncing Checkmark Icon -->
+        <div class="h-16 w-16 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-250 rounded-full flex items-center justify-center mb-5 animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-lg font-logo font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white mb-2">Listing Submitted!</h2>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 font-medium leading-relaxed">
+          Your hypercar details and photos have been received. We are verifying the authenticity and will publish the listing shortly.
+        </p>
+        <!-- Countdown redirect indicator -->
+        <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
+          <div id="success-progress" class="bg-emerald-500 h-full w-full transition-all duration-[3000ms] ease-linear"></div>
+        </div>
+        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider">Redirecting to Listings...</span>
+      </div>
+    </div>
+
   </main>
 
   <!-- SCRIPTS -->

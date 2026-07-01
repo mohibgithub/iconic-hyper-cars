@@ -353,17 +353,34 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        formMsg.textContent = 'Listing submitted successfully! Admin will verify it shortly.';
-        formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/30 text-emerald-600 dark:text-emerald-400';
-        formMsg.classList.remove('hidden');
-
         // Clear local draft data
         clearDraft();
+
+        // Show Success Overlay Reaction
+        const successOverlay = document.getElementById('success-overlay');
+        const successCard = document.getElementById('success-card');
+        const progressIndicator = document.getElementById('success-progress');
+
+        if (successOverlay && successCard && progressIndicator) {
+          successOverlay.classList.remove('pointer-events-none');
+          successOverlay.style.opacity = '1';
+          
+          // Animate Card Scale
+          setTimeout(() => {
+            successCard.classList.remove('scale-95');
+            successCard.classList.add('scale-100');
+          }, 50);
+
+          // Animate Progress Bar depletion
+          setTimeout(() => {
+            progressIndicator.style.width = '0%';
+          }, 100);
+        }
 
         // Redirect after a short delay
         setTimeout(() => {
           window.location.href = 'listings.html';
-        }, 2500);
+        }, 3300);
       } else {
         formMsg.textContent = data.error || 'Failed to submit listing.';
         formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
