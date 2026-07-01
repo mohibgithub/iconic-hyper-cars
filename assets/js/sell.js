@@ -13,13 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepIndicator1 = document.getElementById('step-indicator-1');
   const stepIndicator2 = document.getElementById('step-indicator-2');
 
+  // File Upload Elements
+  const dropzone = document.getElementById('upload-dropzone');
+  const fileInput = document.getElementById('sell-photos-input');
+  const previewGrid = document.getElementById('photos-preview-grid');
+
   let currentStep = 1;
+  let selectedFiles = [];
+
   const fields = [
     'sell-location', 'sell-brand', 'sell-model', 'sell-trim', 'sell-specs',
     'sell-year', 'sell-mileage', 'sell-body-type', 'sell-price', 'sell-phone',
     'sell-exterior-color', 'sell-interior-color', 'sell-engine', 'sell-transmission',
     'sell-steering', 'sell-horsepower', 'sell-top-speed', 'sell-torque',
-    'sell-description', 'sell-photos'
+    'sell-description'
   ];
 
   // --- Auth Check on Load ---
@@ -124,6 +131,90 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Image Selector Drag & Drop Handlers ---
+  if (dropzone && fileInput) {
+    dropzone.addEventListener('click', () => fileInput.click());
+    
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.classList.add('border-brand', 'bg-zinc-100/50', 'dark:bg-zinc-900/20');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+      dropzone.classList.remove('border-brand', 'bg-zinc-100/50', 'dark:bg-zinc-900/20');
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('border-brand', 'bg-zinc-100/50', 'dark:bg-zinc-900/20');
+      if (e.dataTransfer.files) {
+        handleFiles(e.dataTransfer.files);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files) {
+        handleFiles(e.target.files);
+      }
+    });
+  }
+
+  function handleFiles(files) {
+    formMsg.classList.add('hidden');
+    const filesArr = Array.from(files);
+
+    if (selectedFiles.length + filesArr.length > 5) {
+      formMsg.textContent = 'You can upload a maximum of 5 photos.';
+      formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+      formMsg.classList.remove('hidden');
+      return;
+    }
+
+    filesArr.forEach(file => {
+      if (!file.type.startsWith('image/')) {
+        formMsg.textContent = 'Only image files are allowed.';
+        formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+        formMsg.classList.remove('hidden');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        formMsg.textContent = 'Each image size must not exceed 10MB.';
+        formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+        formMsg.classList.remove('hidden');
+        return;
+      }
+      selectedFiles.push(file);
+    });
+
+    renderPreviews();
+  }
+
+  function renderPreviews() {
+    if (!previewGrid) return;
+    previewGrid.innerHTML = '';
+
+    selectedFiles.forEach((file, index) => {
+      const objectUrl = URL.createObjectURL(file);
+      const div = document.createElement('div');
+      div.className = 'relative aspect-square bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden group shadow-sm';
+      div.innerHTML = `
+        <img src="${objectUrl}" class="w-full h-full object-cover" />
+        <button type="button" class="absolute top-1 right-1 h-5 w-5 bg-black/60 rounded-full flex items-center justify-center text-white text-[10px] hover:bg-brand transition-colors focus:outline-none" data-index="${index}">
+          ✕
+        </button>
+      `;
+
+      div.querySelector('button').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(e.target.getAttribute('data-index'));
+        selectedFiles.splice(idx, 1);
+        renderPreviews();
+      });
+
+      previewGrid.appendChild(div);
+    });
+  }
+
   // --- Draft Auto-Save Logic ---
   function saveDraft() {
     const draft = {
@@ -170,6 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function clearDraft() {
     localStorage.removeItem('iconic_sell_draft');
     form.reset();
+    selectedFiles = [];
+    if (previewGrid) previewGrid.innerHTML = '';
     currentStep = 1;
     updateStepUI();
   }
@@ -187,14 +280,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('btn-submit-listing');
     const originalText = submitBtn.textContent;
     submitBtn.disabled = true;
+
+    // Validate that at least 1 image is selected
+    if (selectedFiles.length === 0) {
+      formMsg.textContent = 'Please select and upload at least 1 photo of your car.';
+      formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+      formMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+      return;
+    }
+
+    // 1. Upload files to /api/upload
+    submitBtn.textContent = 'UPLOADING PHOTOS (0%)...';
+    let photoUrls = [];
+    const formData = new FormData();
+    selectedFiles.forEach(file => {
+      formData.append('photos', file);
+    });
+
+    try {
+      const uploadRes = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok) {
+        throw new Error(uploadData.error || 'Failed to upload photos.');
+      }
+      photoUrls = uploadData.urls;
+    } catch (err) {
+      formMsg.textContent = err.message || 'Image upload failed. Please try again.';
+      formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+      formMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      return;
+    }
+
+    // 2. Submit Listing to /api/listings
     submitBtn.textContent = 'SUBMITTING LISTING...';
-
-    // Parse photos input
-    const photosRaw = document.getElementById('sell-photos').value;
-    const photosArray = photosRaw 
-      ? photosRaw.split(',').map(url => url.trim()).filter(url => url !== '') 
-      : [];
-
     const payload = {
       location: document.getElementById('sell-location').value,
       brand: document.getElementById('sell-brand').value,
@@ -215,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
       top_speed: document.getElementById('sell-top-speed').value,
       torque: document.getElementById('sell-torque').value,
       description: document.getElementById('sell-description').value,
-      photos: photosArray
+      photos: photoUrls
     };
 
     try {

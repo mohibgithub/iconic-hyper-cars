@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
@@ -270,6 +271,64 @@ app.get('/api/auth/callback', async (req, res) => {
   } catch (error) {
     console.error('Callback error:', error);
     res.redirect('/?error=internal_server_error');
+  }
+});
+
+// Configure Multer for Memory Storage
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // Limit to 10MB per file
+  }
+});
+
+// 6b. Image Upload Endpoint
+app.post('/api/upload', upload.array('photos', 5), async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: 'Please sign in to upload images.' });
+    }
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) {
+      return res.status(401).json({ error: 'Please sign in to upload images.' });
+    }
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files uploaded.' });
+    }
+
+    const uploadPromises = req.files.map(async (file) => {
+      const fileExt = file.originalname.split('.').pop();
+      const fileName = `${user.id}/${Date.now()}-${Math.floor(Math.random() * 1000000)}.${fileExt}`;
+      const filePath = fileName;
+
+      // Upload file to Supabase Storage bucket 'car-images'
+      const { data, error } = await supabase.storage
+        .from('car-images')
+        .upload(filePath, file.buffer, {
+          contentType: file.mimetype,
+          upsert: true
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('car-images')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    });
+
+    const urls = await Promise.all(uploadPromises);
+    res.status(200).json({ success: true, urls });
+  } catch (error) {
+    console.error('File upload error:', error);
+    res.status(500).json({ error: error.message || 'Failed to upload images.' });
   }
 });
 
