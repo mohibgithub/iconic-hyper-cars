@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Setup DOM structure for logged in / logged out states
     const loggedOutContainer = document.createElement('div');
     loggedOutContainer.id = 'auth-logged-out-view';
-    loggedOutContainer.className = 'flex flex-col h-full w-full';
+    loggedOutContainer.className = 'flex flex-col w-full';
     
     // Move existing popover content into loggedOutContainer
     while (profilePopover.firstChild) {
