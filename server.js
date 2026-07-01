@@ -313,6 +313,9 @@ app.post('/api/upload', upload.array('photos', 20), async (req, res) => {
         });
 
       if (error) {
+        if (error.message && error.message.includes('Bucket not found')) {
+          throw new Error("Supabase Storage bucket 'car-images' not found. Please create the bucket named 'car-images' (and make it Public) in your Supabase dashboard.");
+        }
         throw error;
       }
 
