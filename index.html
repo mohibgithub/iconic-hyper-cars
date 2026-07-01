@@ -269,8 +269,17 @@
     <section
       class="hero-section relative flex-grow flex flex-col items-center px-4 min-h-[500px] md:min-h-[750px] bg-black select-none overflow-hidden">
 
-      <img src="assets/images/hero.png" alt="Featured Hypercar"
-        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+      <!-- Desktop Hero Video Background -->
+      <video autoplay loop muted playsinline 
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 z-0 hidden md:block opacity-75">
+        <source src="assets/images/hero-desktop.MP4" type="video/mp4" />
+      </video>
+
+      <!-- Mobile Hero Video Background -->
+      <video autoplay loop muted playsinline 
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 z-0 block md:hidden opacity-75">
+        <source src="assets/images/hero-mobile.MP4" type="video/mp4" />
+      </video>
 
       <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black to-transparent"></div>
       <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
