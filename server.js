@@ -288,14 +288,14 @@ app.post('/api/listings', async (req, res) => {
     }
 
     const {
-      brand, model, year, price, mileage, specs,
-      exterior_color, interior_color, engine, transmission,
-      location, description
+      brand, model, trim, year, price, mileage, specs, body_type,
+      exterior_color, interior_color, horsepower, engine, transmission,
+      steering, top_speed, torque, location, description, phone_number, photos
     } = req.body;
 
-    // Basic Validations
-    if (!brand || !model || !year || !price || !mileage || !specs || !location) {
-      return res.status(400).json({ error: 'Missing required vehicle details.' });
+    // Basic Validations for Required Step 1 Fields
+    if (!brand || !model || !trim || !year || !price || !mileage || !specs || !body_type || !location || !phone_number) {
+      return res.status(400).json({ error: 'Missing required vehicle information.' });
     }
 
     // Insert into Supabase listings table
@@ -304,16 +304,24 @@ app.post('/api/listings', async (req, res) => {
       .insert([{
         brand,
         model,
+        trim,
         year: parseInt(year),
         price,
         mileage,
         specs,
+        body_type,
         exterior_color: exterior_color || 'N/A',
         interior_color: interior_color || 'N/A',
+        horsepower: horsepower || 'N/A',
         engine: engine || 'N/A',
         transmission: transmission || 'N/A',
+        steering: steering || 'N/A',
+        top_speed: top_speed || 'N/A',
+        torque: torque || 'N/A',
         location,
         description: description || '',
+        phone_number,
+        photos: Array.isArray(photos) ? photos : [],
         user_id: user.id,
         status: 'pending' // default pending state
       }])
