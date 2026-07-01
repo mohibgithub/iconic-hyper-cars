@@ -7,10 +7,10 @@ with open(file_path, "r", encoding="utf-8") as f:
 
 # --- 1. Update main car image class in Listings page to include transition-all and duration-200 ---
 # Old:
-# class="main-car-img w-full h-full object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]"
+# class="main-car-img w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]"
 html = html.replace(
-    'class="main-car-img w-full h-full object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]"',
-    'class="main-car-img w-full h-full object-contain pointer-events-none transition-all duration-200 group-hover:scale-[1.03]"'
+    'class="main-car-img w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]"',
+    'class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-200 group-hover:scale-[1.03]"'
 )
 
 # --- 2. Update the JavaScript Thumbnail Click Handler to implement the fade transition ---

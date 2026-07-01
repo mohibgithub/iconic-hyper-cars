@@ -219,6 +219,60 @@ app.post('/api/auth/logout', async (req, res) => {
   res.status(200).json({ success: true, message: 'Logged out successfully.' });
 });
 
+// 5. Google OAuth Login Route
+app.get('/api/auth/google', async (req, res) => {
+  try {
+    const redirectUrl = `${req.protocol}://${req.get('host')}/api/auth/callback`;
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: redirectUrl
+      }
+    });
+
+    if (error) {
+      return res.status(400).send(`Google Login failed: ${error.message}`);
+    }
+
+    res.redirect(data.url);
+  } catch (error) {
+    console.error('Google OAuth redirect error:', error);
+    res.status(500).send('Internal server error.');
+  }
+});
+
+// 6. OAuth Callback Route
+app.get('/api/auth/callback', async (req, res) => {
+  try {
+    const code = req.query.code;
+    
+    if (!code) {
+      return res.redirect('/?error=No authentication code found');
+    }
+
+    // Exchange the code for a session
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (error || !data.session) {
+      console.error('Code exchange error:', error);
+      return res.redirect(`/?error=${encodeURIComponent(error?.message || 'Authentication failed')}`);
+    }
+
+    // Set cookie with token
+    res.cookie('token', data.session.access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    res.redirect('/');
+  } catch (error) {
+    console.error('Callback error:', error);
+    res.redirect('/?error=internal_server_error');
+  }
+});
+
 // Start the Server
 app.listen(PORT, () => {
   console.log(`===================================================`);

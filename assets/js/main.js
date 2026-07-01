@@ -623,6 +623,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Handle Google Sign Up / Login Click
+    const googleAuthBtn = loggedOutContainer.querySelector('button[type="button"]');
+    if (googleAuthBtn) {
+      googleAuthBtn.addEventListener('click', () => {
+        window.location.href = '/api/auth/google';
+      });
+    }
+
     // Initial auth status check
     async function checkAuthStatus() {
       try {

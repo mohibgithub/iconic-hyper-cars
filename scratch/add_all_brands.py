@@ -22,7 +22,7 @@ if grid_index != -1:
           <!-- BRAND 1: BUGATTI (Active -> Links to listings.html?brand=bugatti) -->
           <a href="listings.html?brand=bugatti" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/bugatti-logo.png" class="w-full h-full object-contain" alt="Bugatti Logo" />
+              <img src="https://www.carlogos.org/car-logos/bugatti-logo.png" class="w-full h-full object-cover" alt="Bugatti Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BUGATTI</span>
           </a>
@@ -30,7 +30,7 @@ if grid_index != -1:
           <!-- BRAND 2: FERRARI -->
           <a href="listings.html?brand=ferrari" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/ferrari-logo.png" class="w-full h-full object-contain" alt="Ferrari Logo" />
+              <img src="https://www.carlogos.org/car-logos/ferrari-logo.png" class="w-full h-full object-cover" alt="Ferrari Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">FERRARI</span>
           </a>
@@ -38,7 +38,7 @@ if grid_index != -1:
           <!-- BRAND 3: LAMBORGHINI -->
           <a href="listings.html?brand=lamborghini" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/lamborghini-logo.png" class="w-full h-full object-contain" alt="Lamborghini Logo" />
+              <img src="https://www.carlogos.org/car-logos/lamborghini-logo.png" class="w-full h-full object-cover" alt="Lamborghini Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">LAMBORGHINI</span>
           </a>
@@ -46,7 +46,7 @@ if grid_index != -1:
           <!-- BRAND 4: KOENIGSEGG -->
           <a href="listings.html?brand=koenigsegg" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/koenigsegg-logo.png" class="w-full h-full object-contain" alt="Koenigsegg Logo" />
+              <img src="https://www.carlogos.org/car-logos/koenigsegg-logo.png" class="w-full h-full object-cover" alt="Koenigsegg Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">KOENIGSEGG</span>
           </a>
@@ -54,7 +54,7 @@ if grid_index != -1:
           <!-- BRAND 5: PAGANI -->
           <a href="listings.html?brand=pagani" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/pagani-logo.png" class="w-full h-full object-contain" alt="Pagani Logo" />
+              <img src="https://www.carlogos.org/car-logos/pagani-logo.png" class="w-full h-full object-cover" alt="Pagani Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">PAGANI</span>
           </a>
@@ -62,7 +62,7 @@ if grid_index != -1:
           <!-- BRAND 6: PORSCHE -->
           <a href="listings.html?brand=porsche" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/porsche-logo.png" class="w-full h-full object-contain" alt="Porsche Logo" />
+              <img src="https://www.carlogos.org/car-logos/porsche-logo.png" class="w-full h-full object-cover" alt="Porsche Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">PORSCHE</span>
           </a>
@@ -70,7 +70,7 @@ if grid_index != -1:
           <!-- BRAND 7: MCLAREN -->
           <a href="listings.html?brand=mclaren" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/mclaren-logo.png" class="w-full h-full object-contain" alt="McLaren Logo" />
+              <img src="https://www.carlogos.org/car-logos/mclaren-logo.png" class="w-full h-full object-cover" alt="McLaren Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">McLAREN</span>
           </a>
@@ -78,7 +78,7 @@ if grid_index != -1:
           <!-- BRAND 8: ASTON MARTIN -->
           <a href="listings.html?brand=astonmartin" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/aston-martin-logo.png" class="w-full h-full object-contain" alt="Aston Martin Logo" />
+              <img src="https://www.carlogos.org/car-logos/aston-martin-logo.png" class="w-full h-full object-cover" alt="Aston Martin Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">ASTON MARTIN</span>
           </a>
@@ -86,7 +86,7 @@ if grid_index != -1:
           <!-- BRAND 9: MASERATI -->
           <a href="listings.html?brand=maserati" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/maserati-logo.png" class="w-full h-full object-contain" alt="Maserati Logo" />
+              <img src="https://www.carlogos.org/car-logos/maserati-logo.png" class="w-full h-full object-cover" alt="Maserati Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">MASERATI</span>
           </a>
@@ -94,7 +94,7 @@ if grid_index != -1:
           <!-- BRAND 10: BENTLEY -->
           <a href="listings.html?brand=bentley" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/bentley-logo.png" class="w-full h-full object-contain" alt="Bentley Logo" />
+              <img src="https://www.carlogos.org/car-logos/bentley-logo.png" class="w-full h-full object-cover" alt="Bentley Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BENTLEY</span>
           </a>
@@ -102,7 +102,7 @@ if grid_index != -1:
           <!-- BRAND 11: ROLLS-ROYCE -->
           <a href="listings.html?brand=rollsroyce" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/rolls-royce-logo.png" class="w-full h-full object-contain" alt="Rolls-Royce Logo" />
+              <img src="https://www.carlogos.org/car-logos/rolls-royce-logo.png" class="w-full h-full object-cover" alt="Rolls-Royce Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">ROLLS-ROYCE</span>
           </a>
@@ -110,7 +110,7 @@ if grid_index != -1:
           <!-- BRAND 12: MERCEDES-BENZ -->
           <a href="listings.html?brand=mercedesbenz" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/mercedes-benz-logo.png" class="w-full h-full object-contain" alt="Mercedes-Benz Logo" />
+              <img src="https://www.carlogos.org/car-logos/mercedes-benz-logo.png" class="w-full h-full object-cover" alt="Mercedes-Benz Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">MERCEDES-BENZ</span>
           </a>
@@ -118,7 +118,7 @@ if grid_index != -1:
           <!-- BRAND 13: BMW -->
           <a href="listings.html?brand=bmw" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/bmw-logo.png" class="w-full h-full object-contain" alt="BMW Logo" />
+              <img src="https://www.carlogos.org/car-logos/bmw-logo.png" class="w-full h-full object-cover" alt="BMW Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">BMW</span>
           </a>
@@ -126,7 +126,7 @@ if grid_index != -1:
           <!-- BRAND 14: AUDI -->
           <a href="listings.html?brand=audi" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/audi-logo.png" class="w-full h-full object-contain" alt="Audi Logo" />
+              <img src="https://www.carlogos.org/car-logos/audi-logo.png" class="w-full h-full object-cover" alt="Audi Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">AUDI</span>
           </a>
@@ -134,7 +134,7 @@ if grid_index != -1:
           <!-- BRAND 15: LOTUS -->
           <a href="listings.html?brand=lotus" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/lotus-logo.png" class="w-full h-full object-contain" alt="Lotus Logo" />
+              <img src="https://www.carlogos.org/car-logos/lotus-logo.png" class="w-full h-full object-cover" alt="Lotus Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">LOTUS</span>
           </a>
@@ -142,7 +142,7 @@ if grid_index != -1:
           <!-- BRAND 16: RIMAC -->
           <a href="listings.html?brand=rimac" class="group flex flex-col items-center justify-center p-4 md:p-5 bg-white dark:bg-zinc-900/40 border border-black/[0.08] dark:border-white/10 rounded-[12px] hover:border-brand/40 hover:shadow-card transition-all duration-300 cursor-pointer">
             <div class="h-20 w-20 md:h-28 md:w-28 flex items-center justify-center bg-white rounded-[12px] p-2.5 transition-all duration-300 group-hover:scale-105 border border-black/5 shadow-sm">
-              <img src="https://www.carlogos.org/car-logos/rimac-logo.png" class="w-full h-full object-contain" alt="Rimac Logo" />
+              <img src="https://www.carlogos.org/car-logos/rimac-logo.png" class="w-full h-full object-cover" alt="Rimac Logo" />
             </div>
             <span class="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mt-3.5 group-hover:text-brand transition-colors duration-200">RIMAC</span>
           </a>

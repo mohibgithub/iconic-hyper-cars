@@ -14,7 +14,7 @@ old_card_area = """          <!-- CARD 1: BUGATTI CHIRON -->
               <!-- Main Image Display -->
               <div class="relative w-full aspect-[3/2] bg-zinc-100 dark:bg-zinc-950 rounded-[6px] overflow-hidden group select-none border border-black/5 dark:border-white/5">
                 <img src="assets/images/chiron.png" alt="Bugatti Chiron Super Sport"
-                  class="main-car-img w-full h-full object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]" />
+                  class="main-car-img w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]" />
                 
                 <!-- Overlay Badges -->
                 <span class="absolute top-2.5 left-2.5 bg-brand text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">CAR OF THE WEEK</span>
@@ -23,13 +23,13 @@ old_card_area = """          <!-- CARD 1: BUGATTI CHIRON -->
               <!-- 3 Smaller Thumbnails underneath -->
               <div class="flex gap-2 mt-2 select-none">
                 <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-brand dark:border-brand cursor-pointer transition-all duration-200">
-                  <img src="assets/images/chiron.png" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 1" />
+                  <img src="assets/images/chiron.png" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 1" />
                 </div>
                 <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/mercedes_one.png" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 2" />
+                  <img src="assets/images/mercedes_one.png" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 2" />
                 </div>
                 <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200 relative">
-                  <img src="assets/images/ferrari_enzo.png" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 3" />
+                  <img src="assets/images/ferrari_enzo.png" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 3" />
                   <div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-[10px] tracking-wide">+20</div>
                 </div>
               </div>
@@ -85,7 +85,7 @@ new_card_area = """          <!-- CARD 1: BUGATTI CHIRON -->
               <!-- Main Image Display -->
               <div class="relative w-full aspect-[3/2] bg-zinc-100 dark:bg-zinc-950 rounded-[6px] overflow-hidden group select-none border border-black/5 dark:border-white/5">
                 <img src="assets/images/product-list/bugatti/2200xxs.webp" alt="Bugatti Chiron"
-                  class="main-car-img w-full h-full object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]" />
+                  class="main-car-img w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-[1.03]" />
                 
                 <!-- Overlay Badges -->
                 <span class="absolute top-2.5 left-2.5 bg-brand text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">CAR OF THE WEEK</span>
@@ -94,13 +94,13 @@ new_card_area = """          <!-- CARD 1: BUGATTI CHIRON -->
               <!-- 3 Smaller Thumbnails underneath -->
               <div class="flex gap-2 mt-2 select-none">
                 <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-brand dark:border-brand cursor-pointer transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/2200xxs (1).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron profile" />
+                  <img src="assets/images/product-list/bugatti/2200xxs (1).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron profile" />
                 </div>
                 <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs.webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron rear three quarters" />
+                  <img src="assets/images/product-list/bugatti/1900xxs.webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron rear three quarters" />
                 </div>
                 <div id="trigger-more-gallery" class="thumb-wrapper flex-1 aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200 relative">
-                  <img src="assets/images/product-list/bugatti/1900xxs (1).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron rear straight" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (1).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron rear straight" />
                   <div id="more-overlay" class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-[10px] tracking-wide">+12</div>
                 </div>
               </div>
@@ -108,40 +108,40 @@ new_card_area = """          <!-- CARD 1: BUGATTI CHIRON -->
               <!-- Expanded Gallery Grid (Collapsible Portal) -->
               <div id="expanded-gallery" class="grid grid-cols-4 gap-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out select-none">
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (2).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 4" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (2).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 4" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (3).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 5" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (3).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 5" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (4).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 6" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (4).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 6" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (5).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 7" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (5).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 7" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (6).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 8" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (6).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 8" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (7).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 9" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (7).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 9" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (8).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 10" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (8).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 10" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (9).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 11" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (9).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 11" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (10).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 12" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (10).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 12" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (11).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 13" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (11).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 13" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/1900xxs (12).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 14" />
+                  <img src="assets/images/product-list/bugatti/1900xxs (12).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron angle 14" />
                 </div>
                 <div class="thumb-wrapper aspect-[3/2] rounded-[6px] overflow-hidden border border-black/10 dark:border-white/10 cursor-pointer hover:border-brand/40 transition-all duration-200">
-                  <img src="assets/images/product-list/bugatti/2200xxs (2).webp" class="thumb-img w-full h-full object-contain bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron interior" />
+                  <img src="assets/images/product-list/bugatti/2200xxs (2).webp" class="thumb-img w-full h-full object-cover bg-zinc-100 dark:bg-zinc-950 p-0.5" alt="Bugatti Chiron interior" />
                 </div>
               </div>
             </div>
