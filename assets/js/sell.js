@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
     formMsg.classList.add('hidden');
     const filesArr = Array.from(files);
 
-    if (selectedFiles.length + filesArr.length > 5) {
-      formMsg.textContent = 'You can upload a maximum of 5 photos.';
+    if (selectedFiles.length + filesArr.length > 20) {
+      formMsg.textContent = 'You can upload a maximum of 20 photos.';
       formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
       formMsg.classList.remove('hidden');
       return;

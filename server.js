@@ -283,7 +283,7 @@ const upload = multer({
 });
 
 // 6b. Image Upload Endpoint
-app.post('/api/upload', upload.array('photos', 5), async (req, res) => {
+app.post('/api/upload', upload.array('photos', 20), async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) {
