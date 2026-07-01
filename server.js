@@ -273,6 +273,69 @@ app.get('/api/auth/callback', async (req, res) => {
   }
 });
 
+// 7. Place an Ad / Create Listing Endpoint
+app.post('/api/listings', async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: 'Please sign in to submit a listing.' });
+    }
+
+    // Verify token with Supabase Auth
+    const { data: { user }, error } = await supabase.auth.getUser(token);
+    if (error || !user) {
+      return res.status(401).json({ error: 'Please sign in to submit a listing.' });
+    }
+
+    const {
+      brand, model, year, price, mileage, specs,
+      exterior_color, interior_color, engine, transmission,
+      location, description
+    } = req.body;
+
+    // Basic Validations
+    if (!brand || !model || !year || !price || !mileage || !specs || !location) {
+      return res.status(400).json({ error: 'Missing required vehicle details.' });
+    }
+
+    // Insert into Supabase listings table
+    const { data: listing, error: insertError } = await supabase
+      .from('listings')
+      .insert([{
+        brand,
+        model,
+        year: parseInt(year),
+        price,
+        mileage,
+        specs,
+        exterior_color: exterior_color || 'N/A',
+        interior_color: interior_color || 'N/A',
+        engine: engine || 'N/A',
+        transmission: transmission || 'N/A',
+        location,
+        description: description || '',
+        user_id: user.id,
+        status: 'pending' // default pending state
+      }])
+      .select()
+      .single();
+
+    if (insertError) {
+      console.error('Database insert error:', insertError);
+      return res.status(400).json({ error: insertError.message });
+    }
+
+    res.status(201).json({
+      success: true,
+      message: 'Listing submitted for verification successfully!',
+      listing
+    });
+  } catch (error) {
+    console.error('Listings post error:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 // Start the Server
 app.listen(PORT, () => {
   console.log(`===================================================`);

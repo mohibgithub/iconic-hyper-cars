@@ -619,5 +619,65 @@ footer button {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Bottom Slide-up Ad Drawer Styles */
+#ad-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#ad-drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#ad-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  background-color: #ffffff;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.1), 0 -8px 10px -6px rgba(0, 0, 0, 0.1);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark #ad-drawer {
+  background-color: #18181b;
+  border-top: 1px solid #27272a;
+}
+
+#ad-drawer.active {
+  transform: translateY(0);
+}
+
+/* For larger screens (tablets/desktops), display it as a centered slide-up sheet */
+@media (min-width: 640px) {
+  #ad-drawer {
+    left: 50%;
+    transform: translate(-50%, 100%);
+    width: 600px;
+    max-width: calc(100vw - 32px);
+    border-radius: 1.5rem;
+    bottom: 24px;
+    max-height: calc(100vh - 48px);
+  }
+  
+  #ad-drawer.active {
+    transform: translate(-50%, 0);
+  }
+}
+
 
 
