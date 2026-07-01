@@ -39,12 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${protocol}//${hostname}:3000${path}`;
   }
 
+  // --- Reusable Authenticated Fetch Wrapper ---
+  async function authenticatedFetch(path, options = {}) {
+    const url = getApiUrl(path);
+    const token = localStorage.getItem('iconic_auth_token');
+    if (!options.headers) {
+      options.headers = {};
+    }
+    if (token) {
+      options.headers['Authorization'] = `Bearer ${token}`;
+    }
+    options.credentials = 'include';
+    return fetch(url, options);
+  }
+
   // --- Auth Check on Load ---
   async function checkPageAuth() {
     try {
-      const res = await fetch(getApiUrl('/api/auth/me'), {
-        credentials: 'include'
-      });
+      const res = await authenticatedFetch('/api/auth/me');
       const data = await res.json();
       
       if (res.ok && data.success) {
@@ -311,10 +323,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     try {
-      const uploadRes = await fetch(getApiUrl('/api/upload'), {
+      const uploadRes = await authenticatedFetch('/api/upload', {
         method: 'POST',
-        body: formData,
-        credentials: 'include'
+        body: formData
       });
 
       const uploadData = await uploadRes.json();
@@ -357,11 +368,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch(getApiUrl('/api/listings'), {
+      const response = await authenticatedFetch('/api/listings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        credentials: 'include'
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json();

@@ -13,6 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${protocol}//${hostname}:3000${path}`;
   }
 
+  // --- Reusable Authenticated Fetch Wrapper ---
+  async function authenticatedFetch(path, options = {}) {
+    const url = getApiUrl(path);
+    const token = localStorage.getItem('iconic_auth_token');
+    if (!options.headers) {
+      options.headers = {};
+    }
+    if (token) {
+      options.headers['Authorization'] = `Bearer ${token}`;
+    }
+    options.credentials = 'include';
+    return fetch(url, options);
+  }
+
   // --- Reusable Swipe Gesture Helper ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
@@ -528,16 +542,18 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'SIGNING IN...';
 
       try {
-        const response = await fetch(getApiUrl('/api/auth/login'), {
+        const response = await authenticatedFetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-          credentials: 'include'
+          body: JSON.stringify({ email, password })
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
+          if (data.token) {
+            localStorage.setItem('iconic_auth_token', data.token);
+          }
           showFormMessage(authLoginForm, 'success', 'Login successful! Welcome back.');
           renderLoggedInView(data.user);
 
@@ -583,16 +599,18 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'CREATING ACCOUNT...';
 
       try {
-        const response = await fetch(getApiUrl('/api/auth/signup'), {
+        const response = await authenticatedFetch('/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password }),
-          credentials: 'include'
+          body: JSON.stringify({ name, email, password })
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
+          if (data.token) {
+            localStorage.setItem('iconic_auth_token', data.token);
+          }
           showFormMessage(authSignupForm, 'success', 'Account created! Welcome to Iconic.');
           renderLoggedInView(data.user);
 
@@ -627,10 +645,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch(getApiUrl('/api/auth/logout'), { 
-          method: 'POST',
-          credentials: 'include'
+        const response = await authenticatedFetch('/api/auth/logout', { 
+          method: 'POST'
         });
+        localStorage.removeItem('iconic_auth_token');
         if (response.ok) {
           renderLoggedOutView();
           setTimeout(() => {
@@ -655,9 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial auth status check
     async function checkAuthStatus() {
       try {
-        const response = await fetch(getApiUrl('/api/auth/me'), {
-          credentials: 'include'
-        });
+        const response = await authenticatedFetch('/api/auth/me');
         const data = await response.json();
         if (response.ok && data.success) {
           renderLoggedInView(data.user);

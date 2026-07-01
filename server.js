@@ -102,6 +102,7 @@ app.post('/api/auth/signup', async (req, res) => {
 
     res.status(201).json({
       success: true,
+      token: data.session ? data.session.access_token : null,
       user: {
         id: data.user.id,
         name: data.user.user_metadata?.name || name,
@@ -160,6 +161,7 @@ app.post('/api/auth/login', async (req, res) => {
 
     res.status(200).json({
       success: true,
+      token: data.session.access_token,
       user: {
         id: data.user.id,
         name: data.user.user_metadata?.name || 'User',
@@ -176,7 +178,7 @@ app.post('/api/auth/login', async (req, res) => {
 // 3. Get Authenticated User Details (Check Session)
 app.get('/api/auth/me', async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
     if (!token) {
       return res.status(401).json({ error: 'Not authenticated.' });
     }
@@ -301,7 +303,7 @@ const upload = multer({
 // 6b. Image Upload Endpoint
 app.post('/api/upload', upload.array('photos', 20), async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
     if (!token) {
       return res.status(401).json({ error: 'Please sign in to upload images.' });
     }
@@ -354,7 +356,7 @@ app.post('/api/upload', upload.array('photos', 20), async (req, res) => {
 // 7. Place an Ad / Create Listing Endpoint
 app.post('/api/listings', async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
     if (!token) {
       return res.status(401).json({ error: 'Please sign in to submit a listing.' });
     }
