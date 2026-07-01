@@ -922,22 +922,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Attach click event to all "Place an ad" buttons
     placeAdButtons.forEach(btn => {
-      btn.addEventListener('click', async (e) => {
+      btn.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // Enforce user authentication
-        try {
-          const res = await fetch('/api/auth/me');
-          const data = await res.json();
-          
-          if (res.ok && data.success) {
-            openDrawer();
-          } else {
-            promptLogin();
-          }
-        } catch (err) {
-          promptLogin();
-        }
+        openDrawer();
       });
     });
 
@@ -1016,6 +1003,30 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'SUBMITTING LISTING...';
+
+      // Enforce user authentication at submission time
+      try {
+        const authRes = await fetch('/api/auth/me');
+        const authData = await authRes.json();
+        
+        if (!authRes.ok || !authData.success) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          formMsg.textContent = 'Please log in to submit your listing.';
+          formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+          formMsg.classList.remove('hidden');
+          promptLogin();
+          return;
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        formMsg.textContent = 'Connection error. Please ensure you are logged in.';
+        formMsg.className = 'text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+        formMsg.classList.remove('hidden');
+        promptLogin();
+        return;
+      }
 
       const payload = {
         brand: document.getElementById('ad-brand').value,
