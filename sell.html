@@ -138,23 +138,7 @@
     <!-- MAIN BODY SECTION -->
     <section class="flex-grow bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-16 md:pt-20 pb-10 px-4 md:px-6 flex flex-col justify-start relative">
       
-      <!-- LOCK SCREEN OVERLAY (Shown if User is Not Authenticated) -->
-      <div id="auth-lock-overlay" class="absolute inset-0 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-300">
-        <div class="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center">
-          <div class="h-14 w-14 bg-red-50 dark:bg-brand/10 border border-brand/20 rounded-full flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h2 class="text-base font-logo font-extrabold uppercase tracking-wider text-zinc-900 dark:text-white mb-2">Sell Your Hypercar</h2>
-          <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 font-medium leading-relaxed">
-            Please log in or create an account to list your hypercar for verification on our platform.
-          </p>
-          <button id="lock-login-btn" class="w-full bg-brand hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-lg active:scale-95 transition-all duration-200 shadow-md">
-            Sign In / Sign Up
-          </button>
-        </div>
-      </div>
+
 
       <!-- MAIN MULTI-STEP CONTENT WIZARD -->
       <div id="sell-wizard-container" class="max-w-[32rem] mx-auto w-full flex flex-col mt-4 sell-content-container relative z-10 opacity-30 pointer-events-none transition-opacity duration-300">

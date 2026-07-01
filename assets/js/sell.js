@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const wizardContainer = document.getElementById('sell-wizard-container');
-  const lockOverlay = document.getElementById('auth-lock-overlay');
-  const lockLoginBtn = document.getElementById('lock-login-btn');
   const form = document.getElementById('sell-car-form');
   const formMsg = document.getElementById('sell-form-msg');
   const btnNext = document.getElementById('btn-next-step');
@@ -61,39 +59,45 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (res.ok && data.success) {
         // Unlock Form
-        lockOverlay.classList.add('hidden');
-        lockOverlay.style.opacity = '0';
-        lockOverlay.style.pointerEvents = 'none';
-        
         wizardContainer.classList.remove('opacity-30', 'pointer-events-none');
         
         // Load Draft and restore correct step
         loadDraft();
       } else {
         // Keep Locked
-        lockOverlay.classList.remove('hidden');
-        lockOverlay.style.opacity = '1';
-        lockOverlay.style.pointerEvents = 'auto';
-        
         wizardContainer.classList.add('opacity-30', 'pointer-events-none');
+        
+        // Open the header profile login popover directly
+        showHeaderLoginPopover();
       }
     } catch (err) {
       // Offline / Server error lock fallback
-      lockOverlay.classList.remove('hidden');
-      lockOverlay.style.opacity = '1';
-      lockOverlay.style.pointerEvents = 'auto';
       wizardContainer.classList.add('opacity-30', 'pointer-events-none');
     }
   }
 
-  if (lockLoginBtn) {
-    lockLoginBtn.addEventListener('click', () => {
-      const profilePopover = document.getElementById('profile-popover');
-      if (profilePopover && typeof profilePopover.showPopover === 'function') {
-        profilePopover.showPopover();
+  function showHeaderLoginPopover() {
+    const profilePopover = document.getElementById('profile-popover');
+    if (profilePopover && typeof profilePopover.showPopover === 'function') {
+      profilePopover.showPopover();
+      // Show warning message in login form
+      const loginForm = document.getElementById('auth-login-form');
+      if (loginForm) {
+        const msgContainer = loginForm.querySelector('.auth-msg-container');
+        if (msgContainer) {
+          msgContainer.className = 'auth-msg-container text-xs font-semibold p-2.5 rounded-lg text-center mb-4 bg-brand/10 border border-brand/20 text-brand';
+          msgContainer.textContent = 'Please sign in to place an ad.';
+        }
       }
-    });
+    }
   }
+
+  // Listen to auth events to sync state automatically across scripts
+  window.addEventListener('auth-login-success', checkPageAuth);
+  window.addEventListener('auth-logout-success', () => {
+    wizardContainer.classList.add('opacity-30', 'pointer-events-none');
+    checkPageAuth();
+  });
 
   // --- Step Navigation & Validation ---
   function updateStepUI() {

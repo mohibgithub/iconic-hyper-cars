@@ -556,6 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           showFormMessage(authLoginForm, 'success', 'Login successful! Welcome back.');
           renderLoggedInView(data.user);
+          window.dispatchEvent(new Event('auth-login-success'));
 
           emailInput.value = '';
           passwordInput.value = '';
@@ -613,6 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           showFormMessage(authSignupForm, 'success', 'Account created! Welcome to Iconic.');
           renderLoggedInView(data.user);
+          window.dispatchEvent(new Event('auth-login-success'));
 
           nameInput.value = '';
           emailInput.value = '';
@@ -651,6 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('iconic_auth_token');
         if (response.ok) {
           renderLoggedOutView();
+          window.dispatchEvent(new Event('auth-logout-success'));
           setTimeout(() => {
             if (typeof profilePopover.hidePopover === 'function') {
               profilePopover.hidePopover();
