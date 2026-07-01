@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Reusable API URL Helper for multi-port testing ---
+  function getApiUrl(path) {
+    if (window.location.port === '3000') {
+      return path;
+    }
+    // E.g. file:/// or localhost:5500 maps to localhost:3000
+    const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+    const hostname = window.location.hostname === '' ? 'localhost' : window.location.hostname;
+    return `${protocol}//${hostname}:3000${path}`;
+  }
+
   // --- Reusable Swipe Gesture Helper ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
@@ -512,10 +523,11 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'SIGNING IN...';
 
       try {
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch(getApiUrl('/api/auth/login'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
+          credentials: 'include'
         });
 
         const data = await response.json();
@@ -566,10 +578,11 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'CREATING ACCOUNT...';
 
       try {
-        const response = await fetch('/api/auth/signup', {
+        const response = await fetch(getApiUrl('/api/auth/signup'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password }),
+          credentials: 'include'
         });
 
         const data = await response.json();
@@ -609,7 +622,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('/api/auth/logout', { method: 'POST' });
+        const response = await fetch(getApiUrl('/api/auth/logout'), { 
+          method: 'POST',
+          credentials: 'include'
+        });
         if (response.ok) {
           renderLoggedOutView();
           setTimeout(() => {
@@ -627,14 +643,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const googleAuthBtn = loggedOutContainer.querySelector('button[type="button"]');
     if (googleAuthBtn) {
       googleAuthBtn.addEventListener('click', () => {
-        window.location.href = '/api/auth/google';
+        window.location.href = getApiUrl('/api/auth/google');
       });
     }
 
     // Initial auth status check
     async function checkAuthStatus() {
       try {
-        const response = await fetch('/api/auth/me');
+        const response = await fetch(getApiUrl('/api/auth/me'), {
+          credentials: 'include'
+        });
         const data = await response.json();
         if (response.ok && data.success) {
           renderLoggedInView(data.user);

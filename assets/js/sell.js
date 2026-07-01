@@ -29,10 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
     'sell-description'
   ];
 
+  // --- Reusable API URL Helper for multi-port testing ---
+  function getApiUrl(path) {
+    if (window.location.port === '3000') {
+      return path;
+    }
+    const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+    const hostname = window.location.hostname === '' ? 'localhost' : window.location.hostname;
+    return `${protocol}//${hostname}:3000${path}`;
+  }
+
   // --- Auth Check on Load ---
   async function checkPageAuth() {
     try {
-      const res = await fetch('/api/auth/me');
+      const res = await fetch(getApiUrl('/api/auth/me'), {
+        credentials: 'include'
+      });
       const data = await res.json();
       
       if (res.ok && data.success) {
@@ -299,9 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     try {
-      const uploadRes = await fetch('/api/upload', {
+      const uploadRes = await fetch(getApiUrl('/api/upload'), {
         method: 'POST',
-        body: formData
+        body: formData,
+        credentials: 'include'
       });
 
       const uploadData = await uploadRes.json();
@@ -344,10 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('/api/listings', {
+      const response = await fetch(getApiUrl('/api/listings'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        credentials: 'include'
       });
 
       const data = await response.json();
