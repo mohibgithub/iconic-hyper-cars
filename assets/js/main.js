@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Global auth state tracker
+  window.isAuthenticated = false;
+
   // --- Reusable API URL Helper for multi-port testing ---
   function getApiUrl(path) {
     if (window.location.port === '3000') {
@@ -390,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dynamic UI states rendering
     function renderLoggedInView(user) {
+      window.isAuthenticated = true;
       const initials = user.name
         ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2)
         : 'U';
@@ -483,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderLoggedOutView() {
+      window.isAuthenticated = false;
       loggedInContainer.innerHTML = '';
       loggedOutContainer.classList.remove('hidden');
       loggedInContainer.classList.add('hidden');
@@ -666,6 +671,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check status immediately
     checkAuthStatus();
+
+    // Intercept Place an Ad button clicks
+    const placeAdButtons = document.querySelectorAll('[aria-label="Place an ad"]');
+    placeAdButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (!window.isAuthenticated) {
+          e.preventDefault();
+          // Open profile popover
+          const profilePopover = document.getElementById('profile-popover');
+          if (profilePopover && typeof profilePopover.showPopover === 'function') {
+            profilePopover.showPopover();
+            // Show custom alert inside popover
+            const loginForm = document.getElementById('auth-login-form');
+            if (loginForm) {
+              showFormMessage(loginForm, 'error', 'Please sign in to place an ad.');
+            }
+          }
+        }
+      });
+    });
   }
 
   // --- Global Slider Helper ---
