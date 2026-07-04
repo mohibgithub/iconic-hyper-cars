@@ -78,6 +78,11 @@ app.post('/api/auth/signup', async (req, res) => {
       return res.status(400).json({ error: 'Registration failed.' });
     }
 
+    // Check if the user is already registered (identities length will be 0 if email exists and confirmation is active)
+    if (data.user.identities && data.user.identities.length === 0) {
+      return res.status(400).json({ error: 'This email is already registered. Please sign in instead.' });
+    }
+
     // Set cookie if a session is immediately created
     if (data.session) {
       res.cookie('token', data.session.access_token, {
@@ -237,6 +242,72 @@ app.post('/api/auth/logout', async (req, res) => {
 
   res.clearCookie('token');
   res.status(200).json({ success: true, message: 'Logged out successfully.' });
+});
+
+// 4.5. Forgot Password Route
+app.post('/api/auth/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'Email address is required.' });
+    }
+
+    const referer = req.headers.referer || `${req.protocol}://${req.get('host')}/`;
+    const resetUrl = new URL(referer);
+    // Redirect user back to home page with reset-password action parameter
+    resetUrl.pathname = '/index.html';
+    resetUrl.search = '?action=reset-password';
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email.toLowerCase(), {
+      redirectTo: resetUrl.toString()
+    });
+
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    res.status(200).json({ success: true, message: 'Password reset link sent successfully!' });
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ error: 'Internal server error during password reset request.' });
+  }
+});
+
+// 4.6. Update Password Route
+app.post('/api/auth/update-password', async (req, res) => {
+  try {
+    const { password } = req.body;
+    if (!password || password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters long.' });
+    }
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Unauthorized. Please login again.' });
+    }
+    const token = authHeader.split(' ')[1];
+
+    const userClient = createClient(
+      supabaseUrl || 'https://placeholder.supabase.co',
+      supabaseAnonKey || 'placeholder',
+      { auth: { persistSession: false } }
+    );
+    
+    const { data: { user }, error: authErr } = await userClient.auth.getUser(token);
+    if (authErr || !user) {
+      return res.status(401).json({ error: 'Unauthorized session.' });
+    }
+
+    const { error } = await userClient.auth.updateUser({ password });
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    res.status(200).json({ success: true, message: 'Password updated successfully!' });
+  } catch (error) {
+    console.error('Update password error:', error);
+    res.status(500).json({ error: 'Internal server error during password update.' });
+  }
 });
 
 // 5. Google OAuth Login Route

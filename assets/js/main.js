@@ -381,6 +381,82 @@ document.addEventListener('DOMContentLoaded', () => {
     profilePopover.appendChild(loggedInContainer);
 
     // 2. Tab Navigation logic (toggled via loggedOutContainer)
+    const tabsHeader = authLoginTab.parentElement;
+
+    // Create and inject Forgot Password form
+    const forgotForm = document.createElement('form');
+    forgotForm.id = 'auth-forgot-form';
+    forgotForm.className = 'flex flex-col gap-3.5 hidden text-left';
+    forgotForm.innerHTML = `
+      <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mb-2 leading-relaxed font-semibold">
+        Enter your email address and we will send you a secure link to reset your password.
+      </p>
+      <div class="flex flex-col gap-1">
+        <label for="forgot-email" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email Address</label>
+        <input type="email" id="forgot-email" required placeholder="name@example.com"
+          class="w-full text-xs px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors duration-200 text-zinc-900 dark:text-white placeholder-zinc-400" />
+      </div>
+      <button type="submit" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md">
+        Send Reset Link
+      </button>
+      <button type="button" id="forgot-back-to-login" class="text-center text-[10px] text-zinc-400 dark:text-zinc-500 hover:text-brand font-bold transition-colors mt-1.5">
+        Back to Login
+      </button>
+    `;
+    loggedOutContainer.insertBefore(forgotForm, authSignupForm.nextSibling);
+
+    // Create and inject Reset Password form
+    const resetForm = document.createElement('form');
+    resetForm.id = 'auth-reset-form';
+    resetForm.className = 'flex flex-col gap-3.5 hidden text-left';
+    resetForm.innerHTML = `
+      <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mb-2 leading-relaxed font-semibold">
+        Create a new password for your account (minimum 6 characters).
+      </p>
+      <div class="flex flex-col gap-1">
+        <label for="reset-password" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">New Password</label>
+        <input type="password" id="reset-password" required placeholder="••••••••"
+          class="w-full text-xs px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors duration-200 text-zinc-900 dark:text-white placeholder-zinc-400" />
+      </div>
+      <button type="submit" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md">
+        Save New Password
+      </button>
+    `;
+    loggedOutContainer.insertBefore(resetForm, forgotForm.nextSibling);
+
+    // Hook up Forgot Password click triggers
+    const forgotTriggers = authLoginForm.querySelectorAll('a');
+    let forgotTriggerBtn = null;
+    forgotTriggers.forEach(link => {
+      if (link.textContent.trim() === 'Forgot?') {
+        forgotTriggerBtn = link;
+      }
+    });
+
+    if (forgotTriggerBtn) {
+      forgotTriggerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearFormMessages(authLoginForm);
+        clearFormMessages(forgotForm);
+        tabsHeader.classList.add('hidden');
+        authLoginForm.classList.add('hidden');
+        authSignupForm.classList.add('hidden');
+        forgotForm.classList.remove('hidden');
+      });
+    }
+
+    const backToLoginBtn = forgotForm.querySelector('#forgot-back-to-login');
+    if (backToLoginBtn) {
+      backToLoginBtn.addEventListener('click', () => {
+        clearFormMessages(forgotForm);
+        clearFormMessages(authLoginForm);
+        tabsHeader.classList.remove('hidden');
+        authLoginForm.classList.remove('hidden');
+        authSignupForm.classList.add('hidden');
+        forgotForm.classList.add('hidden');
+      });
+    }
+
     authLoginTab.addEventListener('click', () => {
       authLoginTab.classList.add('text-brand', 'border-b-2', 'border-brand');
       authLoginTab.classList.remove('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
@@ -388,6 +464,8 @@ document.addEventListener('DOMContentLoaded', () => {
       authSignupTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
       authLoginForm.classList.remove('hidden');
       authSignupForm.classList.add('hidden');
+      forgotForm.classList.add('hidden');
+      resetForm.classList.add('hidden');
     });
 
     authSignupTab.addEventListener('click', () => {
@@ -397,6 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
       authLoginTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'hover:text-zinc-900', 'dark:hover:text-white');
       authSignupForm.classList.remove('hidden');
       authLoginForm.classList.add('hidden');
+      forgotForm.classList.add('hidden');
+      resetForm.classList.add('hidden');
     });
 
     // Helper functions to show success/error feedback inside forms
@@ -733,6 +813,129 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    // 4. Submit Forgot Password Form
+    forgotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearFormMessages(forgotForm);
+
+      const emailInput = forgotForm.querySelector('#forgot-email');
+      const submitBtn = forgotForm.querySelector('button[type="submit"]');
+      if (!emailInput || !submitBtn) return;
+
+      const email = emailInput.value;
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SENDING LINK...';
+
+      try {
+        const response = await authenticatedFetch('/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFormMessage(forgotForm, 'success', 'Password reset link sent! Check your email inbox.');
+          emailInput.value = '';
+        } else {
+          showFormMessage(forgotForm, 'error', data.error || 'Failed to send reset link.');
+        }
+      } catch (err) {
+        showFormMessage(forgotForm, 'error', 'Network error. Please try again.');
+        console.error('Forgot password error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // 5. Submit Reset Password Form
+    resetForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearFormMessages(resetForm);
+
+      const passwordInput = resetForm.querySelector('#reset-password');
+      const submitBtn = resetForm.querySelector('button[type="submit"]');
+      if (!passwordInput || !submitBtn) return;
+
+      const password = passwordInput.value;
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SAVING PASSWORD...';
+
+      // Parse token from URL hash (sent on recovery redirect from Supabase)
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      let accessToken = hashParams.get('access_token');
+
+      if (!accessToken) {
+        accessToken = localStorage.getItem('iconic_auth_token') || urlParams.get('token');
+      }
+
+      if (!accessToken) {
+        showFormMessage(resetForm, 'error', 'Invalid or expired session. Please request a new link.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      try {
+        const response = await fetch(getApiUrl('/api/auth/update-password'), {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+          },
+          body: JSON.stringify({ password })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFormMessage(resetForm, 'success', 'Password updated! Please login with your new password.');
+          passwordInput.value = '';
+
+          // Clear Hash parameters securely
+          window.history.replaceState({}, document.title, window.location.pathname);
+
+          setTimeout(() => {
+            clearFormMessages(resetForm);
+            tabsHeader.classList.remove('hidden');
+            authLoginForm.classList.remove('hidden');
+            resetForm.classList.add('hidden');
+          }, 2500);
+        } else {
+          showFormMessage(resetForm, 'error', data.error || 'Failed to update password.');
+        }
+      } catch (err) {
+        showFormMessage(resetForm, 'error', 'Network error. Please try again.');
+        console.error('Reset password error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // 6. Check URL parameters for Reset Password redirection
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const isResetAction = urlParams.get('action') === 'reset-password' || hashParams.get('type') === 'recovery';
+
+    if (isResetAction) {
+      setTimeout(() => {
+        if (profilePopover) {
+          if (typeof profilePopover.showPopover === 'function') {
+            profilePopover.showPopover();
+          } else {
+            profilePopover.style.display = 'block';
+          }
+          tabsHeader.classList.add('hidden');
+          authLoginForm.classList.add('hidden');
+          authSignupForm.classList.add('hidden');
+          forgotForm.classList.add('hidden');
+          resetForm.classList.remove('hidden');
+        }
+      }, 500); // Small timeout to ensure popover transitions correctly after render
+    }
   }
 
   // --- Global Slider Helper ---
