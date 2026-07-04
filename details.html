@@ -895,13 +895,38 @@
         }
 
         // Touch / swipe
-        let startX = 0, isDragging = false;
-        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
-        track.addEventListener('touchend', e => {
-          if (!isDragging) return;
-          const diff = startX - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
-          isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+
+        track.addEventListener('touchstart', e => {
+          startX = e.touches[0].screenX;
+          startY = e.touches[0].screenY;
+          endX = startX;
+          endY = startY;
+        }, { passive: true });
+
+        track.addEventListener('touchmove', e => {
+          endX = e.touches[0].screenX;
+          endY = e.touches[0].screenY;
+        }, { passive: true });
+
+        track.addEventListener('touchend', () => {
+          const diffX = startX - endX;
+          const diffY = startY - endY;
+
+          if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+              goTo(current + 1);
+            } else {
+              goTo(current - 1);
+            }
+          }
+          startX = 0;
+          startY = 0;
+          endX = 0;
+          endY = 0;
         });
 
         // Click slides → open lightbox

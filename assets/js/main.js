@@ -55,45 +55,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Reusable Swipe Gesture Helper ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
-    let startX = 0, startY = 0, diffX = 0, diffY = 0, isHorizontalSwipe = false;
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
 
     trackElement.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      diffX = 0;
-      diffY = 0;
-      isHorizontalSwipe = false;
+      startX = e.touches[0].screenX;
+      startY = e.touches[0].screenY;
+      endX = startX;
+      endY = startY;
     }, { passive: true });
 
     trackElement.addEventListener('touchmove', (e) => {
-      if (!startX || !startY) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      diffX = startX - currentX;
-      diffY = startY - currentY;
-
-      if (!isHorizontalSwipe && Math.abs(diffX) > 5 && Math.abs(diffX) > Math.abs(diffY)) {
-        isHorizontalSwipe = true;
-      }
-
-      if (isHorizontalSwipe) {
-        if (e.cancelable) e.preventDefault();
-      }
-    }, { passive: false });
+      endX = e.touches[0].screenX;
+      endY = e.touches[0].screenY;
+    }, { passive: true });
 
     trackElement.addEventListener('touchend', () => {
-      if (isHorizontalSwipe && Math.abs(diffX) > 50) {
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+
+      // Swipe threshold of 50px, and horizontal angle check
+      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
         if (diffX > 0) {
-          onSwipeLeft();
+          onSwipeLeft(); // Swiped left (show next)
         } else {
-          onSwipeRight();
+          onSwipeRight(); // Swiped right (show prev)
         }
       }
       startX = 0;
       startY = 0;
-      diffX = 0;
-      diffY = 0;
-      isHorizontalSwipe = false;
+      endX = 0;
+      endY = 0;
     });
   }
 
@@ -863,5 +857,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', updateReviewsSlider);
   }
+
+  // --- Video Autoplay Fallback for Mobile (iOS Safari / Android Chrome) ---
+  const videos = document.querySelectorAll('video');
+  videos.forEach(video => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        const playOnInteraction = () => {
+          video.play();
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('click', playOnInteraction);
+        };
+        document.addEventListener('touchstart', playOnInteraction, { passive: true });
+        document.addEventListener('click', playOnInteraction, { passive: true });
+      });
+    }
+  });
 
 });
