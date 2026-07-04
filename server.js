@@ -438,6 +438,9 @@ app.post('/api/listings', async (req, res) => {
   } catch (error) {
     console.error('Listings post error:', error);
     res.status(500).json({ error: 'Internal server error.' });
+  }
+});
+
 // 8. Get Approved Listings Endpoint
 app.get('/api/listings', async (req, res) => {
   try {
