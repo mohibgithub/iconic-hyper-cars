@@ -688,21 +688,23 @@
                 
                 // Build thumbnails HTML
                 let thumbnailsHTML = '';
-                if (car.photos && car.photos.length > 0) {
-                  const maxThumbs = Math.min(car.photos.length, 3);
+                let showThumbnails = false;
+                if (car.photos && car.photos.length > 1) {
+                  showThumbnails = true;
+                  const maxThumbs = Math.min(car.photos.length, 4);
                   for (let i = 1; i < maxThumbs; i++) {
                     thumbnailsHTML += `
-                      <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200">
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 border border-transparent">
                         <img src="${car.photos[i]}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} thumbnail" />
                       </div>
                     `;
                   }
-                  if (car.photos.length > 3) {
+                  if (car.photos.length > 4) {
                     thumbnailsHTML += `
-                      <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 relative">
-                        <img src="${car.photos[3]}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} thumbnail" />
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 relative border border-transparent">
+                        <img src="${car.photos[4]}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} thumbnail" />
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-[10px] tracking-wide">
-                          +${car.photos.length - 3}
+                          +${car.photos.length - 4}
                         </div>
                       </div>
                     `;
@@ -710,6 +712,18 @@
                 }
 
                 const mainImg = car.photos && car.photos.length > 0 ? car.photos[0] : 'assets/images/placeholder.jpg';
+
+                let thumbnailsContainerHTML = '';
+                if (showThumbnails) {
+                  thumbnailsContainerHTML = `
+                    <div class="flex gap-2 mt-2 select-none">
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 border border-brand/50">
+                        <img src="${mainImg}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} main thumbnail" />
+                      </div>
+                      ${thumbnailsHTML}
+                    </div>
+                  `;
+                }
 
                 card.innerHTML = `
                   <a href="${detailsLink}" class="absolute inset-0 z-10" aria-label="View ${car.brand} ${car.model} Details"></a>
@@ -720,13 +734,7 @@
                       <img src="${mainImg}" alt="${car.brand} ${car.model}"
                         class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-200 group-hover:scale-[1.03]" />
                     </div>
-
-                    <div class="flex gap-2 mt-2 select-none">
-                      <div class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 border border-brand/50">
-                        <img src="${mainImg}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} main thumbnail" />
-                      </div>
-                      ${thumbnailsHTML}
-                    </div>
+                    ${thumbnailsContainerHTML}
                   </div>
 
                   <!-- Right Side: Details and Actions -->
