@@ -29,10 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Reusable API URL Helper for multi-port testing ---
   function getApiUrl(path) {
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1' || 
+                        window.location.hostname.startsWith('192.168.') ||
+                        window.location.hostname === '';
+    const isFileProtocol = window.location.protocol === 'file:';
+
+    // If it's a live production site (not local), use relative path directly
+    if (!isLocalhost && !isFileProtocol) {
+      return path;
+    }
+
+    // If we're already on the server port 3000, use relative path directly
     if (window.location.port === '3000') {
       return path;
     }
-    const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+
+    // For local development on other ports (e.g. 5500) or file:/// protocol, redirect to local port 3000
+    const protocol = isFileProtocol ? 'http:' : window.location.protocol;
     const hostname = window.location.hostname === '' ? 'localhost' : window.location.hostname;
     return `${protocol}//${hostname}:3000${path}`;
   }
@@ -58,6 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
       
       if (res.ok && data.success) {
+        if (data.token) {
+          localStorage.setItem('iconic_auth_token', data.token);
+        }
         // Unlock Form
         wizardContainer.classList.remove('opacity-30', 'pointer-events-none');
         

@@ -204,6 +204,7 @@ app.get('/api/auth/me', async (req, res) => {
 
     res.status(200).json({
       success: true,
+      token, // Return token back to client so they can save it in localStorage
       user: {
         id: user.id,
         name: user.user_metadata?.name || 'User',
@@ -241,6 +242,14 @@ app.post('/api/auth/logout', async (req, res) => {
 // 5. Google OAuth Login Route
 app.get('/api/auth/google', async (req, res) => {
   try {
+    const referer = req.headers.referer;
+    if (referer) {
+      res.cookie('oauth_redirect_origin', referer, {
+        httpOnly: true,
+        maxAge: 10 * 60 * 1000, // 10 minutes
+      });
+    }
+
     const redirectUrl = `${req.protocol}://${req.get('host')}/api/auth/callback`;
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -285,7 +294,15 @@ app.get('/api/auth/callback', async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    res.redirect('/');
+    // Get origin to redirect back to
+    const redirectOrigin = req.cookies.oauth_redirect_origin || `${req.protocol}://${req.get('host')}/`;
+    res.clearCookie('oauth_redirect_origin');
+
+    // Parse URL and append token parameter safely
+    const targetUrl = new URL(redirectOrigin);
+    targetUrl.searchParams.set('token', data.session.access_token);
+
+    res.redirect(targetUrl.toString());
   } catch (error) {
     console.error('Callback error:', error);
     res.redirect('/?error=internal_server_error');
@@ -420,6 +437,24 @@ app.post('/api/listings', async (req, res) => {
     });
   } catch (error) {
     console.error('Listings post error:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+// 8. Get Approved Listings Endpoint
+app.get('/api/listings', async (req, res) => {
+  try {
+    const { data: listings, error } = await supabase
+      .from('listings')
+      .select('*')
+      .eq('status', 'approved')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Fetch listings database error:', error);
+      return res.status(400).json({ error: error.message });
+    }
+
+    res.status(200).json({ success: true, listings });
+  } catch (error) {
+    console.error('Fetch listings endpoint error:', error);
     res.status(500).json({ error: 'Internal server error.' });
   }
 });
