@@ -558,15 +558,18 @@ app.get('/api/listings/:id', async (req, res) => {
 // 10. Private Sales Lead Submission Endpoint
 app.post('/api/private-sales', async (req, res) => {
   try {
-    const { name, email, phone, message } = req.body;
+    const { name, email, phone, message, form_type } = req.body;
     
     if (!name || !email || !phone || !message) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
 
+    // Default to 'formA' if not specified
+    const type = form_type || 'formA';
+
     const { data, error } = await supabase
       .from('private_leads')
-      .insert([{ name, email, phone, message }]);
+      .insert([{ name, email, phone, message, form_type: type }]);
 
     if (error) {
       console.error('Database error in private sales submission:', error);

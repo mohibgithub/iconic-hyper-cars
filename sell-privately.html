@@ -213,7 +213,7 @@
           Private Request Form
         </h3>
 
-        <form id="private-sales-form" class="flex flex-col gap-4">
+        <form id="formA" class="flex flex-col gap-4">
           <!-- Name field -->
           <div class="flex flex-col gap-1.5 text-left">
             <label for="private-name"
@@ -428,7 +428,7 @@
   <script src="assets/js/main.js"></script>
   <script>
     // Form Submission Logic
-    document.getElementById('private-sales-form').addEventListener('submit', async (e) => {
+    document.getElementById('formA').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const submitBtn = document.getElementById('private-submit-btn');
@@ -445,14 +445,14 @@
         const response = await fetch('/api/private-sales', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, phone, message })
+          body: JSON.stringify({ name, email, phone, message, form_type: 'formA' })
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
           alert('Your private request has been submitted successfully! We will reach out to you on WhatsApp shortly.');
-          document.getElementById('private-sales-form').reset();
+          document.getElementById('formA').reset();
         } else {
           alert('Error: ' + (data.error || 'Failed to submit request.'));
         }
