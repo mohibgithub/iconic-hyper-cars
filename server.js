@@ -564,19 +564,21 @@ app.post('/api/private-sales', async (req, res) => {
       return res.status(400).json({ error: 'All fields are required.' });
     }
 
-    // Default to 'formA' if not specified
     const type = form_type || 'formA';
 
+    // Route dynamically to form_a_leads or form_b_leads tables
+    const tableName = (type === 'formB') ? 'form_b_leads' : 'form_a_leads';
+
     const { data, error } = await supabase
-      .from('private_leads')
+      .from(tableName)
       .insert([{ name, email, phone, message, form_type: type }]);
 
     if (error) {
-      console.error('Database error in private sales submission:', error);
+      console.error(`Database error in ${tableName} submission:`, error);
       return res.status(400).json({ error: error.message });
     }
 
-    res.status(201).json({ success: true, message: 'Private sales request submitted successfully!' });
+    res.status(201).json({ success: true, message: 'Request submitted successfully!' });
   } catch (error) {
     console.error('Private sales lead submission error:', error);
     res.status(500).json({ error: 'Internal server error.' });
