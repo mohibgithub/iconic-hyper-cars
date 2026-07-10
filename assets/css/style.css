@@ -677,7 +677,26 @@ footer button {
   #ad-drawer.active {
     transform: translate(-50%, 0);
   }
+}/* Centered Popover Modal styles for service forms */
+.service-popup {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  border-radius: 12px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-behavior: allow-discrete;
 }
 
+.service-popup:popover-open {
+  opacity: 1;
+  transform: scale(1);
 
-
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
