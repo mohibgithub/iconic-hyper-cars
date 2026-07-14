@@ -296,7 +296,7 @@ body {
 
 [popover]:popover-open::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
 
   @starting-style {
     background-color: rgba(0, 0, 0, 0);
@@ -682,9 +682,9 @@ footer button {
   position: fixed;
   inset: 0;
   margin: auto;
-  border-radius: 12px;
+  border-radius: 20px;
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.95) translateY(12px);
   transition-property: opacity, transform, display, overlay;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -693,10 +693,10 @@ footer button {
 
 .service-popup:popover-open {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 
   @starting-style {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.95) translateY(12px);
   }
 }

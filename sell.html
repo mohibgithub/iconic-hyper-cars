@@ -32,17 +32,17 @@
     }
   </script>
   <script>
-    // System Theme Preference Manager
-    (function () {
-      const savedTheme = localStorage.getItem('color-theme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
-      }
-    })();
+      // System Theme Preference Manager
+      (function () {
+        const savedTheme = localStorage.getItem('color-theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+        }
+      })();
   </script>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
@@ -55,18 +55,22 @@
   </style>
 </head>
 
-<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen font-sans antialiased overflow-x-hidden transition-colors duration-300 flex flex-col">
+<body
+  class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen font-sans antialiased overflow-x-hidden transition-colors duration-300 flex flex-col">
 
   <!-- Main Responsive Container -->
   <main class="w-full flex-grow flex flex-col relative transition-all duration-300">
 
     <!-- MAIN HEADER SECTION -->
-    <header class="main-header absolute top-0 left-0 right-0 z-40 bg-white dark:bg-zinc-950 px-2 py-4 md:py-5 border-b border-black/[0.06] dark:border-white/5 transition-colors duration-300 shrink-0">
+    <header
+      class="main-header absolute top-0 left-0 right-0 z-40 bg-white dark:bg-zinc-950 px-2 py-4 md:py-5 border-b border-black/[0.06] dark:border-white/5 transition-colors duration-300 shrink-0">
       <div class="max-w-[100rem] mx-auto w-full flex items-center justify-center relative">
         <!-- Center Logo -->
         <a href="index.html" class="flex flex-col items-center text-center select-none font-logo group">
-          <span class="text-[16.4px] md:text-1xl font-extrabold tracking-widest text-zinc-950 dark:text-white transition-colors font-iconic">ICONIC</span>
-          <span class="text-[10px] md:text-[13px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
+          <span
+            class="text-[16.4px] md:text-1xl font-extrabold tracking-widest text-zinc-950 dark:text-white transition-colors font-iconic">ICONIC</span>
+          <span
+            class="text-[10px] md:text-[13px] font-bold tracking-wider text-brand transition-colors uppercase -mt-0.5 md:mt-0 font-montserrat">HYPERCARS</span>
         </a>
         <!-- Hidden Compatibility Container for main.js theme toggles -->
         <div class="hidden">
@@ -79,47 +83,61 @@
     </header>
 
     <!-- NATIVE INTERACTIVE OVERLAYS -->
-    <div id="mobile-menu" popover class="mobile-sidebar p-5 text-zinc-900 dark:text-white shadow-2xl h-full flex flex-col justify-between">
+    <div id="mobile-menu" popover
+      class="mobile-sidebar p-5 text-zinc-900 dark:text-white shadow-2xl h-full flex flex-col justify-between">
       <div>
         <div class="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.37] pb-4 mb-6">
           <div class="font-logo flex flex-col">
             <span class="text-base font-bold text-zinc-900 dark:text-white uppercase mt-0.5">MENU</span>
           </div>
-          <button popovertarget="mobile-menu" aria-label="Close menu" class="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 active:scale-90 transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <button popovertarget="mobile-menu" aria-label="Close menu"
+            class="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 active:scale-90 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
         <nav class="flex flex-col gap-4">
-          <a href="index.html" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+          <a href="index.html"
+            class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
             <span>Home</span>
           </a>
-          <a href="brands.html" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+          <a href="brands.html"
+            class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
             <span>Browse Hypercars</span>
           </a>
-          <a href="#" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+          <a href="#"
+            class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
             <span>Services</span>
           </a>
-          <a href="#" class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
+          <a href="#"
+            class="text-sm font-bold uppercase tracking-wider hover:text-brand transition-colors py-1 flex items-center gap-2 border-b border-black/[0.03] dark:border-white/[0.03]">
             <span>About Us</span>
           </a>
         </nav>
       </div>
       <div class="border-t border-black/[0.08] dark:border-white/[0.37] pt-4 flex flex-col gap-4">
-        <button popovertarget="profile-popover" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black font-bold py-2.5 rounded-[6px] text-xs uppercase tracking-wider hover:bg-brand dark:hover:bg-brand dark:hover:text-white transition-all active:scale-95">
+        <button popovertarget="profile-popover"
+          class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black font-bold py-2.5 rounded-[6px] text-xs uppercase tracking-wider hover:bg-brand dark:hover:bg-brand dark:hover:text-white transition-all active:scale-95">
           Sign In
         </button>
         <div class="flex flex-col gap-1 pt-2 border-t border-black/[0.04] dark:border-white/[0.04]">
-          <a href="tel:+971568854390" class="py-2 flex items-center gap-2.5 text-[15px] font-medium text-zinc-900 dark:text-white hover:text-brand transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400 dark:text-zinc-500 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          <a href="tel:+971568854390"
+            class="py-2 flex items-center gap-2.5 text-[15px] font-medium text-zinc-900 dark:text-white hover:text-brand transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400 dark:text-zinc-500 stroke-current"
+              fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
             </svg>
             <span>Hotline +971 56 885 4390</span>
           </a>
-          <a href="https://wa.me/971568854390" target="_blank" class="py-2 flex items-center gap-2.5 text-[15px] font-medium text-zinc-900 dark:text-white hover:text-brand transition-colors">
-            <svg class="h-5 w-5 text-zinc-400 dark:text-zinc-500 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          <a href="https://wa.me/971568854390" target="_blank"
+            class="py-2 flex items-center gap-2.5 text-[15px] font-medium text-zinc-900 dark:text-white hover:text-brand transition-colors">
+            <svg class="h-5 w-5 text-zinc-400 dark:text-zinc-500 fill-current" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
             </svg>
             <span>Call WhatsApp</span>
           </a>
@@ -128,39 +146,53 @@
     </div>
 
     <!-- PROFILE POPOVER -->
-    <div id="profile-popover" popover class="user-profile-dropdown bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white p-6 rounded-[12px] shadow-2xl border border-zinc-100 dark:border-zinc-800/80 transition-colors duration-300 w-[320px] sm:w-[350px]">
+    <div id="profile-popover" popover
+      class="user-profile-dropdown bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white p-6 rounded-[12px] shadow-2xl border border-zinc-100 dark:border-zinc-800/80 transition-colors duration-300 w-[320px] sm:w-[350px]">
       <div class="flex border-b border-zinc-100 dark:border-zinc-800 pb-3 mb-4">
-        <button id="auth-login-tab" class="flex-1 text-center font-bold text-xs uppercase tracking-wider text-brand border-b-2 border-brand pb-1 transition-all">Login</button>
-        <button id="auth-signup-tab" class="flex-1 text-center font-semibold text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white pb-1 transition-all">Sign Up</button>
+        <button id="auth-login-tab"
+          class="flex-1 text-center font-bold text-xs uppercase tracking-wider text-brand border-b-2 border-brand pb-1 transition-all">Login</button>
+        <button id="auth-signup-tab"
+          class="flex-1 text-center font-semibold text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white pb-1 transition-all">Sign
+          Up</button>
       </div>
       <form id="auth-login-form" class="flex flex-col gap-3.5">
         <div class="flex flex-col gap-1 text-left">
-          <label for="login-email" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email Address</label>
-          <input type="email" id="login-email" required placeholder="name@example.com" class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
+          <label for="login-email"
+            class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email Address</label>
+          <input type="email" id="login-email" required placeholder="name@example.com"
+            class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
         </div>
         <div class="flex flex-col gap-1 text-left">
           <div class="flex justify-between items-center">
-            <label for="login-password" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Password</label>
+            <label for="login-password"
+              class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Password</label>
             <a href="#" class="text-[9px] font-semibold text-brand hover:underline">Forgot?</a>
           </div>
-          <input type="password" id="login-password" required placeholder="••••••••" class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
+          <input type="password" id="login-password" required placeholder="••••••••"
+            class="w-full text-xs px-3 py-2 rounded-[6px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand transition-colors text-zinc-900 dark:text-white placeholder-zinc-400" />
         </div>
-        <button type="submit" class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-[6px] active:scale-[0.98] transition-all shadow-md">Sign In</button>
+        <button type="submit"
+          class="w-full bg-zinc-900 dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-100 font-bold text-xs uppercase tracking-wider py-2.5 rounded-[6px] active:scale-[0.98] transition-all shadow-md">Sign
+          In</button>
       </form>
     </div>
 
     <!-- MAIN BODY SECTION -->
-    <section class="bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-16 md:pt-20 pb-10 md:pb-12 px-4 md:px-6 flex flex-col justify-start relative">
-      
+    <section
+      class="bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-16 md:pt-20 pb-10 md:pb-12 px-4 md:px-6 flex flex-col justify-start relative">
+
 
 
       <!-- MAIN MULTI-STEP CONTENT WIZARD -->
-      <div id="sell-wizard-container" class="max-w-[32rem] mx-auto w-full flex flex-col mt-4 sell-content-container relative z-10 opacity-30 pointer-events-none transition-opacity duration-300">
-        
+      <div id="sell-wizard-container"
+        class="max-w-[32rem] mx-auto w-full flex flex-col mt-4 sell-content-container relative z-10 opacity-30 pointer-events-none transition-opacity duration-300">
+
         <!-- Back Navigation -->
         <div class="mb-4">
-          <a href="listings.html" class="inline-flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-white text-xs font-bold uppercase tracking-wider transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+          <a href="listings.html"
+            class="inline-flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-white text-xs font-bold uppercase tracking-wider transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24"
+              stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             <span>Cancel</span>
@@ -168,41 +200,62 @@
         </div>
 
         <div class="text-center mb-6">
-          <h1 class="text-xl md:text-2xl font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white font-logo mb-1">Tell us about your car</h1>
-          <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-semibold uppercase tracking-wider">Motors &nbsp;›&nbsp; Supercars & Hypercars</p>
+          <h1
+            class="text-xl md:text-2xl font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white font-logo mb-1">
+            Tell us about your car</h1>
+          <p class="text-[11px] text-zinc-400 dark:text-zinc-500 font-semibold uppercase tracking-wider">Motors
+            &nbsp;›&nbsp; Supercars & Hypercars</p>
         </div>
 
         <!-- Progress Steps Bar -->
         <div class="flex items-center justify-between mb-8 px-4 select-none">
           <div id="step-indicator-1" class="flex flex-col items-center gap-1.5 flex-1 relative">
-            <div class="step-num w-7 h-7 bg-brand text-white border-2 border-brand font-bold text-xs rounded-full flex items-center justify-center transition-all duration-200">1</div>
-            <span class="step-title text-[9px] font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">Basic Info</span>
-            <div class="absolute top-3.5 left-[60%] right-[-40%] h-[2px] bg-zinc-200 dark:bg-zinc-800 -z-10 step-connector"></div>
+            <div
+              class="step-num w-7 h-7 bg-brand text-white border-2 border-brand font-bold text-xs rounded-full flex items-center justify-center transition-all duration-200">
+              1</div>
+            <span
+              class="step-title text-[9px] font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">Basic
+              Info</span>
+            <div
+              class="absolute top-3.5 left-[60%] right-[-40%] h-[2px] bg-zinc-200 dark:bg-zinc-800 -z-10 step-connector">
+            </div>
           </div>
           <div id="step-indicator-2" class="flex flex-col items-center gap-1.5 flex-1 relative">
-            <div class="step-num w-7 h-7 bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 border-2 border-zinc-200 dark:border-zinc-800 font-bold text-xs rounded-full flex items-center justify-center transition-all duration-200">2</div>
-            <span class="step-title text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Technical Specs</span>
+            <div
+              class="step-num w-7 h-7 bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 border-2 border-zinc-200 dark:border-zinc-800 font-bold text-xs rounded-full flex items-center justify-center transition-all duration-200">
+              2</div>
+            <span
+              class="step-title text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Technical
+              Specs</span>
           </div>
         </div>
 
         <!-- Form Wrapper -->
-        <form id="sell-car-form" class="bg-white dark:bg-zinc-900/40 border border-black/10 dark:border-white/10 rounded-2xl p-5 md:p-7 shadow-card flex flex-col gap-5 text-left">
-          
+        <form id="sell-car-form"
+          class="bg-white dark:bg-zinc-900/40 border border-black/10 dark:border-white/10 rounded-2xl p-5 md:p-7 shadow-card flex flex-col gap-5 text-left">
+
           <!-- Message Container -->
           <div id="sell-form-msg" class="hidden text-xs font-semibold p-2.5 rounded-lg text-center mb-2"></div>
 
           <!-- ==================== STEP 1: BASIC INFO ==================== -->
           <div id="wizard-step-1" class="flex flex-col gap-4 transition-all duration-300">
             <!-- Alert banner -->
-            <div class="bg-zinc-50 dark:bg-zinc-950 p-4 rounded-xl border border-black/5 dark:border-white/5 flex flex-col gap-1">
-              <span class="text-[10px] font-logo font-extrabold uppercase tracking-wider text-zinc-850 dark:text-zinc-200">Selling more than one car?</span>
-              <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">Save with our dealer packages! <a href="#" class="text-brand font-semibold hover:underline">Learn More</a></span>
+            <div
+              class="bg-zinc-50 dark:bg-zinc-950 p-4 rounded-xl border border-black/5 dark:border-white/5 flex flex-col gap-1">
+              <span
+                class="text-[10px] font-logo font-extrabold uppercase tracking-wider text-zinc-850 dark:text-zinc-200">Selling
+                more than one car?</span>
+              <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">Save with our dealer packages! <a
+                  href="#" class="text-brand font-semibold hover:underline">Learn More</a></span>
             </div>
 
             <!-- Emirate / Location -->
             <div class="flex flex-col gap-1">
-              <label for="sell-location" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Emirate / Location *</label>
-              <select id="sell-location" required class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
+              <label for="sell-location"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Emirate /
+                Location *</label>
+              <select id="sell-location" required
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
                 <option value="" disabled selected>Select Emirate</option>
                 <option value="Dubai, UAE">Dubai</option>
                 <option value="Abu Dhabi, UAE">Abu Dhabi</option>
@@ -216,9 +269,12 @@
 
             <!-- Make / Brand -->
             <div class="flex flex-col gap-1">
-              <label for="sell-brand" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Make & Model *</label>
+              <label for="sell-brand"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Make & Model
+                *</label>
               <div class="grid grid-cols-2 gap-3">
-                <select id="sell-brand" required class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
+                <select id="sell-brand" required
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
                   <option value="" disabled selected>Select Make</option>
                   <option value="Bugatti">Bugatti</option>
                   <option value="Koenigsegg">Koenigsegg</option>
@@ -230,20 +286,26 @@
                   <option value="Porsche">Porsche</option>
                   <option value="Aston Martin">Aston Martin</option>
                 </select>
-                <input type="text" id="sell-model" required placeholder="Model (e.g. Chiron)" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <input type="text" id="sell-model" required placeholder="Model (e.g. Chiron)"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
             </div>
 
             <!-- Trim -->
             <div class="flex flex-col gap-1">
-              <label for="sell-trim" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Trim *</label>
-              <input type="text" id="sell-trim" required placeholder="e.g. Super Sport" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+              <label for="sell-trim"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Trim *</label>
+              <input type="text" id="sell-trim" required placeholder="e.g. Super Sport"
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
             </div>
 
             <!-- Regional Specs -->
             <div class="flex flex-col gap-1">
-              <label for="sell-specs" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Regional Specs *</label>
-              <select id="sell-specs" required class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
+              <label for="sell-specs"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Regional Specs
+                *</label>
+              <select id="sell-specs" required
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
                 <option value="" disabled selected>Select Regional Specs</option>
                 <option value="GCC Specs">GCC Specs</option>
                 <option value="European Specs">European Specs</option>
@@ -255,13 +317,18 @@
             <!-- Year & Kilometers -->
             <div class="grid grid-cols-2 gap-3.5">
               <div class="flex flex-col gap-1">
-                <label for="sell-year" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Year *</label>
-                <input type="number" id="sell-year" required min="1900" max="2027" placeholder="e.g. 2022" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-year"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Year *</label>
+                <input type="number" id="sell-year" required min="1900" max="2027" placeholder="e.g. 2022"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
               <div class="flex flex-col gap-1">
-                <label for="sell-mileage" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Kilometers *</label>
+                <label for="sell-mileage"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Kilometers
+                  *</label>
                 <div class="relative flex items-center">
-                  <input type="text" id="sell-mileage" required placeholder="e.g. 1,200" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand pr-10" />
+                  <input type="text" id="sell-mileage" required placeholder="e.g. 1,200"
+                    class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand pr-10" />
                   <span class="absolute right-3.5 text-[10px] font-bold text-zinc-400 uppercase">KM</span>
                 </div>
               </div>
@@ -269,8 +336,11 @@
 
             <!-- Body Type -->
             <div class="flex flex-col gap-1">
-              <label for="sell-body-type" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Body Type *</label>
-              <select id="sell-body-type" required class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
+              <label for="sell-body-type"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Body Type
+                *</label>
+              <select id="sell-body-type" required
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
                 <option value="" disabled selected>Select Body Type</option>
                 <option value="Coupe">Coupe</option>
                 <option value="Convertible">Convertible</option>
@@ -283,126 +353,172 @@
 
             <!-- Price -->
             <div class="flex flex-col gap-1">
-              <label for="sell-price" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Price *</label>
+              <label for="sell-price"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Price *</label>
               <div class="relative flex items-center">
-                <input type="text" id="sell-price" required placeholder="e.g. 38,500,000" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand pr-12" />
+                <input type="text" id="sell-price" required placeholder="e.g. 38,500,000"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand pr-12" />
                 <span class="absolute right-3.5 text-[10px] font-bold text-zinc-400 uppercase">AED</span>
               </div>
             </div>
 
             <!-- Phone Number -->
             <div class="flex flex-col gap-1">
-              <label for="sell-phone" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Phone Number *</label>
-              <input type="text" id="sell-phone" required placeholder="e.g. +971 50 000 0000" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+              <label for="sell-phone"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Phone Number
+                *</label>
+              <input type="text" id="sell-phone" required placeholder="e.g. +971 00 000 0000"
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
             </div>
 
             <!-- Next Button -->
             <div class="pt-4 mt-2">
-              <button type="button" id="btn-next-step" class="w-full bg-brand hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md flex items-center justify-center gap-1.5">
+              <button type="button" id="btn-next-step"
+                class="w-full bg-brand hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md flex items-center justify-center gap-1.5">
                 <span>Next Step</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </button>
-              <p class="text-center text-[10px] text-zinc-400 dark:text-zinc-500 mt-3">Questions? Call <a href="tel:8003824995" class="text-brand font-semibold">800 Dubizzle</a></p>
+              <p class="text-center text-[10px] text-zinc-400 dark:text-zinc-500 mt-3">Questions? Call <a
+                  href="tel:8003824995" class="text-brand font-semibold">800 Dubizzle</a></p>
             </div>
           </div>
 
 
           <!-- ==================== STEP 2: TECHNICAL SPECS ==================== -->
           <div id="wizard-step-2" class="hidden flex flex-col gap-4 transition-all duration-300">
-            
+
             <!-- Specs Title -->
             <div class="border-b border-black/[0.05] dark:border-white/[0.05] pb-2">
-              <span class="text-[10px] font-logo font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white">Additional Overview & Specs</span>
+              <span
+                class="text-[10px] font-logo font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white">Additional
+                Overview & Specs</span>
             </div>
 
             <!-- Exterior & Interior Colors -->
             <div class="grid grid-cols-2 gap-3.5">
               <div class="flex flex-col gap-1">
-                <label for="sell-exterior-color" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Exterior Color *</label>
-                <input type="text" id="sell-exterior-color" required placeholder="e.g. Atlantic Blue" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-exterior-color"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Exterior Color
+                  *</label>
+                <input type="text" id="sell-exterior-color" required placeholder="e.g. Atlantic Blue"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
               <div class="flex flex-col gap-1">
-                <label for="sell-interior-color" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Interior Color *</label>
-                <input type="text" id="sell-interior-color" required placeholder="e.g. Black Alcantara" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-interior-color"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Interior Color
+                  *</label>
+                <input type="text" id="sell-interior-color" required placeholder="e.g. Black Alcantara"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
             </div>
 
             <!-- Engine & Transmission -->
             <div class="grid grid-cols-2 gap-3.5">
               <div class="flex flex-col gap-1">
-                <label for="sell-engine" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Engine specs *</label>
-                <input type="text" id="sell-engine" required placeholder="e.g. 8.0L W16 Quad-Turbo" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-engine"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Engine specs
+                  *</label>
+                <input type="text" id="sell-engine" required placeholder="e.g. 8.0L W16 Quad-Turbo"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
               <div class="flex flex-col gap-1">
-                <label for="sell-transmission" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Transmission *</label>
-                <input type="text" id="sell-transmission" required placeholder="e.g. 7-Speed DSG" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-transmission"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Transmission
+                  *</label>
+                <input type="text" id="sell-transmission" required placeholder="e.g. 7-Speed DSG"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
             </div>
 
             <!-- Steering & Horsepower -->
             <div class="grid grid-cols-2 gap-3.5">
               <div class="flex flex-col gap-1">
-                <label for="sell-steering" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Steering Side *</label>
-                <select id="sell-steering" required class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
+                <label for="sell-steering"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Steering Side
+                  *</label>
+                <select id="sell-steering" required
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand">
                   <option value="Left Hand" selected>Left Hand</option>
                   <option value="Right Hand">Right Hand</option>
                 </select>
               </div>
               <div class="flex flex-col gap-1">
-                <label for="sell-horsepower" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Horsepower *</label>
-                <input type="text" id="sell-horsepower" required placeholder="e.g. 1,600 HP" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-horsepower"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Horsepower
+                  *</label>
+                <input type="text" id="sell-horsepower" required placeholder="e.g. 1,600 HP"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
             </div>
 
             <!-- Top Speed & Torque -->
             <div class="grid grid-cols-2 gap-3.5">
               <div class="flex flex-col gap-1">
-                <label for="sell-top-speed" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Top Speed *</label>
-                <input type="text" id="sell-top-speed" required placeholder="e.g. 440 km/h" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-top-speed"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Top Speed
+                  *</label>
+                <input type="text" id="sell-top-speed" required placeholder="e.g. 440 km/h"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
               <div class="flex flex-col gap-1">
-                <label for="sell-torque" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Torque *</label>
-                <input type="text" id="sell-torque" required placeholder="e.g. 1,600 Nm" class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
+                <label for="sell-torque"
+                  class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Torque
+                  *</label>
+                <input type="text" id="sell-torque" required placeholder="e.g. 1,600 Nm"
+                  class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand" />
               </div>
             </div>
 
             <!-- Description -->
             <div class="flex flex-col gap-1">
-              <label for="sell-description" class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Description</label>
-              <textarea id="sell-description" rows="4" placeholder="Mention key details about your car like history, condition, paint protection film, services..." class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand resize-none"></textarea>
+              <label for="sell-description"
+                class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Description</label>
+              <textarea id="sell-description" rows="4"
+                placeholder="Mention key details about your car like history, condition, paint protection film, services..."
+                class="w-full text-xs px-3.5 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-brand resize-none"></textarea>
             </div>
 
             <!-- Photo Upload Area -->
             <div class="flex flex-col gap-2">
-              <label class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Photos * (Upload up to 20 images)</label>
-              
+              <label class="text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Photos *
+                (Upload up to 20 images)</label>
+
               <!-- Hidden input file -->
               <input type="file" id="sell-photos-input" name="photos" multiple accept="image/*" class="hidden" />
-              
+
               <!-- Visual upload box -->
-              <div id="upload-dropzone" class="border border-dashed border-zinc-300 dark:border-zinc-800 rounded-xl p-5 flex flex-col items-center justify-center gap-2 bg-zinc-50/50 dark:bg-zinc-900/10 cursor-pointer hover:border-brand/50 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/30 transition-all duration-200 select-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <div id="upload-dropzone"
+                class="border border-dashed border-zinc-300 dark:border-zinc-800 rounded-xl p-5 flex flex-col items-center justify-center gap-2 bg-zinc-50/50 dark:bg-zinc-900/10 cursor-pointer hover:border-brand/50 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/30 transition-all duration-200 select-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-zinc-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span class="text-[11px] font-bold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Click or Drag & Drop Photos</span>
-                <span class="text-[9px] font-medium text-zinc-400 dark:text-zinc-500">PNG, JPG, JPEG up to 10MB each</span>
+                <span class="text-[11px] font-bold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Click or
+                  Drag & Drop Photos</span>
+                <span class="text-[9px] font-medium text-zinc-400 dark:text-zinc-500">PNG, JPG, JPEG up to 10MB
+                  each</span>
               </div>
-              
+
               <!-- Preview Grid for Selected Files -->
               <div id="photos-preview-grid" class="grid grid-cols-5 gap-2 mt-2"></div>
             </div>
 
             <!-- Action buttons: Back and Submit -->
             <div class="grid grid-cols-12 gap-3 pt-4 mt-2">
-              <button type="button" id="btn-back-step" class="col-span-4 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-800 dark:text-zinc-200 font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <button type="button" id="btn-back-step"
+                class="col-span-4 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-800 dark:text-zinc-200 font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
                 <span>Back</span>
               </button>
-              <button type="submit" id="btn-submit-listing" class="col-span-8 bg-brand hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md">
+              <button type="submit" id="btn-submit-listing"
+                class="col-span-8 bg-brand hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg active:scale-[0.98] transition-all duration-200 shadow-md">
                 Submit Listing
               </button>
             </div>
@@ -415,36 +531,51 @@
     </section>
 
     <!-- NATIVE STICKY BOTTOM NAVIGATION (For Mobile Screen Viewports) -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-t border-black/[0.08] dark:border-white/10 md:hidden grid grid-cols-5 items-center h-16 px-1 shadow-lg select-none">
-      <a href="index.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    <nav
+      class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-t border-black/[0.08] dark:border-white/10 md:hidden grid grid-cols-5 items-center h-16 px-1 shadow-lg select-none">
+      <a href="index.html"
+        class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
         <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Home</span>
       </a>
-      <a href="brands.html" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+      <a href="brands.html"
+        class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
         <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Brands</span>
       </a>
       <!-- Plus Button navigates directly to sell.html -->
-      <a href="sell.html" class="flex flex-col items-center justify-center -translate-y-4 shrink-0 relative select-none w-full" aria-label="Place an ad">
-        <div class="h-14 w-14 bg-brand text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-4 border-zinc-50 dark:border-zinc-950">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="3">
+      <a href="sell.html"
+        class="flex flex-col items-center justify-center -translate-y-4 shrink-0 relative select-none w-full"
+        aria-label="Place an ad">
+        <div
+          class="h-14 w-14 bg-brand text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 border-4 border-zinc-50 dark:border-zinc-950">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current" fill="none" viewBox="0 0 24 24"
+            stroke-width="3">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
         </div>
       </a>
-      <a href="#" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      <a href="#"
+        class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
         <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Chats</span>
       </a>
-      <button popovertarget="mobile-menu" class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+      <button popovertarget="mobile-menu"
+        class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200 py-1 w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[21px] w-[21px]" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
         <span class="text-[10px] font-bold tracking-wider mt-0.5 uppercase">Menu</span>
@@ -454,23 +585,32 @@
 
 
     <!-- SUCCESS CONFIRMATION OVERLAY -->
-    <div id="success-overlay" class="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 flex items-center justify-center p-6 text-center select-none opacity-0 pointer-events-none transition-all duration-300">
-      <div class="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center scale-95 transition-all duration-300" id="success-card">
+    <div id="success-overlay"
+      class="fixed inset-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50 flex items-center justify-center p-6 text-center select-none opacity-0 pointer-events-none transition-all duration-300">
+      <div
+        class="bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-8 max-w-sm w-full flex flex-col items-center scale-95 transition-all duration-300"
+        id="success-card">
         <!-- Bouncing Checkmark Icon -->
-        <div class="h-16 w-16 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-250 rounded-full flex items-center justify-center mb-5 animate-bounce">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <div
+          class="h-16 w-16 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-250 rounded-full flex items-center justify-center mb-5 animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 class="text-lg font-logo font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white mb-2">Submission Successful!</h2>
+        <h2 class="text-lg font-logo font-extrabold uppercase tracking-widest text-zinc-900 dark:text-white mb-2">
+          Submission Successful!</h2>
         <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-6 font-medium leading-relaxed">
-          Your hypercar details and photos have been received. Our admin team will verify the vehicle specs to ensure authenticity. Once verified, your listing will go live on the platform.
+          Your hypercar details and photos have been received. Our admin team will verify the vehicle specs to ensure
+          authenticity. Once verified, your listing will go live on the platform.
         </p>
         <!-- Countdown redirect indicator -->
         <div class="w-full bg-zinc-100 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
-          <div id="success-progress" class="bg-emerald-500 h-full w-full transition-all duration-[3000ms] ease-linear"></div>
+          <div id="success-progress" class="bg-emerald-500 h-full w-full transition-all duration-[3000ms] ease-linear">
+          </div>
         </div>
-        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider">Redirecting to Listings...</span>
+        <span class="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider">Redirecting to
+          Listings...</span>
       </div>
     </div>
 
