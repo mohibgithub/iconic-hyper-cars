@@ -150,9 +150,12 @@
         </svg>
         <input type="text" id="search-input" placeholder="Search Bugatti, Koenigsegg, Pagani..."
           class="flex-1 bg-transparent text-sm border-none outline-none py-1 placeholder-zinc-500 dark:placeholder-zinc-300/80" />
-        <button popovertarget="search-popover" popovertargetaction="hide"
-          class="text-xs font-bold tracking-wider text-zinc-600 dark:text-zinc-200 hover:text-brand dark:hover:text-brand transition-colors duration-200 uppercase">
-          CLOSE
+        <button popovertarget="search-popover" popovertargetaction="hide" aria-label="Close search"
+          class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors duration-200 p-1 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
     </div>
@@ -236,19 +239,15 @@
           <path fill="#34a853"
             d="M12 23c3.24 0 5.97-1.07 7.96-2.9l-3.6-2.8c-1.1.74-2.5 1.18-4.36 1.18-3.15 0-5.82-2.7-6.78-5.68l-3.83 2.97C3.32 20.26 7.28 23 12 23z" />
         </svg>
-        Sign up with Google
-      </button>
-    </div>
-
-    <!-- MAIN SEARCH, FILTER & LISTINGS BODY -->
+        Sign up with Goo    <!-- MAIN SEARCH, FILTER & LISTINGS BODY -->
     <section
-      class="bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-14 md:pt-16 pb-10 md:pb-12 px-2 md:px-6">
-      <div class="max-w-[100rem] mx-auto w-full flex flex-col mt-4">
+      class="bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 pt-16 md:pt-20 pb-12 md:pb-16 px-3 md:px-6">
+      <div class="max-w-[100rem] mx-auto w-full flex flex-col mt-2">
 
-        <!-- 1. Search Bar Area -->
-        <div class="w-full max-w-[48rem] mx-auto mt-2 mb-4 px-0.5 md:px-0">
+        <!-- 1. Search Bar Area (Bespoke Glass Container) -->
+        <div class="w-full max-w-[48rem] mx-auto mb-4 px-0.5 md:px-0">
           <div
-            class="flex items-center gap-3 w-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-[6px] px-4 py-3 shadow-sm focus-within:border-brand dark:focus-within:border-brand transition-all duration-200">
+            class="flex items-center gap-3 w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl px-4 py-3 shadow-lg focus-within:border-brand dark:focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/20 transition-all duration-300">
 
             <!-- Mobile Back Button -->
             <a href="brands.html"
@@ -260,19 +259,19 @@
             </a>
 
             <!-- Search Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400 dark:text-zinc-500 shrink-0"
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand shrink-0"
               fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
 
             <!-- Search Input -->
-            <input type="text" placeholder="Search make, model, trim"
+            <input type="text" placeholder="Search Bugatti, Koenigsegg, Pagani..."
               class="flex-1 bg-transparent text-[15px] border-none outline-none font-medium placeholder-zinc-400 dark:placeholder-zinc-500 text-zinc-900 dark:text-zinc-100" />
           </div>
         </div>
 
-        <!-- 2. Horizontal Scroll Filter Pills -->
+        <!-- 2. Horizontal Scroll Filter Pills (Bespoke Glass Pills) -->
         <div class="w-full max-w-[48rem] mx-auto mb-6 flex items-center justify-start md:justify-center px-0.5 md:px-0">
           <!-- Filter Label -->
           <div class="flex items-center gap-1.5 text-zinc-800 dark:text-zinc-200 shrink-0">
@@ -288,7 +287,7 @@
               <line x1="10" y1="8" x2="14" y2="8" />
               <line x1="18" y1="16" x2="22" y2="16" />
             </svg>
-            <span class="text-[13px] font-bold uppercase tracking-wider font-logo">Filters</span>
+            <span class="text-xs font-extrabold uppercase tracking-widest font-logo">Filters</span>
           </div>
 
           <!-- Vertical Divider -->
@@ -300,45 +299,45 @@
 
             <!-- Country Button -->
             <button id="filter-country-btn"
-              class="filter-btn flex items-center gap-1 px-3 py-1.5 border border-black/10 dark:border-white/10 rounded-[6px] bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-200 uppercase tracking-wider h-8 shrink-0">
+              class="filter-btn flex items-center gap-1.5 px-3.5 py-1.5 border border-black/10 dark:border-white/10 rounded-xl bg-white/80 dark:bg-zinc-900/80 hover:border-brand/40 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-300 uppercase tracking-wider h-8 shrink-0 shadow-sm">
               <span class="filter-label">Country</span>
-              <svg class="h-2.5 w-2.5 fill-current opacity-70" viewBox="0 0 24 24">
+              <svg class="h-2.5 w-2.5 fill-current text-zinc-400" viewBox="0 0 24 24">
                 <polygon points="6,9 12,15 18,9" />
               </svg>
             </button>
 
             <!-- Price Button -->
             <button id="filter-price-btn"
-              class="filter-btn flex items-center gap-1 px-3 py-1.5 border border-black/10 dark:border-white/10 rounded-[6px] bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-200 uppercase tracking-wider h-8 shrink-0">
+              class="filter-btn flex items-center gap-1.5 px-3.5 py-1.5 border border-black/10 dark:border-white/10 rounded-xl bg-white/80 dark:bg-zinc-900/80 hover:border-brand/40 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-300 uppercase tracking-wider h-8 shrink-0 shadow-sm">
               <span class="filter-label">Price</span>
-              <svg class="h-2.5 w-2.5 fill-current opacity-70" viewBox="0 0 24 24">
+              <svg class="h-2.5 w-2.5 fill-current text-zinc-400" viewBox="0 0 24 24">
                 <polygon points="6,9 12,15 18,9" />
               </svg>
             </button>
 
             <!-- Year Button -->
             <button id="filter-year-btn"
-              class="filter-btn flex items-center gap-1 px-3 py-1.5 border border-black/10 dark:border-white/10 rounded-[6px] bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-200 uppercase tracking-wider h-8 shrink-0">
+              class="filter-btn flex items-center gap-1.5 px-3.5 py-1.5 border border-black/10 dark:border-white/10 rounded-xl bg-white/80 dark:bg-zinc-900/80 hover:border-brand/40 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-300 uppercase tracking-wider h-8 shrink-0 shadow-sm">
               <span class="filter-label">Year</span>
-              <svg class="h-2.5 w-2.5 fill-current opacity-70" viewBox="0 0 24 24">
+              <svg class="h-2.5 w-2.5 fill-current text-zinc-400" viewBox="0 0 24 24">
                 <polygon points="6,9 12,15 18,9" />
               </svg>
             </button>
 
             <!-- Kilometres Button -->
             <button id="filter-km-btn"
-              class="filter-btn flex items-center gap-1 px-3 py-1.5 border border-black/10 dark:border-white/10 rounded-[6px] bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-200 uppercase tracking-wider h-8 shrink-0">
+              class="filter-btn flex items-center gap-1.5 px-3.5 py-1.5 border border-black/10 dark:border-white/10 rounded-xl bg-white/80 dark:bg-zinc-900/80 hover:border-brand/40 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-300 uppercase tracking-wider h-8 shrink-0 shadow-sm">
               <span class="filter-label">Kilometres</span>
-              <svg class="h-2.5 w-2.5 fill-current opacity-70" viewBox="0 0 24 24">
+              <svg class="h-2.5 w-2.5 fill-current text-zinc-400" viewBox="0 0 24 24">
                 <polygon points="6,9 12,15 18,9" />
               </svg>
             </button>
 
             <!-- Regional Specs Button -->
             <button id="filter-specs-btn"
-              class="filter-btn flex items-center gap-1 px-3 py-1.5 border border-black/10 dark:border-white/10 rounded-[6px] bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-200 uppercase tracking-wider h-8 shrink-0">
+              class="filter-btn flex items-center gap-1.5 px-3.5 py-1.5 border border-black/10 dark:border-white/10 rounded-xl bg-white/80 dark:bg-zinc-900/80 hover:border-brand/40 text-[11px] font-bold text-zinc-800 dark:text-zinc-200 transition-all duration-300 uppercase tracking-wider h-8 shrink-0 shadow-sm">
               <span class="filter-label">Regional Specs</span>
-              <svg class="h-2.5 w-2.5 fill-current opacity-70" viewBox="0 0 24 24">
+              <svg class="h-2.5 w-2.5 fill-current text-zinc-400" viewBox="0 0 24 24">
                 <polygon points="6,9 12,15 18,9" />
               </svg>
             </button>
@@ -346,58 +345,60 @@
           </div>
         </div>
 
-
-
         <!-- 3. Headline Title Section -->
-        <div class="w-full max-w-[48rem] mx-auto mb-6 px-0.5 md:px-0">
+        <div class="w-full max-w-[48rem] mx-auto mb-6 px-0.5 md:px-0 flex flex-col gap-1">
+          <div class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-brand animate-pulse"></span>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-brand font-logo">Exclusive Global Inventory</span>
+          </div>
           <h2
-            class="text-lg md:text-xl font-bold uppercase tracking-wider text-zinc-900 dark:text-white leading-tight font-logo">
-            Hypercars & Supercars for sale Globally
+            class="text-lg md:text-xl font-extrabold uppercase tracking-wider text-zinc-900 dark:text-white leading-tight font-logo">
+            Hypercars & Supercars for sale
           </h2>
         </div>
 
-        <!-- 4. Vertical List of 5 Listings -->
+        <!-- 4. Vertical List of Listings -->
         <div class="listings-content-container w-full max-w-[48rem] mx-auto flex flex-col gap-6">
 
           <!-- CARD 1: BUGATTI CHIRON -->
           <div
-            class="listing-card relative cursor-pointer bg-white dark:bg-zinc-900/40 border border-black/15 dark:border-white/10 rounded-[12px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col md:flex-row p-3 md:p-4 gap-4">
+            class="listing-card relative cursor-pointer bg-white dark:bg-zinc-900/50 border border-black/10 dark:border-white/10 rounded-[20px] overflow-hidden shadow-md hover:shadow-2xl hover:border-brand/30 transition-all duration-500 flex flex-col md:flex-row p-3.5 md:p-4 gap-4">
             <!-- Absolute overlay link to details page -->
             <a href="details.html" class="absolute inset-0 z-10" aria-label="View Bugatti Chiron Details"></a>
 
             <!-- Left Side: Image Gallery -->
-            <div class="w-full md:w-[42%] shrink-0">
+            <div class="w-full md:w-[44%] shrink-0">
               <!-- Main Image Display -->
               <div
-                class="relative w-full aspect-[3/2] bg-zinc-100 dark:bg-zinc-950 rounded-[12px] overflow-hidden group select-none">
+                class="relative w-full aspect-[16/10] bg-zinc-100 dark:bg-zinc-950 rounded-[14px] overflow-hidden group select-none shadow-inner">
                 <img src="assets/images/product-list/bugatti/2200xxs.webp" alt="Bugatti Chiron"
-                  class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-200 group-hover:scale-[1.03]" />
+                  class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-500 group-hover:scale-105" />
 
                 <!-- Overlay Badges -->
                 <span
-                  class="absolute top-2.5 left-2.5 bg-brand text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">CAR
+                  class="absolute top-2.5 left-2.5 bg-brand text-white text-[9px] font-extrabold uppercase px-3 py-1 rounded-full shadow-lg tracking-wider">CAR
                   OF THE WEEK</span>
               </div>
 
               <!-- 3 Smaller Thumbnails underneath -->
               <div class="flex gap-2 mt-2 select-none">
                 <div
-                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200">
+                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 border border-black/5 dark:border-white/10 hover:border-brand">
                   <img src="assets/images/product-list/bugatti/2200xxs (1).webp"
-                    class="thumb-img w-full h-full object-cover rounded-[12px]" alt="Bugatti Chiron profile" />
+                    class="thumb-img w-full h-full object-cover rounded-[10px]" alt="Bugatti Chiron profile" />
                 </div>
                 <div
-                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200">
+                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 border border-black/5 dark:border-white/10 hover:border-brand">
                   <img src="assets/images/product-list/bugatti/1900xxs.webp"
-                    class="thumb-img w-full h-full object-cover rounded-[12px]"
+                    class="thumb-img w-full h-full object-cover rounded-[10px]"
                     alt="Bugatti Chiron rear three quarters" />
                 </div>
                 <div
-                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 relative">
+                  class="thumb-wrapper flex-1 aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 relative border border-black/5 dark:border-white/10 hover:border-brand">
                   <img src="assets/images/product-list/bugatti/1900xxs (1).webp"
-                    class="thumb-img w-full h-full object-cover rounded-[12px]" alt="Bugatti Chiron rear straight" />
+                    class="thumb-img w-full h-full object-cover rounded-[10px]" alt="Bugatti Chiron rear straight" />
                   <div
-                    class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-[10px] tracking-wide">
+                    class="absolute inset-0 bg-black/60 backdrop-blur-[1px] flex items-center justify-center text-white font-bold text-[10px] tracking-wide rounded-[10px]">
                     +12</div>
                 </div>
               </div>
@@ -411,52 +412,52 @@
                 <!-- Price & Date Row -->
                 <div class="flex items-baseline justify-between mb-1.5">
                   <span
-                    class="text-xl md:text-2xl font-extrabold text-zinc-950 dark:text-white uppercase tracking-tight">EUR
+                    class="text-xl md:text-2xl font-black text-zinc-950 dark:text-white uppercase tracking-tight font-logo">EUR
                     3,600,000</span>
-                  <span class="text-[11px] text-zinc-500 dark:text-zinc-400 font-semibold">1 hour ago</span>
+                  <span class="text-[11px] text-zinc-500 dark:text-zinc-400 font-semibold bg-zinc-100 dark:bg-zinc-800/60 px-2 py-0.5 rounded-full">1 hour ago</span>
                 </div>
 
                 <!-- Title Header -->
                 <h3
-                  class="text-base md:text-lg font-bold text-zinc-900 dark:text-white uppercase tracking-wide font-logo mb-1 leading-snug">
-                  Bugatti <span class="text-zinc-300 dark:text-zinc-700 mx-1">•</span> Chiron <span
-                    class="text-zinc-300 dark:text-zinc-700 mx-1">•</span> Luxury Coupe
+                  class="text-base md:text-lg font-extrabold text-zinc-900 dark:text-white uppercase tracking-wide font-logo mb-1 leading-snug">
+                  Bugatti <span class="text-brand font-normal mx-1">•</span> Chiron <span
+                    class="text-brand font-normal mx-1">•</span> Luxury Coupe
                 </h3>
 
                 <!-- First Line Description -->
                 <p
-                  class="text-xs md:text-[13px] text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-1 font-medium">
+                  class="text-xs md:text-[13px] text-zinc-500 dark:text-zinc-400 mb-3.5 leading-relaxed line-clamp-1 font-medium">
                   Pristine dark blue Bugatti Chiron in showroom condition. Low mileage, fully serviced.
                 </p>
 
                 <!-- Spec Grid Pills -->
-                <div class="grid grid-cols-2 gap-2 mb-4 max-w-sm">
+                <div class="grid grid-cols-2 gap-2 mb-3.5 max-w-sm">
                   <div
-                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                     <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Year</span>
-                    <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">2021</span>
+                    <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">2021</span>
                   </div>
                   <div
-                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                     <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Mileage</span>
-                    <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">2,200 Km</span>
+                    <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">2,200 Km</span>
                   </div>
                   <div
-                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                     <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Drive</span>
-                    <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">Left hand</span>
+                    <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">Left hand</span>
                   </div>
                   <div
-                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                    class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                     <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Specs</span>
-                    <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">GCC Specs</span>
+                    <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">GCC Specs</span>
                   </div>
                 </div>
               </div>
 
               <!-- Lower Location & Actions Block -->
               <div
-                class="border-t border-black/[0.06] dark:border-white/[0.06] pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-auto">
+                class="border-t border-black/10 dark:border-white/10 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-auto">
                 <!-- Location Pin -->
                 <div class="flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-brand" fill="none"
@@ -466,13 +467,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span class="text-xs font-semibold leading-none truncate">Sheikh Zayed Road, Dubai</span>
+                  <span class="text-xs font-bold leading-none truncate text-zinc-700 dark:text-zinc-300">Sheikh Zayed Road, Dubai</span>
                 </div>
 
                 <!-- Call / WhatsApp Buttons -->
                 <div class="flex items-center gap-2 w-full sm:w-auto shrink-0 select-none relative z-20">
                   <a href="tel:+971568854390"
-                    class="flex-1 sm:flex-none border border-black/15 dark:border-white/15 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-4 py-2 font-bold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-10 shadow-sm">
+                    class="flex-1 sm:flex-none border border-black/15 dark:border-white/15 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-2 font-extrabold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-9 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none"
                       viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                       <path
@@ -481,7 +482,7 @@
                     <span>Call</span>
                   </a>
                   <a href="https://wa.me/971568854390" target="_blank"
-                    class="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20ba59] text-white rounded-[6px] px-4 py-2 font-bold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-10 shadow-md">
+                    class="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl px-4 py-2 font-extrabold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-9 shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 448 512">
                       <path
                         d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
@@ -682,7 +683,7 @@
             if (container) {
               filteredListings.forEach(car => {
                 const card = document.createElement('div');
-                card.className = 'listing-card relative cursor-pointer bg-white dark:bg-zinc-900/40 border border-black/15 dark:border-white/10 rounded-[12px] overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col md:flex-row p-3 md:p-4 gap-4';
+                card.className = 'listing-card relative cursor-pointer bg-white dark:bg-zinc-900/50 border border-black/10 dark:border-white/10 rounded-[20px] overflow-hidden shadow-md hover:shadow-2xl hover:border-brand/30 transition-all duration-500 flex flex-col md:flex-row p-3.5 md:p-4 gap-4';
                 
                 const detailsLink = `details.html?id=${car.id}`;
                 
@@ -694,16 +695,16 @@
                   const maxThumbs = Math.min(car.photos.length, 4);
                   for (let i = 1; i < maxThumbs; i++) {
                     thumbnailsHTML += `
-                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 border border-transparent">
-                        <img src="${car.photos[i]}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} thumbnail" />
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 border border-black/5 dark:border-white/10 hover:border-brand">
+                        <img src="${car.photos[i]}" class="thumb-img w-full h-full object-cover rounded-[10px]" alt="${car.brand} ${car.model} thumbnail" />
                       </div>
                     `;
                   }
                   if (car.photos.length > 4) {
                     thumbnailsHTML += `
-                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 relative border border-transparent">
-                        <img src="${car.photos[4]}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} thumbnail" />
-                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-[10px] tracking-wide">
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 relative border border-black/5 dark:border-white/10 hover:border-brand">
+                        <img src="${car.photos[4]}" class="thumb-img w-full h-full object-cover rounded-[10px]" alt="${car.brand} ${car.model} thumbnail" />
+                        <div class="absolute inset-0 bg-black/60 backdrop-blur-[1px] flex items-center justify-center text-white font-bold text-[10px] tracking-wide rounded-[10px]">
                           +${car.photos.length - 4}
                         </div>
                       </div>
@@ -717,8 +718,8 @@
                 if (showThumbnails) {
                   thumbnailsContainerHTML = `
                     <div class="flex gap-2 mt-2 select-none">
-                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 border border-brand/50">
-                        <img src="${mainImg}" class="thumb-img w-full h-full object-cover rounded-[12px]" alt="${car.brand} ${car.model} main thumbnail" />
+                      <div class="thumb-wrapper w-[23%] aspect-[3/2] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 border border-brand">
+                        <img src="${mainImg}" class="thumb-img w-full h-full object-cover rounded-[10px]" alt="${car.brand} ${car.model} main thumbnail" />
                       </div>
                       ${thumbnailsHTML}
                     </div>
@@ -729,10 +730,10 @@
                   <a href="${detailsLink}" class="absolute inset-0 z-10" aria-label="View ${car.brand} ${car.model} Details"></a>
 
                   <!-- Left Side: Image Gallery -->
-                  <div class="w-full md:w-[42%] shrink-0">
-                    <div class="relative w-full aspect-[3/2] bg-zinc-100 dark:bg-zinc-950 rounded-[12px] overflow-hidden group select-none">
+                  <div class="w-full md:w-[44%] shrink-0">
+                    <div class="relative w-full aspect-[16/10] bg-zinc-100 dark:bg-zinc-950 rounded-[14px] overflow-hidden group select-none shadow-inner">
                       <img src="${mainImg}" alt="${car.brand} ${car.model}"
-                        class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-200 group-hover:scale-[1.03]" />
+                        class="main-car-img w-full h-full object-cover pointer-events-none transition-all duration-500 group-hover:scale-105" />
                     </div>
                     ${thumbnailsContainerHTML}
                   </div>
@@ -741,62 +742,63 @@
                   <div class="flex-1 flex flex-col justify-between pt-1">
                     <div>
                       <div class="flex items-baseline justify-between mb-1.5">
-                        <span class="text-xl md:text-2xl font-extrabold text-zinc-950 dark:text-white uppercase tracking-tight">${car.price}</span>
-                        <span class="text-[11px] text-zinc-500 dark:text-zinc-400 font-semibold">Just approved</span>
+                        <span class="text-xl md:text-2xl font-black text-zinc-950 dark:text-white uppercase tracking-tight font-logo">${car.price}</span>
+                        <span class="text-[11px] text-zinc-500 dark:text-zinc-400 font-semibold bg-zinc-100 dark:bg-zinc-800/60 px-2 py-0.5 rounded-full">Just approved</span>
                       </div>
 
-                      <h3 class="text-base md:text-lg font-bold text-zinc-900 dark:text-white uppercase tracking-wide font-logo mb-1 leading-snug">
-                        ${car.brand} <span class="text-zinc-300 dark:text-zinc-700 mx-1">•</span> ${car.model} <span class="text-zinc-300 dark:text-zinc-700 mx-1">•</span> ${car.trim}
+                      <h3 class="text-base md:text-lg font-extrabold text-zinc-900 dark:text-white uppercase tracking-wide font-logo mb-1 leading-snug">
+                        ${car.brand} <span class="text-brand font-normal mx-1">•</span> ${car.model} <span class="text-brand font-normal mx-1">•</span> ${car.trim}
                       </h3>
 
-                      <p class="text-xs md:text-[13px] text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-1 font-medium">
+                      <p class="text-xs md:text-[13px] text-zinc-500 dark:text-zinc-400 mb-3.5 leading-relaxed line-clamp-1 font-medium">
                         ${car.description || `Beautiful ${car.brand} ${car.model} in excellent condition.`}
                       </p>
 
-                      <div class="grid grid-cols-2 gap-2 mb-4 max-w-sm">
-                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                      <div class="grid grid-cols-2 gap-2 mb-3.5 max-w-sm">
+                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                           <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Year</span>
-                          <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">${car.year}</span>
+                          <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">${car.year}</span>
                         </div>
-                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                           <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Mileage</span>
-                          <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">${car.mileage}</span>
+                          <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">${car.mileage}</span>
                         </div>
-                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                           <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Drive</span>
-                          <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">${car.steering}</span>
+                          <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">${car.steering}</span>
                         </div>
-                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-zinc-100/70 dark:bg-zinc-900 border border-black/[0.04] dark:border-white/[0.04]">
+                        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-black/5 dark:border-white/5">
                           <span class="text-[10px] font-bold text-zinc-400 uppercase shrink-0">Specs</span>
-                          <span class="text-[11px] font-bold text-zinc-800 dark:text-zinc-200">${car.specs}</span>
+                          <span class="text-[11px] font-extrabold text-zinc-900 dark:text-zinc-100">${car.specs}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div class="border-t border-black/[0.06] dark:border-white/[0.06] pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-auto">
+                    <div class="border-t border-black/10 dark:border-white/10 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-auto">
                       <div class="flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span class="text-xs font-semibold leading-none truncate">${car.location}</span>
+                        <span class="text-xs font-bold leading-none truncate text-zinc-700 dark:text-zinc-300">${car.location}</span>
                       </div>
 
                       <div class="flex items-center gap-2 w-full sm:w-auto shrink-0 select-none relative z-20">
-                        <a href="tel:${car.phone_number}" class="flex-1 sm:flex-none border border-black/15 dark:border-white/15 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-4 py-2 font-bold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-10 shadow-sm">
+                        <a href="tel:${car.phone_number}" class="flex-1 sm:flex-none border border-black/15 dark:border-white/15 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white rounded-xl px-4 py-2 font-extrabold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-9 shadow-sm">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                           </svg>
                           <span>Call</span>
                         </a>
-                        <a href="https://wa.me/${car.phone_number.replace(/\+/g, '')}" target="_blank" class="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20ba59] text-white rounded-[6px] px-4 py-2 font-bold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-10 shadow-md">
-                          <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        <a href="https://wa.me/${car.phone_number ? car.phone_number.replace(/[^0-9]/g, '') : '971568854390'}" target="_blank" class="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl px-4 py-2 font-extrabold text-xs uppercase active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 h-9 shadow-md">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current" viewBox="0 0 448 512">
+                            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
                           </svg>
                           <span>WhatsApp</span>
                         </a>
                       </div>
                     </div>
+
                   </div>
                 `;
 

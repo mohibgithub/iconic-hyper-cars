@@ -320,19 +320,24 @@ body {
 .slider-container {
   overflow: hidden;
   position: relative;
+  touch-action: pan-y pinch-zoom;
 }
 
 .slider-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .featured-slider-track,
 #testimonials-slider-track,
 #news-slider-track,
 #reviews-slider-track {
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .slider-slide {
@@ -342,6 +347,37 @@ body {
   align-items: center;
   justify-content: center;
   transition: opacity 0.5s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.featured-slider-slide,
+.news-slider-slide,
+.reviews-slider-slide,
+.testimonials-slide {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.slider-slide img,
+.featured-slider-slide img,
+.news-slider-slide img,
+.reviews-slider-slide img,
+.testimonials-slide img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Testimonial text 3-line clamp with ellipsis (...) */
+.testimonials-slide p.leading-relaxed,
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Custom Scrollbar */
@@ -700,3 +736,22 @@ footer button {
     transform: scale(0.95) translateY(12px);
   }
 }
+
+/* Form Page Inputs & Labels Custom Styling */
+.private-content-container input,
+.private-content-container textarea,
+.service-popup input,
+.service-popup textarea,
+#sell-car-form input,
+#sell-car-form select,
+#sell-car-form textarea {
+  padding: 8px 0px !important;
+}
+
+.private-content-container label,
+.service-popup label,
+#sell-car-form label {
+  line-height: 1.2 !important;
+  left: 13px !important;
+}
+

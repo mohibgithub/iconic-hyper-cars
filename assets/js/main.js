@@ -52,43 +52,56 @@ document.addEventListener('DOMContentLoaded', () => {
     return fetch(url, options);
   }
 
-  // --- Reusable Swipe Gesture Helper ---
+  // --- Reusable Swipe Gesture Helper (iPhone & Mobile Touch / Swipe Optimized) ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
     let startX = 0;
     let startY = 0;
     let endX = 0;
     let endY = 0;
+    let isTracking = false;
 
     trackElement.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].screenX;
-      startY = e.touches[0].screenY;
+      if (!e.touches || !e.touches[0]) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
       endX = startX;
       endY = startY;
+      isTracking = true;
     }, { passive: true });
 
     trackElement.addEventListener('touchmove', (e) => {
-      endX = e.touches[0].screenX;
-      endY = e.touches[0].screenY;
+      if (!isTracking || !e.touches || !e.touches[0]) return;
+      endX = e.touches[0].clientX;
+      endY = e.touches[0].clientY;
     }, { passive: true });
 
-    trackElement.addEventListener('touchend', () => {
+    const handleTouchEnd = (e) => {
+      if (!isTracking) return;
+      if (e.changedTouches && e.changedTouches[0]) {
+        endX = e.changedTouches[0].clientX;
+        endY = e.changedTouches[0].clientY;
+      }
       const diffX = startX - endX;
       const diffY = startY - endY;
 
-      // Swipe threshold of 50px, and horizontal angle check
-      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+      // Lower threshold of 30px for iOS mobile responsiveness, and check horizontal dominance
+      if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
         if (diffX > 0) {
           onSwipeLeft(); // Swiped left (show next)
         } else {
           onSwipeRight(); // Swiped right (show prev)
         }
       }
+      isTracking = false;
       startX = 0;
       startY = 0;
       endX = 0;
       endY = 0;
-    });
+    };
+
+    trackElement.addEventListener('touchend', handleTouchEnd, { passive: true });
+    trackElement.addEventListener('touchcancel', handleTouchEnd, { passive: true });
   }
 
   // --- Theme Toggle Logic ---
@@ -158,10 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startSoldAutoSlide() {
+    if (soldInterval) clearInterval(soldInterval);
     soldInterval = setInterval(() => {
       soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
       updateSoldSlider();
-    }, 5000);
+    }, 8000); // 8 seconds delay (slow & smooth pause)
   }
 
   function resetSoldAutoSlide() {
@@ -183,6 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
         resetSoldAutoSlide();
       });
     }
+
+    // Pause on hover
+    soldTrack.addEventListener('mouseenter', () => clearInterval(soldInterval));
+    soldTrack.addEventListener('mouseleave', () => startSoldAutoSlide());
 
     // Touch Swipe Support
     enableTouchSwipe(
@@ -229,11 +247,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startFeatAutoSlide() {
+    if (featInterval) clearInterval(featInterval);
     featInterval = setInterval(() => {
       const maxSlide = getFeatMaxSlide();
       featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
       updateFeatSlider();
-    }, 5000);
+    }, 8000); // 8 seconds delay (slow & smooth pause)
   }
 
   function resetFeatAutoSlide() {
@@ -242,6 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (featTrack) {
+    // Pause on hover
+    featTrack.addEventListener('mouseenter', () => clearInterval(featInterval));
+    featTrack.addEventListener('mouseleave', () => startFeatAutoSlide());
+
     // Touch Swipe Support
     enableTouchSwipe(
       featTrack,
@@ -303,11 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startTestimonialAutoSlide() {
     if (!isMobile()) return;
+    if (testimonialInterval) clearInterval(testimonialInterval);
     testimonialInterval = setInterval(() => {
       const maxSlide = getTestimonialMaxSlide();
       testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
       updateTestimonialSlider();
-    }, 5000);
+    }, 8000); // 8 seconds delay (slow & smooth pause)
   }
 
   function resetTestimonialAutoSlide() {
@@ -316,6 +340,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (testimonialTrack) {
+    // Pause on hover
+    testimonialTrack.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
+    testimonialTrack.addEventListener('mouseleave', () => startTestimonialAutoSlide());
+
     // Touch Swipe Support
     enableTouchSwipe(
       testimonialTrack,
@@ -956,6 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const newsSlides = document.querySelectorAll('.news-slider-slide');
   const newsTotalSlides = newsSlides.length;
   let newsCurrentSlide = 0;
+  let newsInterval;
 
   function getNewsMaxSlide() {
     return newsTotalSlides - getVisibleSlides();
@@ -976,18 +1005,38 @@ document.addEventListener('DOMContentLoaded', () => {
     newsTrack.style.transform = `translateX(-${newsCurrentSlide * stepSize}%)`;
   }
 
+  function startNewsAutoSlide() {
+    if (newsInterval) clearInterval(newsInterval);
+    newsInterval = setInterval(() => {
+      const maxSlide = getNewsMaxSlide();
+      newsCurrentSlide = (newsCurrentSlide + 1) > maxSlide ? 0 : newsCurrentSlide + 1;
+      updateNewsSlider();
+    }, 8000); // 8 seconds delay
+  }
+
+  function resetNewsAutoSlide() {
+    clearInterval(newsInterval);
+    startNewsAutoSlide();
+  }
+
   if (newsTrack) {
     if (newsPrevBtn && newsNextBtn) {
       newsPrevBtn.addEventListener('click', () => {
         newsCurrentSlide = newsCurrentSlide - 1;
         updateNewsSlider();
+        resetNewsAutoSlide();
       });
 
       newsNextBtn.addEventListener('click', () => {
         newsCurrentSlide = newsCurrentSlide + 1;
         updateNewsSlider();
+        resetNewsAutoSlide();
       });
     }
+
+    // Pause on hover
+    newsTrack.addEventListener('mouseenter', () => clearInterval(newsInterval));
+    newsTrack.addEventListener('mouseleave', () => startNewsAutoSlide());
 
     // Touch Swipe Support
     enableTouchSwipe(
@@ -995,14 +1044,17 @@ document.addEventListener('DOMContentLoaded', () => {
       () => {
         newsCurrentSlide = newsCurrentSlide + 1;
         updateNewsSlider();
+        resetNewsAutoSlide();
       },
       () => {
         newsCurrentSlide = newsCurrentSlide - 1;
         updateNewsSlider();
+        resetNewsAutoSlide();
       }
     );
 
     window.addEventListener('resize', updateNewsSlider);
+    startNewsAutoSlide();
   }
 
   // --- Reviews Slider Logic ---
@@ -1012,6 +1064,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewsSlides = document.querySelectorAll('.reviews-slider-slide');
   const reviewsTotalSlides = reviewsSlides.length;
   let reviewsCurrentSlide = 0;
+  let reviewsInterval;
 
   function getReviewsMaxSlide() {
     return reviewsTotalSlides - getVisibleSlides();
@@ -1032,18 +1085,38 @@ document.addEventListener('DOMContentLoaded', () => {
     reviewsTrack.style.transform = `translateX(-${reviewsCurrentSlide * stepSize}%)`;
   }
 
+  function startReviewsAutoSlide() {
+    if (reviewsInterval) clearInterval(reviewsInterval);
+    reviewsInterval = setInterval(() => {
+      const maxSlide = getReviewsMaxSlide();
+      reviewsCurrentSlide = (reviewsCurrentSlide + 1) > maxSlide ? 0 : reviewsCurrentSlide + 1;
+      updateReviewsSlider();
+    }, 8000); // 8 seconds delay
+  }
+
+  function resetReviewsAutoSlide() {
+    clearInterval(reviewsInterval);
+    startReviewsAutoSlide();
+  }
+
   if (reviewsTrack) {
     if (reviewsPrevBtn && reviewsNextBtn) {
       reviewsPrevBtn.addEventListener('click', () => {
         reviewsCurrentSlide = reviewsCurrentSlide - 1;
         updateReviewsSlider();
+        resetReviewsAutoSlide();
       });
 
       reviewsNextBtn.addEventListener('click', () => {
         reviewsCurrentSlide = reviewsCurrentSlide + 1;
         updateReviewsSlider();
+        resetReviewsAutoSlide();
       });
     }
+
+    // Pause on hover
+    reviewsTrack.addEventListener('mouseenter', () => clearInterval(reviewsInterval));
+    reviewsTrack.addEventListener('mouseleave', () => startReviewsAutoSlide());
 
     // Touch Swipe Support
     enableTouchSwipe(
@@ -1051,14 +1124,17 @@ document.addEventListener('DOMContentLoaded', () => {
       () => {
         reviewsCurrentSlide = reviewsCurrentSlide + 1;
         updateReviewsSlider();
+        resetReviewsAutoSlide();
       },
       () => {
         reviewsCurrentSlide = reviewsCurrentSlide - 1;
         updateReviewsSlider();
+        resetReviewsAutoSlide();
       }
     );
 
     window.addEventListener('resize', updateReviewsSlider);
+    startReviewsAutoSlide();
   }
 
   // --- Video Autoplay Fallback for Mobile (iOS Safari / Android Chrome) ---
