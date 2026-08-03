@@ -359,17 +359,23 @@ body {
   user-select: none;
 }
 
-/* iOS WebKit Touch & Swipe Optimization for All Sliders */
-#slider-track,
-#featured-slider-track,
-#testimonials-slider-track,
-#news-slider-track,
-#reviews-slider-track,
+/* Similar Cars Horizontal Scroll Container */
 .similar-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 8px;
   touch-action: pan-y;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.similar-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .slider-slide img,
