@@ -928,71 +928,14 @@
             });
           }
 
-          // Touch / swipe (iOS Safari / Mobile optimized)
-          let startX = 0;
-          let startY = 0;
-          let endX = 0;
-          let endY = 0;
-          let isTracking = false;
-
-          track.addEventListener('touchstart', e => {
-            if (!e.touches || !e.touches[0]) return;
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            endX = startX;
-            endY = startY;
-            isTracking = true;
-          }, { passive: true });
-
-          track.addEventListener('touchmove', e => {
-            if (!isTracking || !e.touches || !e.touches[0]) return;
-            endX = e.touches[0].clientX;
-            endY = e.touches[0].clientY;
-          }, { passive: true });
-
-          const handleDetailsTouchEnd = e => {
-            if (!isTracking) return;
-            if (e.changedTouches && e.changedTouches[0]) {
-              endX = e.changedTouches[0].clientX;
-              endY = e.changedTouches[0].clientY;
-            }
-            const diffX = startX - endX;
-            const diffY = startY - endY;
-
-            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
-              if (diffX > 0) {
-                goTo(current + 1);
-              } else {
-                goTo(current - 1);
-              }
-            }
-            isTracking = false;
-            startX = 0;
-            startY = 0;
-            endX = 0;
-            endY = 0;
-          };
-
-          track.addEventListener('touchend', handleDetailsTouchEnd, { passive: true });
-          track.addEventListener('touchcancel', handleDetailsTouchEnd, { passive: true });
-
-          // Mouse drag for desktop
-          track.addEventListener('mousedown', e => {
-            startX = e.clientX;
-            startY = e.clientY;
-            isTracking = true;
-          });
-
-          track.addEventListener('mouseup', e => {
-            if (!isTracking) return;
-            const diffX = startX - e.clientX;
-            const diffY = startY - e.clientY;
-            if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
-              if (diffX > 0) goTo(current + 1);
-              else goTo(current - 1);
-            }
-            isTracking = false;
-          });
+          // Touch / swipe (iOS Safari / iPhone & Mobile optimized)
+          if (typeof enableTouchSwipe === 'function') {
+            enableTouchSwipe(
+              track,
+              () => goTo(current + 1),
+              () => goTo(current - 1)
+            );
+          }
 
           // Click slides → open lightbox
           slides.forEach((slide, i) => {

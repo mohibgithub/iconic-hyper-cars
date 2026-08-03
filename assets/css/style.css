@@ -359,6 +359,19 @@ body {
   user-select: none;
 }
 
+/* iOS WebKit Touch & Swipe Optimization for All Sliders */
+#slider-track,
+#featured-slider-track,
+#testimonials-slider-track,
+#news-slider-track,
+#reviews-slider-track,
+.similar-scroll {
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .slider-slide img,
 .featured-slider-slide img,
 .news-slider-slide img,
@@ -368,6 +381,7 @@ body {
   -webkit-user-select: none;
   user-select: none;
   pointer-events: none;
+  -webkit-touch-callout: none;
 }
 
 /* Testimonial text 3-line clamp with ellipsis (...) */

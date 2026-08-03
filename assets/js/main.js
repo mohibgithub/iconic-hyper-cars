@@ -52,52 +52,100 @@ document.addEventListener('DOMContentLoaded', () => {
     return fetch(url, options);
   }
 
-  // --- Reusable Swipe Gesture Helper (iPhone & Mobile Touch / Swipe Optimized) ---
+  // --- Reusable Swipe Gesture Helper (iPhone iOS Safari & Mobile Touch / Swipe Optimized) ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
+
+    // Apply CSS touch optimizations for iOS WebKit Safari
+    trackElement.style.touchAction = 'pan-y';
+    trackElement.style.webkitUserSelect = 'none';
+    trackElement.style.userSelect = 'none';
+    trackElement.style.webkitTouchCallout = 'none';
+
     let startX = 0;
     let startY = 0;
-    let endX = 0;
-    let endY = 0;
     let isTracking = false;
+    let isHorizontalSwipe = false;
 
+    // 1. Pointer Events API (Modern iOS WebKit Safari 13+, Android, Chrome, iPadOS)
+    if (window.PointerEvent) {
+      trackElement.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        startX = e.clientX;
+        startY = e.clientY;
+        isTracking = true;
+        isHorizontalSwipe = false;
+      });
+
+      trackElement.addEventListener('pointermove', (e) => {
+        if (!isTracking) return;
+        const diffX = e.clientX - startX;
+        const diffY = e.clientY - startY;
+
+        if (!isHorizontalSwipe && Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
+          isHorizontalSwipe = true;
+        }
+      });
+
+      const handlePointerEnd = (e) => {
+        if (!isTracking) return;
+        const diffX = startX - e.clientX;
+        const diffY = startY - e.clientY;
+
+        if (isHorizontalSwipe || (Math.abs(diffX) > 20 && Math.abs(diffX) > Math.abs(diffY))) {
+          if (diffX > 20) {
+            onSwipeLeft(); // Swiped left (show next)
+          } else if (diffX < -20) {
+            onSwipeRight(); // Swiped right (show prev)
+          }
+        }
+        isTracking = false;
+        isHorizontalSwipe = false;
+      };
+
+      trackElement.addEventListener('pointerup', handlePointerEnd);
+      trackElement.addEventListener('pointercancel', handlePointerEnd);
+    }
+
+    // 2. Touch Events Fallback (Legacy iOS WebKit)
     trackElement.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches[0]) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      endX = startX;
-      endY = startY;
       isTracking = true;
+      isHorizontalSwipe = false;
     }, { passive: true });
 
     trackElement.addEventListener('touchmove', (e) => {
       if (!isTracking || !e.touches || !e.touches[0]) return;
-      endX = e.touches[0].clientX;
-      endY = e.touches[0].clientY;
-    }, { passive: true });
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = currentX - startX;
+      const diffY = currentY - startY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        isHorizontalSwipe = true;
+        if (e.cancelable) {
+          e.preventDefault(); // Prevent iOS Safari from cancelling swipe for page scroll
+        }
+      }
+    }, { passive: false });
 
     const handleTouchEnd = (e) => {
       if (!isTracking) return;
-      if (e.changedTouches && e.changedTouches[0]) {
-        endX = e.changedTouches[0].clientX;
-        endY = e.changedTouches[0].clientY;
-      }
+      const touch = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0] : null;
+      const endX = touch ? touch.clientX : startX;
       const diffX = startX - endX;
-      const diffY = startY - endY;
 
-      // Lower threshold of 30px for iOS mobile responsiveness, and check horizontal dominance
-      if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX > 0) {
-          onSwipeLeft(); // Swiped left (show next)
-        } else {
-          onSwipeRight(); // Swiped right (show prev)
+      if (isHorizontalSwipe || Math.abs(diffX) > 20) {
+        if (diffX > 20) {
+          onSwipeLeft();
+        } else if (diffX < -20) {
+          onSwipeRight();
         }
       }
       isTracking = false;
-      startX = 0;
-      startY = 0;
-      endX = 0;
-      endY = 0;
+      isHorizontalSwipe = false;
     };
 
     trackElement.addEventListener('touchend', handleTouchEnd, { passive: true });
