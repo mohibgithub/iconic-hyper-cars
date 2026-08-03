@@ -52,11 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return fetch(url, options);
   }
 
-  // --- Reusable Swipe Gesture Helper (iPhone iOS Safari & Mobile Touch / Swipe Optimized) ---
+  // --- Reusable Swipe Gesture Helper (Safari & All Mobile Touch / Swipe Bulletproof) ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
 
-    // Apply CSS touch optimizations for iOS WebKit Safari
+    // Apply CSS touch optimizations for Safari WebKit
     trackElement.style.touchAction = 'pan-y';
     trackElement.style.webkitUserSelect = 'none';
     trackElement.style.userSelect = 'none';
@@ -64,92 +64,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let startX = 0;
     let startY = 0;
-    let isTracking = false;
-    let isHorizontalSwipe = false;
+    let currentX = 0;
+    let currentY = 0;
+    let isScrolling = undefined;
+    let isTouching = false;
 
-    // 1. Pointer Events API (Modern iOS WebKit Safari 13+, Android, Chrome, iPadOS)
-    if (window.PointerEvent) {
-      trackElement.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        startX = e.clientX;
-        startY = e.clientY;
-        isTracking = true;
-        isHorizontalSwipe = false;
-      });
-
-      trackElement.addEventListener('pointermove', (e) => {
-        if (!isTracking) return;
-        const diffX = e.clientX - startX;
-        const diffY = e.clientY - startY;
-
-        if (!isHorizontalSwipe && Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
-          isHorizontalSwipe = true;
-        }
-      });
-
-      const handlePointerEnd = (e) => {
-        if (!isTracking) return;
-        const diffX = startX - e.clientX;
-        const diffY = startY - e.clientY;
-
-        if (isHorizontalSwipe || (Math.abs(diffX) > 20 && Math.abs(diffX) > Math.abs(diffY))) {
-          if (diffX > 20) {
-            onSwipeLeft(); // Swiped left (show next)
-          } else if (diffX < -20) {
-            onSwipeRight(); // Swiped right (show prev)
-          }
-        }
-        isTracking = false;
-        isHorizontalSwipe = false;
-      };
-
-      trackElement.addEventListener('pointerup', handlePointerEnd);
-      trackElement.addEventListener('pointercancel', handlePointerEnd);
-    }
-
-    // 2. Touch Events Fallback (Legacy iOS WebKit)
+    // Touch Start (Safari & Mobile)
     trackElement.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches[0]) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-      isTracking = true;
-      isHorizontalSwipe = false;
+      currentX = startX;
+      currentY = startY;
+      isScrolling = undefined;
+      isTouching = true;
     }, { passive: true });
 
+    // Touch Move (Safari & Mobile)
     trackElement.addEventListener('touchmove', (e) => {
-      if (!isTracking || !e.touches || !e.touches[0]) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const diffX = currentX - startX;
-      const diffY = currentY - startY;
+      if (!isTouching || !e.touches || !e.touches[0]) return;
+      currentX = e.touches[0].clientX;
+      currentY = e.touches[0].clientY;
 
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        isHorizontalSwipe = true;
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+
+      // Determine gesture direction on initial movement
+      if (typeof isScrolling === 'undefined') {
+        isScrolling = Math.abs(deltaY) > Math.abs(deltaX);
+      }
+
+      // If horizontal swipe, cancel page scrolling on Safari
+      if (!isScrolling) {
         if (e.cancelable) {
-          e.preventDefault(); // Prevent iOS Safari from cancelling swipe for page scroll
+          e.preventDefault();
         }
       }
     }, { passive: false });
 
-    const handleTouchEnd = (e) => {
-      if (!isTracking) return;
-      const touch = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0] : null;
-      const endX = touch ? touch.clientX : startX;
-      const diffX = startX - endX;
+    // Touch End / Cancel (Safari & Mobile)
+    const handleTouchEnd = () => {
+      if (!isTouching) return;
+      isTouching = false;
 
-      if (isHorizontalSwipe || Math.abs(diffX) > 20) {
-        if (diffX > 20) {
-          onSwipeLeft();
-        } else if (diffX < -20) {
-          onSwipeRight();
+      if (isScrolling === false) {
+        const diffX = startX - currentX;
+        if (diffX > 25) {
+          onSwipeLeft(); // Swiped left (show next)
+        } else if (diffX < -25) {
+          onSwipeRight(); // Swiped right (show prev)
         }
       }
-      isTracking = false;
-      isHorizontalSwipe = false;
+      isScrolling = undefined;
     };
 
     trackElement.addEventListener('touchend', handleTouchEnd, { passive: true });
     trackElement.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+
+    // Desktop Mouse Drag Support
+    let isMouseDown = false;
+    trackElement.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      startX = e.clientX;
+      isMouseDown = true;
+    });
+
+    trackElement.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+      const diffX = startX - e.clientX;
+      if (diffX > 25) {
+        onSwipeLeft();
+      } else if (diffX < -25) {
+        onSwipeRight();
+      }
+    });
   }
 
   // --- Theme Toggle Logic ---
