@@ -1172,58 +1172,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', updateReviewsSlider);
     startReviewsAutoSlide();
-  }
+  // --- Enable Mouse Drag Scroll on .similar-scroll Containers ---
+  document.querySelectorAll('.similar-scroll').forEach(container => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-  // --- Similar Cars Single-Slide Slider Logic ---
-  function setupSimilarCarsSlider() {
-    const tracks = document.querySelectorAll('.similar-cars-track');
-    tracks.forEach((track) => {
-      const container = track.closest('.similar-cars-container');
-      if (!container) return;
-
-      const slides = track.querySelectorAll('.similar-cars-slide');
-      const prevBtn = container.querySelector('.similar-prev-btn');
-      const nextBtn = container.querySelector('.similar-next-btn');
-      const totalSlides = slides.length;
-      if (totalSlides === 0) return;
-
-      let currentSlide = 0;
-
-      function updateSlide() {
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-          updateSlide();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          currentSlide = (currentSlide + 1) % totalSlides;
-          updateSlide();
-        });
-      }
-
-      enableTouchSwipe(
-        track,
-        () => {
-          currentSlide = (currentSlide + 1) % totalSlides;
-          updateSlide();
-        },
-        () => {
-          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-          updateSlide();
-        }
-      );
+    container.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
     });
-  }
+    container.addEventListener('mouseleave', () => { isDown = false; });
+    container.addEventListener('mouseup', () => { isDown = false; });
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      container.scrollLeft = scrollLeft - walk;
+    });
+  });
 
-  setupSimilarCarsSlider();
+
 
   // --- Video Autoplay Fallback for Mobile (iOS Safari / Android Chrome) ---
   const videos = document.querySelectorAll('video');
