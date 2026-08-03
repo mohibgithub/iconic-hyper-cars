@@ -50,18 +50,41 @@
     }
 
     /* Slider dots */
+    .slider-dots-container {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      z-index: 30;
+      pointer-events: auto;
+    }
+
     .slider-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      transition: all 0.2s;
+      background: rgba(255, 255, 255, 0.45);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+      border: none;
+      outline: none;
+      padding: 0;
+    }
+
+    .slider-dot:hover {
+      background: rgba(255, 255, 255, 0.85);
     }
 
     .slider-dot.active {
       background: #ffffff;
-      width: 18px;
-      border-radius: 3px;
+      width: 22px;
+      height: 7px;
+      border-radius: 4px;
     }
 
     /* Lightbox */
@@ -254,12 +277,12 @@
     </div>
 
     <!-- Navigation arrows for slider -->
-    <button id="hero-slider-prev" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 backdrop-blur-sm text-white h-9 w-9 rounded-full flex items-center justify-center transition-all cursor-pointer">
+    <button id="hero-slider-prev" type="button" aria-label="Previous image" class="absolute left-3 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 backdrop-blur-sm text-white h-10 w-10 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
-    <button id="hero-slider-next" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 backdrop-blur-sm text-white h-9 w-9 rounded-full flex items-center justify-center transition-all cursor-pointer">
+    <button id="hero-slider-next" type="button" aria-label="Next image" class="absolute right-3 top-1/2 -translate-y-1/2 z-40 bg-black/50 hover:bg-black/80 backdrop-blur-sm text-white h-10 w-10 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
@@ -278,7 +301,7 @@
     </div>
 
     <!-- Dots bottom center -->
-    <div class="slider-dots-container absolute bottom-3 left-0 right-0 flex justify-center items-center gap-1.5 z-20">
+    <div class="slider-dots-container absolute bottom-3 left-1/2 -translate-x-1/2 flex justify-center items-center gap-1.5 z-30 pointer-events-auto">
       <div class="slider-dot active" data-dot="0"></div>
       <div class="slider-dot" data-dot="1"></div>
       <div class="slider-dot" data-dot="2"></div>
@@ -612,13 +635,14 @@
       </div>
 
       <!-- ===== SIMILAR CARS ===== -->
-      <div class="p-5 bg-white dark:bg-zinc-900/60 border border-black/10 dark:border-white/10 rounded-[20px] shadow-lg">
+      <div class="p-4 md:p-5 bg-white dark:bg-zinc-900/60 border border-black/10 dark:border-white/10 rounded-[20px] shadow-lg">
+        <!-- Section Header: SIMILAR CARS (left) and SHOW ALL (right) -->
         <div class="w-full mb-3 flex items-center justify-between">
           <h2 class="font-logo font-extrabold text-xs md:text-sm tracking-widest text-zinc-900 dark:text-white uppercase text-left flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-brand"></span> Similar Cars
+            SIMILAR CARS
           </h2>
           <a href="listings.html"
-            class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-2.5 py-1 font-bold text-[9px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
+            class="shrink-0 border border-zinc-300 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[6px] px-3 py-1.5 font-bold text-[9px] uppercase hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 active:scale-95 transition-all duration-300 flex items-center gap-1 shadow-sm">
             <span>SHOW ALL</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 stroke-current" fill="none" viewBox="0 0 24 24"
               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -628,80 +652,87 @@
           </a>
         </div>
 
-        <div class="similar-scroll">
+        <!-- Slider Container with Glass Overlay Navigation Buttons -->
+        <div class="similar-cars-container relative w-full overflow-hidden rounded-[16px] border border-black/60 dark:border-white/60 shadow-xl">
+          
+          <!-- Left Navigation Button -->
+          <button class="similar-prev-btn absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white w-9 h-10 rounded-[8px] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <polygon points="16,5 7,12 16,19" />
+            </svg>
+          </button>
 
-          <!-- Card 1: Bugatti Chiron SS -->
-          <a href="details.html"
-            class="shrink-0 w-44 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-[12px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-            <div class="relative w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-              <img src="assets/images/product-list/bugatti/2200xxs.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                alt="Bugatti Chiron" />
-              <div
-                class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-sm text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px] flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-                16
-              </div>
-            </div>
-            <div class="p-2.5 flex flex-col gap-0.5">
-              <p class="text-xs font-extrabold text-zinc-900 dark:text-white leading-tight font-logo">AED 38.5M</p>
-              <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Bugatti &bull; Chiron SS</p>
-              <p class="text-[9px] font-bold text-brand uppercase tracking-wider mt-0.5">CAR OF THE WEEK</p>
-            </div>
-          </a>
+          <!-- Right Navigation Button -->
+          <button class="similar-next-btn absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white w-9 h-10 rounded-[8px] flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <polygon points="8,5 17,12 8,19" />
+            </svg>
+          </button>
 
-          <!-- Card 2: Bugatti Chiron SS -->
-          <a href="details.html"
-            class="shrink-0 w-44 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-[12px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-            <div class="relative w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-              <img src="assets/images/product-list/bugatti/1900xxs.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                alt="Bugatti Chiron" />
-              <div
-                class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-sm text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px] flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-                16
-              </div>
+          <!-- Slider Track (Single Slide 100% width) -->
+          <div class="similar-cars-track flex w-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+            
+            <!-- Slide 1 -->
+            <div class="similar-cars-slide w-full flex-shrink-0 relative select-none">
+              <a href="details.html" class="block w-full group cursor-pointer">
+                <div class="relative overflow-hidden w-full aspect-[16/10] bg-zinc-900 flex flex-col justify-end p-4 md:p-6">
+                  <img src="assets/images/product-list/bugatti/2200xxs.webp" alt="Bugatti Chiron SS"
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+                  <span class="absolute top-3 left-3 z-20 bg-blue-600 text-white text-[9px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">CAR OF THE WEEK</span>
+                  <div class="relative z-20 w-full text-center flex flex-col items-center">
+                    <h3 class="font-logo font-extrabold text-white text-sm md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                      AED 38.5M &bull; Bugatti Chiron SS
+                    </h3>
+                    <p class="text-zinc-300 text-[10px] md:text-xs text-center mt-1 font-medium">
+                      Bugatti &bull; 2026 Model &bull; 16 Photos
+                    </p>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="p-2.5 flex flex-col gap-0.5">
-              <p class="text-xs font-extrabold text-zinc-900 dark:text-white leading-tight font-logo">AED 38.5M</p>
-              <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Bugatti &bull; Chiron SS</p>
-              <p class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">GCC SPECS</p>
-            </div>
-          </a>
 
-          <!-- Card 3: Bugatti Chiron SS -->
-          <a href="details.html"
-            class="shrink-0 w-44 flex flex-col bg-zinc-50 dark:bg-zinc-900 border border-black/10 dark:border-white/10 rounded-[12px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-            <div class="relative w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-              <img src="assets/images/product-list/bugatti/2200xxs (1).webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                alt="Bugatti Chiron" />
-              <div
-                class="absolute bottom-1.5 left-1.5 bg-black/70 backdrop-blur-sm text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px] flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-                16
-              </div>
+            <!-- Slide 2 -->
+            <div class="similar-cars-slide w-full flex-shrink-0 relative select-none">
+              <a href="details.html" class="block w-full group cursor-pointer">
+                <div class="relative overflow-hidden w-full aspect-[16/10] bg-zinc-900 flex flex-col justify-end p-4 md:p-6">
+                  <img src="assets/images/product-list/bugatti/1900xxs.webp" alt="Bugatti Chiron SS"
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+                  <span class="absolute top-3 left-3 z-20 bg-blue-600 text-white text-[9px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">GCC SPECS</span>
+                  <div class="relative z-20 w-full text-center flex flex-col items-center">
+                    <h3 class="font-logo font-extrabold text-white text-sm md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                      AED 38.5M &bull; Bugatti Chiron SS
+                    </h3>
+                    <p class="text-zinc-300 text-[10px] md:text-xs text-center mt-1 font-medium">
+                      Bugatti &bull; GCC Specs &bull; Verified
+                    </p>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="p-2.5 flex flex-col gap-0.5">
-              <p class="text-xs font-extrabold text-zinc-900 dark:text-white leading-tight font-logo">AED 38.5M</p>
-              <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Bugatti &bull; Chiron SS</p>
-              <p class="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mt-0.5">1,200 KM</p>
-            </div>
-          </a>
 
+            <!-- Slide 3 -->
+            <div class="similar-cars-slide w-full flex-shrink-0 relative select-none">
+              <a href="details.html" class="block w-full group cursor-pointer">
+                <div class="relative overflow-hidden w-full aspect-[16/10] bg-zinc-900 flex flex-col justify-end p-4 md:p-6">
+                  <img src="assets/images/product-list/bugatti/2200xxs (1).webp" alt="Bugatti Chiron SS"
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
+                  <span class="absolute top-3 left-3 z-20 bg-blue-600 text-white text-[9px] md:text-xs font-bold uppercase px-2.5 py-1 rounded-[6px] shadow-md tracking-wider">1,200 KM</span>
+                  <div class="relative z-20 w-full text-center flex flex-col items-center">
+                    <h3 class="font-logo font-extrabold text-white text-sm md:text-lg text-center tracking-wide leading-tight line-clamp-1">
+                      AED 38.5M &bull; Bugatti Chiron SS
+                    </h3>
+                    <p class="text-zinc-300 text-[10px] md:text-xs text-center mt-1 font-medium">
+                      Bugatti &bull; Low Mileage &bull; Verified
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -767,11 +798,22 @@
         location: 'Sheikh Zayed Road, Dubai',
         phone_number: '+971568854390',
         photos: [
-          'assets/images/details/bugatti/main.webp',
-          'assets/images/details/bugatti/detail-1.jpg',
-          'assets/images/details/bugatti/detail-2.jpg',
-          'assets/images/details/bugatti/detail-3.jpg',
-          'assets/images/details/bugatti/detail-4.jpg'
+          'assets/images/product-list/bugatti/2200xxs.webp',
+          'assets/images/product-list/bugatti/2200xxs (1).webp',
+          'assets/images/product-list/bugatti/2200xxs (2).webp',
+          'assets/images/product-list/bugatti/1900xxs.webp',
+          'assets/images/product-list/bugatti/1900xxs (1).webp',
+          'assets/images/product-list/bugatti/1900xxs (2).webp',
+          'assets/images/product-list/bugatti/1900xxs (3).webp',
+          'assets/images/product-list/bugatti/1900xxs (4).webp',
+          'assets/images/product-list/bugatti/1900xxs (5).webp',
+          'assets/images/product-list/bugatti/1900xxs (6).webp',
+          'assets/images/product-list/bugatti/1900xxs (7).webp',
+          'assets/images/product-list/bugatti/1900xxs (8).webp',
+          'assets/images/product-list/bugatti/1900xxs (9).webp',
+          'assets/images/product-list/bugatti/1900xxs (10).webp',
+          'assets/images/product-list/bugatti/1900xxs (11).webp',
+          'assets/images/product-list/bugatti/1900xxs (12).webp'
         ]
       };
 
@@ -865,7 +907,9 @@
 
         // 2. Populate Photos Slider
         const track = document.getElementById('slider-track');
+        const counter = document.getElementById('slide-counter');
         const dotsContainer = document.querySelector('.slider-dots-container');
+
         if (track) {
           track.innerHTML = '';
           const photos = car.photos && car.photos.length > 0 ? car.photos : ['assets/images/placeholder.jpg'];
@@ -878,26 +922,24 @@
 
           // Initialize slider variables
           const slides = track.querySelectorAll('.slider-slide');
-          const counter = document.getElementById('slide-counter');
           const totalSlides = slides.length;
           let current = 0;
-          
-          if (counter) {
-            counter.textContent = `1 / ${totalSlides}`;
-          }
 
-          // Populate dots indicator
+          // Populate 5 dots indicator (matching image UI)
           if (dotsContainer) {
             dotsContainer.innerHTML = '';
-            const maxDots = Math.min(totalSlides, 5);
-            for (let i = 0; i < maxDots; i++) {
-              const dot = document.createElement('div');
+            for (let i = 0; i < 5; i++) {
+              const dot = document.createElement('button');
+              dot.type = 'button';
               dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
               dot.setAttribute('data-dot', i);
-              dot.addEventListener('click', (e) => {
+              dot.setAttribute('aria-label', `Go to dot ${i + 1}`);
+              dot.onclick = (e) => {
+                e.preventDefault();
                 e.stopPropagation();
-                goTo(i);
-              });
+                const targetIndex = Math.round((i / 4) * (totalSlides - 1));
+                goTo(targetIndex);
+              };
               dotsContainer.appendChild(dot);
             }
           }
@@ -905,40 +947,63 @@
           const dots = dotsContainer ? dotsContainer.querySelectorAll('.slider-dot') : [];
           const allImages = Array.from(slides).map(s => s.querySelector('img').src);
 
+          function updateSliderState() {
+            track.style.transform = `translateX(-${current * 100}%)`;
+
+            if (counter) {
+              counter.textContent = `${current + 1} / ${totalSlides}`;
+            }
+
+            if (dots && dots.length > 0) {
+              const activeDotIndex = Math.min(
+                dots.length - 1,
+                Math.round((current / (totalSlides - 1 || 1)) * (dots.length - 1))
+              );
+              dots.forEach((d, i) => {
+                d.classList.toggle('active', i === activeDotIndex);
+              });
+            }
+          }
+
           function goTo(index) {
             if (index < 0) index = totalSlides - 1;
             if (index >= totalSlides) index = 0;
             current = index;
-            track.style.transform = `translateX(-${current * 100}%)`;
-            if (counter) {
-              counter.textContent = `${current + 1} / ${totalSlides}`;
-            }
-            if (dots && dots.length > 0) {
-              dots.forEach((d, i) => {
-                d.classList.toggle('active', i === (current % dots.length));
-              });
-            }
+            updateSliderState();
           }
+
+          // Initial UI Update
+          updateSliderState();
 
           // Hero prev / next arrow buttons
           const heroPrev = document.getElementById('hero-slider-prev');
           const heroNext = document.getElementById('hero-slider-next');
 
           if (heroPrev) {
-            heroPrev.addEventListener('click', (e) => {
+            const prevHandler = (e) => {
               e.preventDefault();
               e.stopPropagation();
               goTo(current - 1);
-            });
+            };
+            heroPrev.onclick = prevHandler;
           }
 
           if (heroNext) {
-            heroNext.addEventListener('click', (e) => {
+            const nextHandler = (e) => {
               e.preventDefault();
               e.stopPropagation();
               goTo(current + 1);
-            });
+            };
+            heroNext.onclick = nextHandler;
           }
+
+          // Keyboard arrow navigation
+          document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox');
+            if (lb && !lb.classList.contains('hidden')) return;
+            if (e.key === 'ArrowLeft') goTo(current - 1);
+            if (e.key === 'ArrowRight') goTo(current + 1);
+          });
 
           // Touch / swipe (iOS Safari / iPhone & Mobile optimized)
           if (typeof enableTouchSwipe === 'function') {
