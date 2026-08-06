@@ -32,6 +32,23 @@
       }
     }
   </script>
+  <script>
+    // System Theme Preference Manager (Default: Light Theme)
+    (function () {
+      if (localStorage.getItem('color-theme-v2') === null) {
+        localStorage.removeItem('color-theme');
+        localStorage.setItem('color-theme-v2', 'light');
+      }
+      const savedTheme = localStorage.getItem('color-theme-v2');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 

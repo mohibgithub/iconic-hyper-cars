@@ -194,33 +194,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const sunIcon = document.getElementById('sun-icon');
   const moonIcon = document.getElementById('moon-icon');
 
+  // Migration: clear old legacy 'color-theme' key if present to force default light theme
+  if (localStorage.getItem('color-theme-v2') === null) {
+    localStorage.removeItem('color-theme');
+    localStorage.setItem('color-theme-v2', 'light');
+  }
+
   // Set initial theme based on localStorage (default: light)
-  if (localStorage.getItem('color-theme') === 'dark') {
+  if (localStorage.getItem('color-theme-v2') === 'dark') {
     document.documentElement.classList.add('dark');
     document.documentElement.classList.remove('light');
-    sunIcon.classList.remove('hidden');
-    moonIcon.classList.add('hidden');
+    if (sunIcon) sunIcon.classList.remove('hidden');
+    if (moonIcon) moonIcon.classList.add('hidden');
   } else {
     document.documentElement.classList.remove('dark');
     document.documentElement.classList.add('light');
-    sunIcon.classList.add('hidden');
-    moonIcon.classList.remove('hidden');
+    if (sunIcon) sunIcon.classList.add('hidden');
+    if (moonIcon) moonIcon.classList.remove('hidden');
   }
 
   // Toggle theme function
-  themeToggleBtn.addEventListener('click', () => {
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('color-theme', 'light');
-      sunIcon.classList.add('hidden');
-      moonIcon.classList.remove('hidden');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('color-theme', 'dark');
-      sunIcon.classList.remove('hidden');
-      moonIcon.classList.add('hidden');
-    }
-  });
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        localStorage.setItem('color-theme-v2', 'light');
+        if (sunIcon) sunIcon.classList.add('hidden');
+        if (moonIcon) moonIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        localStorage.setItem('color-theme-v2', 'dark');
+        if (sunIcon) sunIcon.classList.remove('hidden');
+        if (moonIcon) moonIcon.classList.add('hidden');
+      }
+    });
+  }
 
   // --- Search Bar Focus Handler ---
   const searchPopover = document.getElementById('search-popover');
