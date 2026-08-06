@@ -1073,7 +1073,11 @@
             photos.forEach((photo, idx) => {
               const slide = document.createElement('div');
               slide.className = 'w-full h-full flex items-center justify-center select-none';
-              slide.innerHTML = `<img src="${photo}" class="max-w-[94vw] max-h-[85vh] object-contain rounded-[8px] mx-auto select-none pointer-events-none" alt="${car.brand || ''} ${car.model || ''} Lightbox Image ${idx + 1}" />`;
+              slide.style.setProperty('display', 'flex', 'important');
+              slide.style.setProperty('align-items', 'center', 'important');
+              slide.style.setProperty('justify-content', 'center', 'important');
+              slide.style.setProperty('height', '100%', 'important');
+              slide.innerHTML = `<img src="${photo}" class="max-w-[94vw] max-h-[85vh] object-contain rounded-[8px] mx-auto my-auto select-none pointer-events-none" alt="${car.brand || ''} ${car.model || ''} Lightbox Image ${idx + 1}" />`;
               lbTrack.appendChild(slide);
             });
 
@@ -1092,10 +1096,24 @@
                 swipe: true,
                 swipeToSlide: true
               });
-              $(lbTrack).on('afterChange', function(event, slick, currentSlide) {
-                lbIndex = currentSlide;
-                if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
+              
+              const fixLightboxFlex = () => {
+                $('#lightbox-track .slick-slide > div, #lightbox-track .slick-slide > div > div').css({
+                  'display': 'flex',
+                  'align-items': 'center',
+                  'justify-content': 'center',
+                  'height': '100%'
+                });
+              };
+
+              $(lbTrack).on('init rePosition setPosition afterChange', function(event, slick, currentSlide) {
+                fixLightboxFlex();
+                if (typeof currentSlide !== 'undefined') {
+                  lbIndex = currentSlide;
+                  if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
+                }
               });
+              fixLightboxFlex();
             }
           }
 
