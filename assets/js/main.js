@@ -68,10 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentY = 0;
     let startTime = 0;
     let isSwiping = false;
+    let directionDetermined = false;
     let isHorizontal = false;
     let hasMoved = false;
 
-    // 1. Touch Events (Safari iOS iPhone & Android Chrome)
+    // 1. Touch Events (Optimized for Safari iOS iPhone & Android Chrome)
     trackElement.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches[0]) return;
       startX = e.touches[0].clientX;
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentY = startY;
       startTime = Date.now();
       isSwiping = true;
+      directionDetermined = false;
       isHorizontal = false;
       hasMoved = false;
     }, { passive: true });
@@ -91,13 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
 
-      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+      if (absX > 4 || absY > 4) {
         hasMoved = true;
       }
 
-      if (!isHorizontal && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 6) {
-        isHorizontal = true;
+      if (!directionDetermined && (absX > 2 || absY > 2)) {
+        directionDetermined = true;
+        isHorizontal = absX >= absY;
       }
 
       if (isHorizontal) {
@@ -113,12 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
       const deltaTime = Date.now() - startTime;
 
-      const isFastFlick = deltaTime < 350 && Math.abs(deltaX) > 20;
-      const isSufficientDistance = Math.abs(deltaX) > 30;
+      const isFastFlick = deltaTime < 350 && absX > 12;
+      const isSufficientDistance = absX > 20;
 
-      if ((isHorizontal || Math.abs(deltaX) > Math.abs(deltaY)) && (isFastFlick || isSufficientDistance)) {
+      if ((isHorizontal || absX > absY) && (isFastFlick || isSufficientDistance)) {
         if (deltaX < 0) {
           onSwipeLeft(); // Swiped left -> next slide
         } else if (deltaX > 0) {
@@ -126,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      directionDetermined = false;
       isHorizontal = false;
     };
 
@@ -153,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentY = e.clientY;
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
-      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+      if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
         hasMoved = true;
       }
     };
@@ -168,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const deltaY = currentY - startY;
       const deltaTime = Date.now() - startTime;
 
-      if (Math.abs(deltaX) > Math.abs(deltaY) && (Math.abs(deltaX) > 25 || (deltaTime < 350 && Math.abs(deltaX) > 15))) {
+      if (Math.abs(deltaX) > Math.abs(deltaY) && (Math.abs(deltaX) > 20 || (deltaTime < 350 && Math.abs(deltaX) > 12))) {
         if (deltaX < 0) {
           onSwipeLeft();
         } else if (deltaX > 0) {
@@ -182,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Prevent accidental link clicks when dragging/swiping
     trackElement.addEventListener('click', (e) => {
-      if (hasMoved && Math.abs(currentX - startX) > 10) {
+      if (hasMoved && Math.abs(currentX - startX) > 8) {
         e.preventDefault();
         e.stopPropagation();
       }
