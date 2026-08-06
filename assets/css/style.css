@@ -423,13 +423,20 @@ body {
 #slider-track .slick-list,
 #slider-track .slick-track,
 #slider-track .slick-slide,
-#slider-track .slick-slide > div,
+#slider-track .slick-slide > div {
+  height: 100% !important;
+}
+
 #lightbox-track.slick-initialized,
 #lightbox-track .slick-list,
 #lightbox-track .slick-track,
 #lightbox-track .slick-slide,
 #lightbox-track .slick-slide > div {
   height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: auto !important;
 }
 
 /* Similar Cars Horizontal Scroll Container */
