@@ -318,26 +318,32 @@
 
   <!-- ===== LIGHTBOX POPUP ===== -->
   <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 items-center justify-center">
-    <button id="lightbox-close" class="absolute top-4 right-4 text-white/70 hover:text-white z-10">
+    <button id="lightbox-close" type="button" aria-label="Close Lightbox" class="absolute top-4 right-4 text-white/70 hover:text-white z-30 cursor-pointer p-2 rounded-full bg-black/40 backdrop-blur-sm">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24"
         stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    <button id="lightbox-prev" class="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10">
+    <button id="lightbox-prev" type="button" aria-label="Previous image" class="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-30 cursor-pointer p-2 rounded-full bg-black/40 backdrop-blur-sm">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 stroke-current" fill="none" viewBox="0 0 24 24"
         stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
-    <button id="lightbox-next" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10">
+    <button id="lightbox-next" type="button" aria-label="Next image" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-30 cursor-pointer p-2 rounded-full bg-black/40 backdrop-blur-sm">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 stroke-current" fill="none" viewBox="0 0 24 24"
         stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </button>
-    <img id="lightbox-img" src="" class="max-w-[96vw] max-h-[88vh] object-contain rounded-[8px]" alt="" />
-    <p id="lightbox-counter" class="absolute bottom-4 left-0 right-0 text-center text-white/60 text-xs font-semibold">
+    
+    <div class="w-full h-full flex items-center justify-center p-2 md:p-6 overflow-hidden">
+      <div id="lightbox-track" class="w-full h-full max-w-[96vw] max-h-[88vh]">
+        <img id="lightbox-img" src="" class="max-w-[96vw] max-h-[88vh] object-contain rounded-[8px] mx-auto" alt="" />
+      </div>
+    </div>
+
+    <p id="lightbox-counter" class="absolute bottom-4 left-0 right-0 text-center text-white/80 text-sm font-bold z-30">
     </p>
   </div>
 
@@ -910,6 +916,7 @@
         if (track) {
           track.innerHTML = '';
           const photos = car.photos && car.photos.length > 0 ? car.photos : ['assets/images/placeholder.jpg'];
+          
           photos.forEach((photo, idx) => {
             const slide = document.createElement('div');
             slide.className = 'slider-slide flex-shrink-0 w-full h-full relative cursor-zoom-in';
@@ -917,12 +924,11 @@
             track.appendChild(slide);
           });
 
-          // Initialize slider variables
           const slides = track.querySelectorAll('.slider-slide');
           const totalSlides = slides.length;
           let current = 0;
 
-          // Populate 5 dots indicator (matching image UI)
+          // Populate 5 dots indicator
           if (dotsContainer) {
             dotsContainer.innerHTML = '';
             for (let i = 0; i < 5; i++) {
@@ -935,22 +941,23 @@
                 e.preventDefault();
                 e.stopPropagation();
                 const targetIndex = Math.round((i / 4) * (totalSlides - 1));
-                goTo(targetIndex);
+                if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                  $(track).slick('slickGoTo', targetIndex);
+                } else {
+                  goTo(targetIndex);
+                }
               };
               dotsContainer.appendChild(dot);
             }
           }
 
           const dots = dotsContainer ? dotsContainer.querySelectorAll('.slider-dot') : [];
-          const allImages = Array.from(slides).map(s => s.querySelector('img').src);
 
-          function updateSliderState() {
-            track.style.transform = `translateX(-${current * 100}%)`;
-
+          function updateSliderState(index) {
+            current = index;
             if (counter) {
               counter.textContent = `${current + 1} / ${totalSlides}`;
             }
-
             if (dots && dots.length > 0) {
               const activeDotIndex = Math.min(
                 dots.length - 1,
@@ -966,44 +973,50 @@
             if (index < 0) index = totalSlides - 1;
             if (index >= totalSlides) index = 0;
             current = index;
-            updateSliderState();
+            if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+              $(track).slick('slickGoTo', current);
+            } else {
+              track.style.transform = `translateX(-${current * 100}%)`;
+              updateSliderState(current);
+            }
           }
 
           // Initial UI Update
-          updateSliderState();
+          updateSliderState(0);
 
           // Hero prev / next arrow buttons
           const heroPrev = document.getElementById('hero-slider-prev');
           const heroNext = document.getElementById('hero-slider-next');
 
           if (heroPrev) {
-            const prevHandler = (e) => {
+            heroPrev.onclick = (e) => {
               e.preventDefault();
               e.stopPropagation();
-              goTo(current - 1);
+              if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                $(track).slick('slickPrev');
+              } else {
+                goTo(current - 1);
+              }
             };
-            heroPrev.onclick = prevHandler;
           }
 
           if (heroNext) {
-            const nextHandler = (e) => {
+            heroNext.onclick = (e) => {
               e.preventDefault();
               e.stopPropagation();
-              goTo(current + 1);
+              if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                $(track).slick('slickNext');
+              } else {
+                goTo(current + 1);
+              }
             };
-            heroNext.onclick = nextHandler;
           }
-
-          // Keyboard arrow navigation
-          document.addEventListener('keydown', (e) => {
-            const lb = document.getElementById('lightbox');
-            if (lb && !lb.classList.contains('hidden')) return;
-            if (e.key === 'ArrowLeft') goTo(current - 1);
-            if (e.key === 'ArrowRight') goTo(current + 1);
-          });
 
           // Initialize Slick Slider on hero photos
           if (typeof $ !== 'undefined' && $.fn.slick) {
+            if ($(track).hasClass('slick-initialized')) {
+              $(track).slick('unslick');
+            }
             $(track).slick({
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -1016,64 +1029,84 @@
               swipeToSlide: true
             });
             $(track).on('afterChange', function(event, slick, currentSlide) {
-              current = currentSlide;
-              if (counter) counter.textContent = `${current + 1} / ${totalSlides}`;
-              if (dots && dots.length > 0) {
-                const activeDotIndex = Math.min(
-                  dots.length - 1,
-                  Math.round((current / (totalSlides - 1 || 1)) * (dots.length - 1))
-                );
-                dots.forEach((d, i) => {
-                  d.classList.toggle('active', i === activeDotIndex);
-                });
-              }
+              updateSliderState(currentSlide);
             });
           }
 
-          // Touch / swipe (iOS Safari / iPhone & Mobile optimized)
-          if (typeof enableTouchSwipe === 'function') {
-            enableTouchSwipe(
-              track,
-              () => {
-                if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
-                  $(track).slick('slickNext');
-                } else {
-                  goTo(current + 1);
-                }
-              },
-              () => {
-                if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
-                  $(track).slick('slickPrev');
-                } else {
-                  goTo(current - 1);
-                }
+          // Keyboard arrow navigation
+          document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox');
+            if (lb && !lb.classList.contains('hidden')) return;
+            if (e.key === 'ArrowLeft') {
+              if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                $(track).slick('slickPrev');
+              } else {
+                goTo(current - 1);
               }
-            );
-          }
+            }
+            if (e.key === 'ArrowRight') {
+              if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                $(track).slick('slickNext');
+              } else {
+                goTo(current + 1);
+              }
+            }
+          });
 
-          // Click slides → open lightbox
+          // Click slide -> open Lightbox
           slides.forEach((slide, i) => {
             slide.addEventListener('click', () => openLightbox(i));
           });
 
-          // Lightbox
+          // Lightbox Modal Setup
           const lightbox = document.getElementById('lightbox');
-          const lbImg = document.getElementById('lightbox-img');
+          const lbTrack = document.getElementById('lightbox-track');
           const lbCounter = document.getElementById('lightbox-counter');
           let lbIndex = 0;
 
+          if (lbTrack) {
+            lbTrack.innerHTML = '';
+            photos.forEach((photo, idx) => {
+              const slide = document.createElement('div');
+              slide.className = 'w-full h-full flex items-center justify-center select-none';
+              slide.innerHTML = `<img src="${photo}" class="max-w-[94vw] max-h-[85vh] object-contain rounded-[8px] mx-auto select-none pointer-events-none" alt="${car.brand || ''} ${car.model || ''} Lightbox Image ${idx + 1}" />`;
+              lbTrack.appendChild(slide);
+            });
+
+            if (typeof $ !== 'undefined' && $.fn.slick) {
+              if ($(lbTrack).hasClass('slick-initialized')) {
+                $(lbTrack).slick('unslick');
+              }
+              $(lbTrack).slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                speed: 300,
+                prevArrow: '#lightbox-prev',
+                nextArrow: '#lightbox-next',
+                touchMove: true,
+                swipe: true,
+                swipeToSlide: true
+              });
+              $(lbTrack).on('afterChange', function(event, slick, currentSlide) {
+                lbIndex = currentSlide;
+                if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
+              });
+            }
+          }
+
           function openLightbox(index) {
             lbIndex = index;
-            if (lbImg) {
-              lbImg.src = allImages[index];
-              lbImg.alt = `${car.brand || ''} ${car.model || ''} ${index + 1}`;
-            }
-            if (lbCounter) {
-              lbCounter.textContent = `${index + 1} / ${totalSlides}`;
-            }
             if (lightbox) {
               lightbox.classList.remove('hidden');
               lightbox.classList.add('flex', 'open');
+            }
+            if (typeof $ !== 'undefined' && $.fn.slick && $(lbTrack).hasClass('slick-initialized')) {
+              $(lbTrack).slick('setPosition');
+              $(lbTrack).slick('slickGoTo', index, true);
+            }
+            if (lbCounter) {
+              lbCounter.textContent = `${index + 1} / ${totalSlides}`;
             }
             document.body.style.overflow = 'hidden';
           }
@@ -1087,40 +1120,35 @@
           }
 
           const closeBtn = document.getElementById('lightbox-close');
-          const prevBtn = document.getElementById('lightbox-prev');
-          const nextBtn = document.getElementById('lightbox-next');
-
           if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-          if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-              lbIndex = (lbIndex - 1 + totalSlides) % totalSlides;
-              lbImg.src = allImages[lbIndex];
-              lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
-            });
-          }
-          if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-              lbIndex = (lbIndex + 1) % totalSlides;
-              lbImg.src = allImages[lbIndex];
-              lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
-            });
-          }
+          
           if (lightbox) {
-            lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+            lightbox.addEventListener('click', e => {
+              if (e.target === lightbox || e.target.id === 'lightbox-track' || e.target.classList.contains('slick-slide')) {
+                closeLightbox();
+              }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+              if (lightbox && !lightbox.classList.contains('hidden') && e.key === 'Escape') {
+                closeLightbox();
+              }
+            });
+
             if (typeof enableTouchSwipe === 'function') {
               enableTouchSwipe(
                 lightbox,
                 () => {
                   if (lightbox.classList.contains('hidden')) return;
-                  lbIndex = (lbIndex + 1) % totalSlides;
-                  if (lbImg) lbImg.src = allImages[lbIndex];
-                  if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
+                  if (typeof $ !== 'undefined' && $.fn.slick && $(lbTrack).hasClass('slick-initialized')) {
+                    $(lbTrack).slick('slickNext');
+                  }
                 },
                 () => {
                   if (lightbox.classList.contains('hidden')) return;
-                  lbIndex = (lbIndex - 1 + totalSlides) % totalSlides;
-                  if (lbImg) lbImg.src = allImages[lbIndex];
-                  if (lbCounter) lbCounter.textContent = `${lbIndex + 1} / ${totalSlides}`;
+                  if (typeof $ !== 'undefined' && $.fn.slick && $(lbTrack).hasClass('slick-initialized')) {
+                    $(lbTrack).slick('slickPrev');
+                  }
                 }
               );
             }
