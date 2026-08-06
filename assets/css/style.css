@@ -419,6 +419,19 @@ body {
   display: none !important;
 }
 
+#slider-track.slick-initialized,
+#slider-track .slick-list,
+#slider-track .slick-track,
+#slider-track .slick-slide,
+#slider-track .slick-slide > div,
+#lightbox-track.slick-initialized,
+#lightbox-track .slick-list,
+#lightbox-track .slick-track,
+#lightbox-track .slick-slide,
+#lightbox-track .slick-slide > div {
+  height: 100% !important;
+}
+
 /* Similar Cars Horizontal Scroll Container */
 .similar-scroll {
   display: flex;
