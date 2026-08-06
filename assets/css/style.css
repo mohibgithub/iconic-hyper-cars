@@ -398,12 +398,21 @@ body {
   justify-content: center;
   height: auto;
   outline: none !important;
+  text-align: center;
 }
 
 .slick-slide > div {
   width: 100%;
-  display: flex;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
+}
+
+.car-slider-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .slick-prev, .slick-next {
