@@ -257,232 +257,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- First Slider (Sold Cars) Logic ---
-  const soldTrack = document.getElementById('slider-track');
-  const soldPrevBtn = document.getElementById('slider-prev-btn');
-  const soldNextBtn = document.getElementById('slider-next-btn');
-  const soldSlides = document.querySelectorAll('.slider-slide');
-  const soldTotalSlides = soldSlides.length;
-  let soldCurrentSlide = 0;
-  let soldInterval;
-
-  function updateSoldSlider() {
-    if (!soldTrack) return;
-    soldTrack.style.transform = `translateX(-${soldCurrentSlide * 100}%)`;
-  }
-
-  function startSoldAutoSlide() {
-    if (soldInterval) clearInterval(soldInterval);
-    soldInterval = setInterval(() => {
-      soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
-      updateSoldSlider();
-    }, 8000); // 8 seconds delay (slow & smooth pause)
-  }
-
-  function resetSoldAutoSlide() {
-    clearInterval(soldInterval);
-    startSoldAutoSlide();
-  }
-
-  if (soldTrack && !document.getElementById('hero-slider-prev')) {
-    if (soldPrevBtn && soldNextBtn) {
-      soldPrevBtn.addEventListener('click', () => {
-        soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
-      });
-
-      soldNextBtn.addEventListener('click', () => {
-        soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
-      });
-    }
-
-    // Pause on hover
-    soldTrack.addEventListener('mouseenter', () => clearInterval(soldInterval));
-    soldTrack.addEventListener('mouseleave', () => startSoldAutoSlide());
-
-    // Touch Swipe Support
-    enableTouchSwipe(
-      soldTrack,
-      () => {
-        soldCurrentSlide = (soldCurrentSlide + 1) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
-      },
-      () => {
-        soldCurrentSlide = (soldCurrentSlide - 1 + soldTotalSlides) % soldTotalSlides;
-        updateSoldSlider();
-        resetSoldAutoSlide();
-      }
-    );
-
-    startSoldAutoSlide();
-  }
-
-  // --- Second Slider (Iconic Feature) Logic ---
-  const featTrack = document.getElementById('featured-slider-track');
-  const featSlides = document.querySelectorAll('.featured-slider-slide');
-  const featTotalSlides = featSlides.length;
-  let featCurrentSlide = 0;
-  let featInterval;
-
-  function getFeatMaxSlide() {
-    return featTotalSlides - 2; // Always 4 because we show 2 slides on all viewports (mobile & desktop)
-  }
-
-  function updateFeatSlider() {
-    if (!featTrack) return;
-    const stepSize = 50; // Always 50% width since we show 2 slides on all viewports
-    
-    // Boundary check
-    const maxSlide = getFeatMaxSlide();
-    if (featCurrentSlide > maxSlide) {
-      featCurrentSlide = 0;
-    } else if (featCurrentSlide < 0) {
-      featCurrentSlide = maxSlide;
-    }
-    
-    featTrack.style.transform = `translateX(-${featCurrentSlide * stepSize}%)`;
-  }
-
-  function startFeatAutoSlide() {
-    if (featInterval) clearInterval(featInterval);
-    featInterval = setInterval(() => {
-      const maxSlide = getFeatMaxSlide();
-      featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
-      updateFeatSlider();
-    }, 8000); // 8 seconds delay (slow & smooth pause)
-  }
-
-  function resetFeatAutoSlide() {
-    clearInterval(featInterval);
-    startFeatAutoSlide();
-  }
-
-  if (featTrack) {
-    // Pause on hover
-    featTrack.addEventListener('mouseenter', () => clearInterval(featInterval));
-    featTrack.addEventListener('mouseleave', () => startFeatAutoSlide());
-
-    // Touch Swipe Support
-    enableTouchSwipe(
-      featTrack,
-      () => {
-        const maxSlide = getFeatMaxSlide();
-        featCurrentSlide = (featCurrentSlide + 1) > maxSlide ? 0 : featCurrentSlide + 1;
-        updateFeatSlider();
-        resetFeatAutoSlide();
-      },
-      () => {
-        const maxSlide = getFeatMaxSlide();
-        featCurrentSlide = (featCurrentSlide - 1) < 0 ? maxSlide : featCurrentSlide - 1;
-        updateFeatSlider();
-        resetFeatAutoSlide();
-      }
-    );
-
-    // Handle screen resize
-    window.addEventListener('resize', () => {
-      updateFeatSlider();
+  // --- First Slider (Sold Cars) Logic with Slick ---
+  if (typeof $ !== 'undefined' && $.fn.slick && $('#slider-track').length && !document.getElementById('hero-slider-prev')) {
+    $('#slider-track').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
+      speed: 500,
+      prevArrow: '#slider-prev-btn',
+      nextArrow: '#slider-next-btn',
+      touchMove: true,
+      swipe: true,
+      swipeToSlide: true,
+      adaptiveHeight: false
     });
-
-    startFeatAutoSlide();
   }
 
-  // --- Third Slider (Testimonials) Logic ---
-  const testimonialTrack = document.getElementById('testimonials-slider-track');
-  const testimonialSlides = document.querySelectorAll('.testimonials-slide');
-  const testimonialTotalSlides = testimonialSlides.length;
-  let testimonialCurrentSlide = 0;
-  let testimonialInterval;
-
-  function isMobile() {
-    return window.innerWidth < 768;
-  }
-
-  function getTestimonialMaxSlide() {
-    return testimonialTotalSlides - 1; // 1 slide at a time, max index is 2 (3 slides total)
-  }
-
-  function updateTestimonialSlider() {
-    if (!testimonialTrack) return;
-    if (isMobile()) {
-      const stepSize = 100; // Each slide is 100% width
-      const maxSlide = getTestimonialMaxSlide();
-      
-      // Boundary check
-      if (testimonialCurrentSlide > maxSlide) {
-        testimonialCurrentSlide = 0;
-      } else if (testimonialCurrentSlide < 0) {
-        testimonialCurrentSlide = maxSlide;
-      }
-      
-      testimonialTrack.style.transform = `translateX(-${testimonialCurrentSlide * stepSize}%)`;
-    } else {
-      testimonialTrack.style.transform = '';
-    }
-  }
-
-  function startTestimonialAutoSlide() {
-    if (!isMobile()) return;
-    if (testimonialInterval) clearInterval(testimonialInterval);
-    testimonialInterval = setInterval(() => {
-      const maxSlide = getTestimonialMaxSlide();
-      testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
-      updateTestimonialSlider();
-    }, 8000); // 8 seconds delay (slow & smooth pause)
-  }
-
-  function resetTestimonialAutoSlide() {
-    clearInterval(testimonialInterval);
-    startTestimonialAutoSlide();
-  }
-
-  if (testimonialTrack) {
-    // Pause on hover
-    testimonialTrack.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
-    testimonialTrack.addEventListener('mouseleave', () => startTestimonialAutoSlide());
-
-    // Touch Swipe Support
-    enableTouchSwipe(
-      testimonialTrack,
-      () => {
-        if (!isMobile()) return;
-        const maxSlide = getTestimonialMaxSlide();
-        testimonialCurrentSlide = (testimonialCurrentSlide + 1) > maxSlide ? 0 : testimonialCurrentSlide + 1;
-        updateTestimonialSlider();
-        resetTestimonialAutoSlide();
-      },
-      () => {
-        if (!isMobile()) return;
-        const maxSlide = getTestimonialMaxSlide();
-        testimonialCurrentSlide = (testimonialCurrentSlide - 1) < 0 ? maxSlide : testimonialCurrentSlide - 1;
-        updateTestimonialSlider();
-        resetTestimonialAutoSlide();
-      }
-    );
-
-    // Handle screen resize
-    window.addEventListener('resize', () => {
-      if (!isMobile()) {
-        clearInterval(testimonialInterval);
-        testimonialInterval = null;
-        testimonialCurrentSlide = 0;
-        testimonialTrack.style.transform = '';
-      } else {
-        if (!testimonialInterval) {
-          startTestimonialAutoSlide();
+  // --- Second Slider (Iconic Feature) Logic with Slick ---
+  if (typeof $ !== 'undefined' && $.fn.slick && $('#featured-slider-track').length) {
+    $('#featured-slider-track').slick({
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
+      speed: 500,
+      arrows: false,
+      dots: false,
+      touchMove: true,
+      swipe: true,
+      swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
         }
-        updateTestimonialSlider();
-      }
+      ]
     });
+  }
 
-    // Initial load check
-    if (isMobile()) {
-      startTestimonialAutoSlide();
-    }
+  // --- Third Slider (Testimonials) Logic with Slick ---
+  if (typeof $ !== 'undefined' && $.fn.slick && $('#testimonials-slider-track').length) {
+    $('#testimonials-slider-track').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
+      speed: 500,
+      arrows: false,
+      dots: false,
+      touchMove: true,
+      swipe: true,
+      swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
   }
 
   // --- Auth Tabs Toggle Logic & Authentication ---
@@ -1078,164 +920,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- News Slider Logic ---
-  const newsTrack = document.getElementById('news-slider-track');
-  const newsPrevBtn = document.getElementById('news-prev-btn');
-  const newsNextBtn = document.getElementById('news-next-btn');
-  const newsSlides = document.querySelectorAll('.news-slider-slide');
-  const newsTotalSlides = newsSlides.length;
-  let newsCurrentSlide = 0;
-  let newsInterval;
-
-  function getNewsMaxSlide() {
-    return Math.max(0, newsTotalSlides - getVisibleSlides());
+  // --- Fourth Slider (News & Insights) Logic with Slick ---
+  if (typeof $ !== 'undefined' && $.fn.slick && $('#news-slider-track').length) {
+    $('#news-slider-track').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
+      speed: 500,
+      prevArrow: '#news-prev-btn',
+      nextArrow: '#news-next-btn',
+      touchMove: true,
+      swipe: true,
+      swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
   }
 
-  function updateNewsSlider() {
-    if (!newsTrack) return;
-    const visible = getVisibleSlides();
-    const stepSize = 100 / visible;
-    const maxSlide = getNewsMaxSlide();
-    
-    if (newsCurrentSlide > maxSlide) {
-      newsCurrentSlide = 0;
-    } else if (newsCurrentSlide < 0) {
-      newsCurrentSlide = maxSlide;
-    }
-    
-    newsTrack.style.transform = `translateX(-${newsCurrentSlide * stepSize}%)`;
-  }
-
-  function startNewsAutoSlide() {
-    if (newsInterval) clearInterval(newsInterval);
-    newsInterval = setInterval(() => {
-      const maxSlide = getNewsMaxSlide();
-      newsCurrentSlide = (newsCurrentSlide + 1) > maxSlide ? 0 : newsCurrentSlide + 1;
-      updateNewsSlider();
-    }, 8000); // 8 seconds delay
-  }
-
-  function resetNewsAutoSlide() {
-    clearInterval(newsInterval);
-    startNewsAutoSlide();
-  }
-
-  if (newsTrack) {
-    if (newsPrevBtn && newsNextBtn) {
-      newsPrevBtn.addEventListener('click', () => {
-        newsCurrentSlide = newsCurrentSlide - 1;
-        updateNewsSlider();
-        resetNewsAutoSlide();
-      });
-
-      newsNextBtn.addEventListener('click', () => {
-        newsCurrentSlide = newsCurrentSlide + 1;
-        updateNewsSlider();
-        resetNewsAutoSlide();
-      });
-    }
-
-    // Pause on hover
-    newsTrack.addEventListener('mouseenter', () => clearInterval(newsInterval));
-    newsTrack.addEventListener('mouseleave', () => startNewsAutoSlide());
-
-    // Touch Swipe Support
-    enableTouchSwipe(
-      newsTrack,
-      () => {
-        newsCurrentSlide = newsCurrentSlide + 1;
-        updateNewsSlider();
-        resetNewsAutoSlide();
-      },
-      () => {
-        newsCurrentSlide = newsCurrentSlide - 1;
-        updateNewsSlider();
-        resetNewsAutoSlide();
-      }
-    );
-
-    window.addEventListener('resize', updateNewsSlider);
-    startNewsAutoSlide();
-  }
-
-  // --- Reviews Slider Logic ---
-  const reviewsTrack = document.getElementById('reviews-slider-track');
-  const reviewsPrevBtn = document.getElementById('reviews-prev-btn');
-  const reviewsNextBtn = document.getElementById('reviews-next-btn');
-  const reviewsSlides = document.querySelectorAll('.reviews-slider-slide');
-  const reviewsTotalSlides = reviewsSlides.length;
-  let reviewsCurrentSlide = 0;
-  let reviewsInterval;
-
-  function getReviewsMaxSlide() {
-    return Math.max(0, reviewsTotalSlides - getVisibleSlides());
-  }
-
-  function updateReviewsSlider() {
-    if (!reviewsTrack) return;
-    const visible = getVisibleSlides();
-    const stepSize = 100 / visible;
-    const maxSlide = getReviewsMaxSlide();
-    
-    if (reviewsCurrentSlide > maxSlide) {
-      reviewsCurrentSlide = 0;
-    } else if (reviewsCurrentSlide < 0) {
-      reviewsCurrentSlide = maxSlide;
-    }
-    
-    reviewsTrack.style.transform = `translateX(-${reviewsCurrentSlide * stepSize}%)`;
-  }
-
-  function startReviewsAutoSlide() {
-    if (reviewsInterval) clearInterval(reviewsInterval);
-    reviewsInterval = setInterval(() => {
-      const maxSlide = getReviewsMaxSlide();
-      reviewsCurrentSlide = (reviewsCurrentSlide + 1) > maxSlide ? 0 : reviewsCurrentSlide + 1;
-      updateReviewsSlider();
-    }, 8000); // 8 seconds delay
-  }
-
-  function resetReviewsAutoSlide() {
-    clearInterval(reviewsInterval);
-    startReviewsAutoSlide();
-  }
-
-  if (reviewsTrack) {
-    if (reviewsPrevBtn && reviewsNextBtn) {
-      reviewsPrevBtn.addEventListener('click', () => {
-        reviewsCurrentSlide = reviewsCurrentSlide - 1;
-        updateReviewsSlider();
-        resetReviewsAutoSlide();
-      });
-
-      reviewsNextBtn.addEventListener('click', () => {
-        reviewsCurrentSlide = reviewsCurrentSlide + 1;
-        updateReviewsSlider();
-        resetReviewsAutoSlide();
-      });
-    }
-
-    // Pause on hover
-    reviewsTrack.addEventListener('mouseenter', () => clearInterval(reviewsInterval));
-    reviewsTrack.addEventListener('mouseleave', () => startReviewsAutoSlide());
-
-    // Touch Swipe Support
-    enableTouchSwipe(
-      reviewsTrack,
-      () => {
-        reviewsCurrentSlide = reviewsCurrentSlide + 1;
-        updateReviewsSlider();
-        resetReviewsAutoSlide();
-      },
-      () => {
-        reviewsCurrentSlide = reviewsCurrentSlide - 1;
-        updateReviewsSlider();
-        resetReviewsAutoSlide();
-      }
-    );
-
-    window.addEventListener('resize', updateReviewsSlider);
-    startReviewsAutoSlide();
+  // --- Fifth Slider (Reviews & Press) Logic with Slick ---
+  if (typeof $ !== 'undefined' && $.fn.slick && $('#reviews-slider-track').length) {
+    $('#reviews-slider-track').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
+      speed: 500,
+      prevArrow: '#reviews-prev-btn',
+      nextArrow: '#reviews-next-btn',
+      touchMove: true,
+      swipe: true,
+      swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
   }
 
   // --- Enable Mouse Drag Scroll on .similar-scroll Containers ---

@@ -46,6 +46,8 @@
         }
       })();
   </script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
     /* Sticky action bar space */
@@ -764,6 +766,8 @@
   </div>
 
   <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
@@ -998,12 +1002,52 @@
             if (e.key === 'ArrowRight') goTo(current + 1);
           });
 
+          // Initialize Slick Slider on hero photos
+          if (typeof $ !== 'undefined' && $.fn.slick) {
+            $(track).slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+              speed: 400,
+              prevArrow: '#hero-slider-prev',
+              nextArrow: '#hero-slider-next',
+              touchMove: true,
+              swipe: true,
+              swipeToSlide: true
+            });
+            $(track).on('afterChange', function(event, slick, currentSlide) {
+              current = currentSlide;
+              if (counter) counter.textContent = `${current + 1} / ${totalSlides}`;
+              if (dots && dots.length > 0) {
+                const activeDotIndex = Math.min(
+                  dots.length - 1,
+                  Math.round((current / (totalSlides - 1 || 1)) * (dots.length - 1))
+                );
+                dots.forEach((d, i) => {
+                  d.classList.toggle('active', i === activeDotIndex);
+                });
+              }
+            });
+          }
+
           // Touch / swipe (iOS Safari / iPhone & Mobile optimized)
           if (typeof enableTouchSwipe === 'function') {
             enableTouchSwipe(
               track,
-              () => goTo(current + 1),
-              () => goTo(current - 1)
+              () => {
+                if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                  $(track).slick('slickNext');
+                } else {
+                  goTo(current + 1);
+                }
+              },
+              () => {
+                if (typeof $ !== 'undefined' && $.fn.slick && $(track).hasClass('slick-initialized')) {
+                  $(track).slick('slickPrev');
+                } else {
+                  goTo(current - 1);
+                }
+              }
             );
           }
 
