@@ -35,7 +35,7 @@
       // System Theme Preference Manager
       (function () {
         const savedTheme = localStorage.getItem('color-theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (savedTheme === 'dark') {
           document.documentElement.classList.add('dark');
           document.documentElement.classList.remove('light');
         } else {

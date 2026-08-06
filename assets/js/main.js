@@ -52,11 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return fetch(url, options);
   }
 
-  // --- Reusable Swipe Gesture Helper (Safari & All Mobile Touch / Swipe Bulletproof) ---
+  // --- Reusable Swipe Gesture Helper (Safari iOS iPhone, Android & Desktop) ---
   function enableTouchSwipe(trackElement, onSwipeLeft, onSwipeRight) {
     if (!trackElement) return;
 
-    // Apply CSS touch optimizations for Safari WebKit
+    // Apply CSS touch optimizations for Safari WebKit & Android
     trackElement.style.touchAction = 'pan-y';
     trackElement.style.webkitUserSelect = 'none';
     trackElement.style.userSelect = 'none';
@@ -66,79 +66,127 @@ document.addEventListener('DOMContentLoaded', () => {
     let startY = 0;
     let currentX = 0;
     let currentY = 0;
-    let isScrolling = undefined;
-    let isTouching = false;
+    let startTime = 0;
+    let isSwiping = false;
+    let isHorizontal = false;
+    let hasMoved = false;
 
-    // Touch Start (Safari & Mobile)
+    // 1. Touch Events (Safari iOS iPhone & Android Chrome)
     trackElement.addEventListener('touchstart', (e) => {
       if (!e.touches || !e.touches[0]) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
       currentX = startX;
       currentY = startY;
-      isScrolling = undefined;
-      isTouching = true;
+      startTime = Date.now();
+      isSwiping = true;
+      isHorizontal = false;
+      hasMoved = false;
     }, { passive: true });
 
-    // Touch Move (Safari & Mobile)
     trackElement.addEventListener('touchmove', (e) => {
-      if (!isTouching || !e.touches || !e.touches[0]) return;
+      if (!isSwiping || !e.touches || !e.touches[0]) return;
       currentX = e.touches[0].clientX;
       currentY = e.touches[0].clientY;
 
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
 
-      // Determine gesture direction on initial movement
-      if (typeof isScrolling === 'undefined') {
-        isScrolling = Math.abs(deltaY) > Math.abs(deltaX);
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        hasMoved = true;
       }
 
-      // If horizontal swipe, cancel page scrolling on Safari
-      if (!isScrolling) {
+      if (!isHorizontal && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 6) {
+        isHorizontal = true;
+      }
+
+      if (isHorizontal) {
         if (e.cancelable) {
           e.preventDefault();
         }
       }
     }, { passive: false });
 
-    // Touch End / Cancel (Safari & Mobile)
     const handleTouchEnd = () => {
-      if (!isTouching) return;
-      isTouching = false;
+      if (!isSwiping) return;
+      isSwiping = false;
 
-      if (isScrolling === false) {
-        const diffX = startX - currentX;
-        if (diffX > 25) {
-          onSwipeLeft(); // Swiped left (show next)
-        } else if (diffX < -25) {
-          onSwipeRight(); // Swiped right (show prev)
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+      const deltaTime = Date.now() - startTime;
+
+      const isFastFlick = deltaTime < 350 && Math.abs(deltaX) > 20;
+      const isSufficientDistance = Math.abs(deltaX) > 30;
+
+      if ((isHorizontal || Math.abs(deltaX) > Math.abs(deltaY)) && (isFastFlick || isSufficientDistance)) {
+        if (deltaX < 0) {
+          onSwipeLeft(); // Swiped left -> next slide
+        } else if (deltaX > 0) {
+          onSwipeRight(); // Swiped right -> prev slide
         }
       }
-      isScrolling = undefined;
+
+      isHorizontal = false;
     };
 
     trackElement.addEventListener('touchend', handleTouchEnd, { passive: true });
     trackElement.addEventListener('touchcancel', handleTouchEnd, { passive: true });
 
-    // Desktop Mouse Drag Support
+    // 2. Mouse Drag Events for Desktop Browsers
     let isMouseDown = false;
+
     trackElement.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      startX = e.clientX;
+      if (e.button !== 0) return; // Only left click
       isMouseDown = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      currentX = startX;
+      currentY = startY;
+      startTime = Date.now();
+      hasMoved = false;
+      trackElement.style.cursor = 'grabbing';
     });
 
-    trackElement.addEventListener('mouseup', (e) => {
+    const handleMouseMove = (e) => {
+      if (!isMouseDown) return;
+      currentX = e.clientX;
+      currentY = e.clientY;
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        hasMoved = true;
+      }
+    };
+
+    const handleMouseUp = (e) => {
       if (!isMouseDown) return;
       isMouseDown = false;
-      const diffX = startX - e.clientX;
-      if (diffX > 25) {
-        onSwipeLeft();
-      } else if (diffX < -25) {
-        onSwipeRight();
+      trackElement.style.cursor = '';
+      currentX = e.clientX;
+      currentY = e.clientY;
+      const deltaX = currentX - startX;
+      const deltaY = currentY - startY;
+      const deltaTime = Date.now() - startTime;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY) && (Math.abs(deltaX) > 25 || (deltaTime < 350 && Math.abs(deltaX) > 15))) {
+        if (deltaX < 0) {
+          onSwipeLeft();
+        } else if (deltaX > 0) {
+          onSwipeRight();
+        }
       }
-    });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    // 3. Prevent accidental link clicks when dragging/swiping
+    trackElement.addEventListener('click', (e) => {
+      if (hasMoved && Math.abs(currentX - startX) > 10) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   }
 
   // --- Theme Toggle Logic ---
@@ -146,17 +194,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const sunIcon = document.getElementById('sun-icon');
   const moonIcon = document.getElementById('moon-icon');
 
-  // Set initial theme based on localStorage or user preferences
-  if (
-    localStorage.getItem('color-theme') === 'dark' ||
-    (!('color-theme' in localStorage) &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
+  // Set initial theme based on localStorage (default: light)
+  if (localStorage.getItem('color-theme') === 'dark') {
     document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
     sunIcon.classList.remove('hidden');
     moonIcon.classList.add('hidden');
   } else {
     document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
     sunIcon.classList.add('hidden');
     moonIcon.classList.remove('hidden');
   }
@@ -1024,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let newsInterval;
 
   function getNewsMaxSlide() {
-    return newsTotalSlides - getVisibleSlides();
+    return Math.max(0, newsTotalSlides - getVisibleSlides());
   }
 
   function updateNewsSlider() {
@@ -1104,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let reviewsInterval;
 
   function getReviewsMaxSlide() {
-    return reviewsTotalSlides - getVisibleSlides();
+    return Math.max(0, reviewsTotalSlides - getVisibleSlides());
   }
 
   function updateReviewsSlider() {
@@ -1172,6 +1218,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', updateReviewsSlider);
     startReviewsAutoSlide();
+  }
+
   // --- Enable Mouse Drag Scroll on .similar-scroll Containers ---
   document.querySelectorAll('.similar-scroll').forEach(container => {
     let isDown = false;
